@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Oleg Duday" />
+  <title>Tables</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="../css/style.css" />
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+  <!-- Fonts Awesome 4 CDN -->
+  <!-- <script src="https://use.fontawesome.com/e2a0e7c2b4.js"></script> -->
+
+  <!-- Font Awesome 5 JS -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+    integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+    crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+    integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+    crossorigin="anonymous"></script>
+
+  <!-- Logo image on top of the tab -->
+  <link rel="icon" href="../images/website-favicon-32x32.png" />
+</head>
+
+<body>
+  <div class="container">
+    <!-- Top Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+      <!-- Logo in the top left corner with the link to main web site -->
+      <a class="navbar-brand" href="http://mdpeg.com/">
+        <img src="../images/MDP_Engineering_Logo-72dpi.png" alt="MDP Logo" style="width: 150px" /></a>
+      <!-- Button navigation for small screens -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+        <!-- Navigation menu on top -->
+        <div class="navbar-nav nav-justified w-100 nav-pills rounded-pill">
+          <a class="nav-link" aria-current="page" href="../index.html"><i class="fa fa-home" aria-hidden="true"
+              style="font-size: 50px;"></i></a>
+          <a class="nav-link active bg-secondary" href="#"><i class="fa fa-table" aria-hidden="true"
+              style="font-size: 50px; color: white;"></i></a>
+          <a class="nav-link disabled" href="#"><i class="fa fa-calculator" aria-disabled="true"
+              style="font-size: 50px; "></i></a>
+          <a class="nav-link disabled" href="#"><i class="fa fa-book" aria-disabled="true"
+              style="font-size: 50px"></i></a>
+          <a class="nav-link " href="../light/light-start.html"><i class="fa fa-lightbulb"
+              style="font-size: 50px"></i></a>
+          <a class="nav-link " href="../power/power-start.html"><i class="fa fa-plug" style="font-size: 50px"></i></a>
+          <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Dropdown Button on top with more options -->
+  <div class="container">
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        More Tables
+      </button>
+      <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenu2">
+        <li><a class="dropdown-item" href="table310-16.html">Conductors Sizing Based on Current
+            Value (310-16)</a></li>
+        <li><a class="dropdown-item" href="table310-12.html">Single-Phase Dwelling Services and Feeders
+            Sizing</a></li>
+        <li><a class="dropdown-item" href="table310-15.html">Ambient Temperature Correction Factors
+            (310-15(B)(1))</a></li>
+        <li><a class="dropdown-item active bg-secondary" href="table310-15C1.html" aria-current="page">Adjustment
+            Factors for
+            More Than Three Current-Carrying Conductors (310-15(C)(1))</a></li>
+        <li><a class="dropdown-item" href="table250-66.html">Grounding Electrode Conductor Sizing (250.66)</a>
+        </li>
+        <li><a class="dropdown-item" href="table250-102.html">Grounded Conductor,
+            System Bonding Jumper Sizing (250.102(C)(1))</a></li>
+        <li><a class="dropdown-item " href="table250-122.html">Equipment Grounding
+            Conductor Sizing (250.122)</a></li>
+        <li><a class="dropdown-item" href="table430-52.html">Maximum Motor OCPD
+            Rating (430.52)</a></li>
+        <li><a class="dropdown-item " href="table430-248.html">FLA for Single-Phase
+            Motors (430-248)</a></li>
+        <li><a class="dropdown-item " href="table430-250.html">FLA for Three-Phase
+            Motors (430-250)</a></li>
+        <li><a class="dropdown-item" href="table430-251B.html">Locked-Rotor
+            Motor Current for Selection of Disconnecting Means (430-251(B)) </a></li>
+        <li><a class="dropdown-item " href="table450-3B.html">Maximum Rating or
+            Settings of OCPD for Transformer (450.3(B))</a></li>
+        <li><a class="dropdown-item " href="tableC1-EMT.html">Maximum Number of
+            Conductors in Electrical Metallic Tubing (EMT) (C.1)</a></li>
+        <li><a class="dropdown-item " href="tableC3-FMC.html">Maximum Number of
+            Conductors in Flexible Metal Conduit (FMC) (C.3)</a></li>
+        <li><a class="dropdown-item " href="tableC11-PVC.html">Maximum Number of
+            Conductors in Rigid PVC Conduit, Schedule 40 and HDPE Conduit (C.11)</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Page Content -->
+
+  <div class="container">
+    <h2 class="fw-bold">
+      Table 310.15(C)(1) Adjustment Factors for More Than Three Current-Carrying Conductors
+    </h2>
+
+    <table class="table table-bordered border-dark table-striped table-hover text-center table-sm">
+      <!-- Table header -->
+      <thead class="align-middle">
+        <tr>
+          <th style="width: 15%;">Number of Conductors*</th>
+          <th style="width: 25%;">Percent of Values in Table 310.16 Through Table 310.19 <br> as
+            Adjusted for Ambient Temperature if Necessary</th>
+        </tr>
+      </thead>
+      <!-- Table body -->
+      <tr>
+        <th scope="row">4-6</th>
+        <td>80</td>
+      </tr>
+      <tr>
+        <th scope="row">7-9</th>
+        <td>70</td>
+      </tr>
+      <tr>
+        <th scope="row">10-20</th>
+        <td>50</td>
+      </tr>
+      <tr>
+        <th scope="row">21-30</th>
+        <td>45</td>
+      </tr>
+      <tr>
+        <th scope="row">31-40</th>
+        <td>40</td>
+      </tr>
+      <tr>
+        <th scope="row">41 and above</th>
+        <td>35</td>
+      </tr>
+    </table>
+    <footer>
+      <p><sup>*</sup>Number of conductors is the total number of conductors in the raceway
+        or cable, including spare conductors. The count shall be adjusted in accordance
+        with 310.15(E) and (F). The count shall not include conductors that are connected
+        to electrical components that cannot be simultaneously energized.</p>
+      <p><strong>310.15(C) Adjustment Factors.</strong></p>
+      <p><strong>310.15(C)(1) More than Three Current-Carrying Conductors.</strong></p>
+      <p>The ampacity of each conductor shall be reduced as shown in Table 310.15(C)(1)
+        where the number of current-carrying conductors in a raceway or cable exceeds three,
+        or where single conductors or multiconductor cables not installed in raceways are
+        installed without maintaining spacing for a continuous length longer than 600 mm (24 in.).
+        Each current-carrying conductor of a paralleled set of conductors shall be counted
+        as a current-carrying conductor.</p>
+      <p>Where conductors of different systems, as provided in 300.3, are installed in a
+        common raceway or cable, the adjustment factors shown in Table 310.15(C)(1) shall
+        apply only to the number of power and lighting conductors
+        (Articles 210, 215, 220, and 230).</p>
+      <p>Informational Note No. 1: See Annex B for adjustment factors for more than
+        three current-carrying conductors in a raceway or cable with load diversity.</p>
+      <p>Informational Note No. 2: See 366.23 for adjustment factors for conductors
+        and ampacity for bare copper and aluminum bars in auxiliary gutters and 376.22(B)
+        for adjustment factors for conductors in metal wireways.</p>
+      <ol type="a">
+        <li>Where conductors are installed in cable trays, the provisions of 392.80 shall apply.</li>
+        <li>Adjustment factors shall not apply to conductors in raceways having a
+          length not exceeding 600 mm (24 in.).</li>
+        <li>Adjustment factors shall not apply to underground conductors entering or
+          leaving an outdoor trench if those conductors have physical protection in the
+          form of rigid metal conduit, intermediate metal conduit, rigid polyvinyl chloride
+          conduit (PVC), or reinforced thermosetting resin conduit (RTRC) having a length
+          not exceeding 3.05 m (10 ft), and if the number of conductors does not exceed four.</li>
+        <li>Adjustment factors shall not apply to Type AC cable or to Type MC cable under
+          the following conditions:</li>
+        <ol type="1">
+          <li>The cables do not have an overall outer jacket.</li>
+          <li>Each cable has not more than three current-carrying conductors.</li>
+          <li>The conductors are 12 AWG copper.</li>
+          <li>Not more than 20 current-carrying conductors are instal⁠led
+            without maintaining spacing, are stacked, or are supported on “bridle rings.”</li>
+        </ol>
+      </ol>
+      <p><em>Exception to (4): If cables meeting the requirements in 310.15(C)(1)(d)(1)
+          through (C)(1)(d)(3) with more than 20 current-carrying conductors are installed
+          longer than 600 mm (24 in.) without maintaining spacing, are stacked, or are
+          supported on bridle rings, a 60 percent adjustment factor shall be applied.</em></p>
+      <p><strong>310.15(E) Neutral Conductor.</strong></p>
+      <p>Neutral conductors shall be considered current carrying in accordance with
+        any of the following:</p>
+      <ol type="1">
+        <li>A neutral conductor that carries only the unbalanced current from
+          other conductors of the same circuit shall not be required to be counted
+          when applying the provisions of 310.15(C)(1).</li>
+        <li>In a 3-wire circuit consisting of two phase conductors and the neutral
+          conductor of a 4-wire, 3-phase, wye-connected system, a common conductor
+          carries approximately the same current as the line-to-neutral load
+          currents of the other conductors and shall be counted when applying the
+          provisions of 310.15(C)(1).</li>
+        <li>On a 4-wire, 3-phase wye circuit where the major portion of the load
+          consists of nonlinear loads, harmonic currents are present in the neutral
+          conductor; the neutral conductor shall therefore be considered a
+          current-carrying conductor.</li>
+      </ol>
+      <p><strong>310.15(F) Grounding or Bonding Conductor.</strong></p>
+      <p>A grounding or bonding conductor shall not be counted when applying
+        the provisions of 310.15(C)(1).</p>
+    </footer>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"></script>
+
+    <!-- <script src="js/script.js"></script> -->
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>

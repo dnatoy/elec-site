@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Oleg Duday" />
+  <title>Fuse Selection</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="../css/style.css" />
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+  <!-- Fonts Awesome 4 CDN -->
+  <!-- <script src="https://use.fontawesome.com/e2a0e7c2b4.js"></script> -->
+
+  <!-- Font Awesome 5 JS -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+    integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+    crossorigin="anonymous"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+    integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+    crossorigin="anonymous"></script>
+
+  <!-- Logo image on top of the tab -->
+  <link rel="icon" href="../images/website-favicon-32x32.png" />
+</head>
+
+<body>
+  <div class="container">
+    <!-- Top Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+      <!-- Logo in the top left corner with the link to main web site -->
+      <a class="navbar-brand" href="http://mdpeg.com/">
+        <img src="../images/MDP_Engineering_Logo-72dpi.png" alt="MDP Logo" style="width: 150px" /></a>
+      <!-- Button navigation for small screens -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+        <!-- Navigation menu on top -->
+        <div class="navbar-nav nav-justified w-100 nav-pills rounded-pill">
+          <a class="nav-link " href="../index.html"><i class="fa fa-home" aria-disabled="true"
+              style="font-size: 50px"></i></a>
+          <a class="nav-link" href="../tables/table310-16.html"><i class="fa fa-table" aria-hidden="true"
+              style="font-size: 50px"></i></a>
+          <a class="nav-link disabled" href="#"><i class="fa fa-calculator" aria-disabled="true"
+              style="font-size: 50px"></i></a>
+          <a class="nav-link disabled" href="#"><i class="fa fa-book" aria-disabled="true"
+              style="font-size: 50px"></i></a>
+          <a class="nav-link" href="../light/light-start.html"><i class="fa fa-lightbulb" aria-disabled="true"
+              style="font-size: 50px;"></i></a>
+          <a class="nav-link active bg-secondary" aria-current="page" href="../power/power-start.html"><i
+              class="fa fa-plug" aria-hidden="true" style="font-size: 50px; color: white;"></i></a>
+          <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Dropdown Button on top with more options -->
+  <div class="container">
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        More
+      </button>
+      <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenu2">
+        <li><a class="dropdown-item" href="../power/power-start.html">Representatives</a></li>
+        <li><a class="dropdown-item" href="../power/typical_loads.html">Typical Loads</a></li>
+        <li><a class="dropdown-item active bg-secondary" href="../power/fuse_selection.html" aria-current="page">Fuse
+            Selection Chart</a>
+        </li>
+        <li><a class="dropdown-item" href="../power/NEMA_non-locking.html">NEMA Non-Locking Connectors</a></li>
+        <li><a class="dropdown-item" href="../power/NEMA_twist-lock.html">NEMA Locking (Twist-Lock) Connectors</a></li>
+        <li><a class="dropdown-item disabled" href="#">Another action</a></li>
+        <li><a class="dropdown-item disabled" href="#">Something else here</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Page Content -->
+
+  <div class="container">
+    <h2 class="fw-bold">
+      Fuse Selection Chart
+    </h2>
+
+    <table class="table table-bordered border-dark table-striped table-hover text-center table-sm w-auto">
+      <!-- Table header -->
+      <thead class="align-middle">
+        <tr>
+          <th>Circuit</th>
+          <th>Load</th>
+          <th>Ampere Rating</th>
+          <th>Class</th>
+          <th>Fuse Type</th>
+          <th>Voltage Rating</th>
+          <th>Interrupting Rating (kA)</th>
+          <th>Bussmann</th>
+          <th>Remarks</th>
+        </tr>
+      </thead>
+      <!-- Table body -->
+      <tbody>
+        <tr>
+          <td rowspan="13" class="boldText">Main, Feeder and Branch</td>
+          <td colspan="8"><b>Conventional Dimensions - Class RK1, RK5, L</b></td>
+        </tr>
+        <tr>
+          <td rowspan="2">All type loads (optimum overcurrent protection)</td>
+          <td>0-600A</td>
+          <td>RK1</td>
+          <td>Dual-element, time-delay</td>
+          <td>250V <br> 600V</td>
+          <td>300</td>
+          <td>LPN-RK <br> LPS-RK</td>
+          <td rowspan="2">All purpose fuses. Great for combined short-circuit and overload protection.</td>
+        </tr>
+        <tr>
+          <td>601-6000A</td>
+          <td>L</td>
+          <td>Time-delay</td>
+          <td>600V</td>
+          <td>300</td>
+          <td>KRP-C</td>
+        </tr>
+        <tr>
+          <td rowspan="2">Motors, welders, transformers, capacitor banks (circuits
+            with heavy inrush currents)</td>
+          <td>0-600A</td>
+          <td>RK5</td>
+          <td>Dual-element, time-delay</td>
+          <td>250V <br> 600V</td>
+          <td>200</td>
+          <td>FRN-R <br> FRS-R</td>
+          <td>Moderate degree of current-limiation. Time-delay passes surge current.</td>
+        </tr>
+        <tr>
+          <td>601-4000A</td>
+          <td>L</td>
+          <td>Time-delay</td>
+          <td>600V</td>
+          <td>200</td>
+          <td>KLU</td>
+          <td>All purpose fuse. Time-delay passes surge currents.</td>
+        </tr>
+        <tr>
+          <td rowspan="2">Non-motor loads (circuits with no heavy inrush currents.)</td>
+          <td>0-600A</td>
+          <td>RK1</td>
+          <td>Fast-acting</td>
+          <td>250V <br> 600V</td>
+          <td>200</td>
+          <td>KTN-R <br> KTS-R</td>
+          <td>Must be sized larger (up to 300%) for circuits with surge currents.</td>
+        </tr>
+        <tr>
+          <td>601-6000A</td>
+          <td>L</td>
+          <td>Fast-acting</td>
+          <td>600V</td>
+          <td>300</td>
+          <td>KTU</td>
+          <td>High performance fuse</td>
+        </tr>
+        <tr>
+          <td colspan="8"><b>Reduced Dimensions for Installation in Restricted Space</b></td>
+        </tr>
+        <tr>
+          <td rowspan="2">Any type loads (optimum overcurrent protection)</td>
+          <td>0-100A</td>
+          <td>CF</td>
+          <td>Finger-safe, dual-element, time-delay</td>
+          <td>600V</td>
+          <td>300</td>
+          <td>TCF</td>
+          <td rowspan="2">All purpose fuses. Great for combined short-circuit and overload protection.</td>
+        </tr>
+        <tr>
+          <td rowspan="3">0-600A</td>
+          <td>J</td>
+          <td>Dual-element, time-delay</td>
+          <td>600V</td>
+          <td>300</td>
+          <td>LPJ</td>
+        </tr>
+        <tr>
+          <td>Power electronics applications (drives, SSR)</td>
+          <td>J</td>
+          <td>High speed</td>
+          <td>600V</td>
+          <td>200</td>
+          <td>DFJ</td>
+          <td>Where branch protection is needed with high speed fuse characteristics</td>
+        </tr>
+        <tr>
+          <td rowspan="2">Non-motor loads (circuits with no heavy inrush current)</td>
+          <td>J</td>
+          <td>Quick-acting</td>
+          <td>600V</td>
+          <td>200</td>
+          <td>JKS</td>
+          <td>Very similar to KTS-R but smaller.</td>
+        </tr>
+        <tr>
+          <td>0-1200A</td>
+          <td>T</td>
+          <td>Fast-acting</td>
+          <td>300V <br> 600V</td>
+          <td>200</td>
+          <td>JJN<br>JJS</td>
+          <td>The space saver.</td>
+        </tr>
+        <tr>
+          <td rowspan="5"><b>Branch</b></td>
+        </tr>
+        <tr>
+          <td>Motor loads (circuits with heavy inrush current)</td>
+          <td>0-30A</td>
+          <td>CC</td>
+          <td>Time-delay</td>
+          <td>600V</td>
+          <td>200</td>
+          <td>LP-CC</td>
+          <td rowspan="3">Very compact. Rejection feature.</td>
+        </tr>
+        <tr>
+          <td>Non-motor loads</td>
+          <td>0-30A</td>
+          <td>CC</td>
+          <td>Fast-acting</td>
+          <td>600V</td>
+          <td>200</td>
+          <td>KTK-R</td>
+        </tr>
+        <tr>
+          <td>Control transformer circuits and lighting ballasts, etc.</td>
+          <td>0-30A</td>
+          <td>CC</td>
+          <td>Time-delay</td>
+          <td>600V</td>
+          <td>200</td>
+          <td>FNQ-R</td>
+        </tr>
+        <tr>
+          <td>General purpose (lighting panelboards)</td>
+          <td>0-20A<br>21-60A</td>
+          <td>G</td>
+          <td></td>
+          <td>600V<br>480V</td>
+          <td>100</td>
+          <td>SC</td>
+          <td>Current-limiting</td>
+        </tr>
+        <tr>
+          <td rowspan="5"><b>General Purpose (non-current limiting)</b></td>
+        </tr>
+        <tr>
+          <td>Miscellaneous</td>
+          <td>0-600A</td>
+          <td>H or K5</td>
+          <td></td>
+          <td>250V<br>600V</td>
+          <td>10</td>
+          <td>NON<br>NOS</td>
+          <td>Modern cartridge fuse</td>
+        </tr>
+        <tr>
+          <td rowspan="3">Plug fuses for branch circuits and small component protection</td>
+          <td rowspan="2">0-30A</td>
+          <td>S</td>
+          <td rowspan="2">Dual-element, time-delay</td>
+          <td>125V</td>
+          <td>10</td>
+          <td>S</td>
+          <td rowspan="3">Base threads differ based on size (rejecting.) Type T and S recommended for motor circuits.
+            T and W have Edison base.</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>125V</td>
+          <td>10</td>
+          <td>T</td>
+        </tr>
+        <tr>
+          <td>0.5-12A</td>
+          <td></td>
+          <td></td>
+          <td>125V</td>
+          <td>10</td>
+          <td>W</td>
+        </tr>
+      </tbody>
+    </table>
+    <footer>
+      Notes:<br>
+
+      1. If multiple sets of service-entrance conductors connect directly to a service drop,
+      set of overhead service conductors, set of underground service conductors, or
+      service lateral, the equivalent size of the largest service-entrance conductor
+      shall be determined by the largest sum of the areas of the corresponding conductors
+      of each set.<br>
+      2. Where there are no service-entrance conductors, the grounding electrode conductor
+      size shall be determined by the equivalent size of the largest service-entrance
+      conductor required for the load to be served.<br>
+      3. See installation restrictions in 250.64.
+      4. When multiple voltages are shown in the "Voltage Rating" column, the Bussmann fuses selections refer to the
+      voltage shown on the left. For example, if Class RK1 fuse for 480V application is needed, the 600V voltage rating
+      should be considered and Bussmann LPS-RK fuse type selected.
+    </footer>
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"></script>
+
+    <!-- <script src="js/script.js"></script> -->
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>

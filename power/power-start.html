@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Oleg Duday" />
+    <title>Power</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+    <!-- Fonts Awesome 4 CDN -->
+    <!-- <script src="https://use.fontawesome.com/e2a0e7c2b4.js"></script> -->
+
+    <!-- Font Awesome 5 JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+        crossorigin="anonymous"></script>
+
+    <!-- Logo image on top of the tab -->
+    <link rel="icon" href="../images/website-favicon-32x32.png" />
+</head>
+
+<body>
+    <div class="container">
+        <!-- Top Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <!-- Logo in the top left corner with the link to main web site -->
+            <a class="navbar-brand" href="http://mdpeg.com/">
+                <img src="../images/MDP_Engineering_Logo-72dpi.png" alt="MDP Logo" style="width: 150px" /></a>
+            <!-- Button navigation for small screens -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+                <!-- Navigation menu on top -->
+                <div class="navbar-nav nav-justified w-100 nav-pills rounded-pill">
+                    <a class="nav-link " href="../index.html"><i class="fa fa-home" aria-disabled="true"
+                            style="font-size: 50px"></i></a>
+                    <a class="nav-link" href="../tables/table310-16.html"><i class="fa fa-table" aria-hidden="true"
+                            style="font-size: 50px"></i></a>
+                    <a class="nav-link disabled" href="#"><i class="fa fa-calculator" aria-disabled="true"
+                            style="font-size: 50px"></i></a>
+                    <a class="nav-link disabled" href="#"><i class="fa fa-book" aria-disabled="true"
+                            style="font-size: 50px"></i></a>
+                    <a class="nav-link" href="../light/light-start.html"><i class="fa fa-lightbulb" aria-disabled="true"
+                            style="font-size: 50px;"></i></a>
+                    <a class="nav-link active bg-secondary" aria-current="page" href="../power/power-start.html"><i
+                            class="fa fa-plug" aria-hidden="true" style="font-size: 50px; color: white;"></i></a>
+                    <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Dropdown Button on top with more options -->
+    <div class="container">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
+                aria-expanded="false">More</button>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenu2">
+                <li><a class="dropdown-item active bg-secondary" href="power-start.html"
+                        aria-current="page">Representatives</a>
+                </li>
+                <li><a class="dropdown-item" href="../power/typical_loads.html">Typical Loads</a></li>
+                <li><a class="dropdown-item" href="../power/fuse_selection.html">Fuse Selection Chart</a></li>
+                <li><a class="dropdown-item" href="../power/NEMA_non-locking.html">NEMA Non-Locking
+                        Connectors</a></li>
+                <li><a class="dropdown-item" href="../power/NEMA_twist-lock.html">NEMA Locking (Twist-Lock)
+                        Connectors</a></li>
+                <li><a class="dropdown-item disabled" href="#">Something else here</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="container">
+        <h1 class="mt-3 mb-3">Equipment Representatives</h1>
+
+        <!-- Accordion with explanations -->
+
+        <div class="accordion" id="accordionExample">
+
+            <!-- Accordion item #1 - ABB-->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <img src="../images/abb-logo.svg" class="img-fluid" style="height: 50pt;" alt="ABB"></i>
+                        <img src="../images/GE-logo.png" class="img-fluid" style="height: 50pt;" alt="GE"></i>
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <!-- Cards group -->
+                        <div class="card-group">
+                            <!-- Card for Joseph Rushin -->
+                            <div class="card mb-3">
+                                <div class=" row g-0">
+                                    <div class="col-md-4">
+                                        <img src="../images/ABB-JosephRushin.jpg" class="card-img">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Joseph J Rushin</h3>
+                                            <h6 class="card-subtitle">Field Application/</h6>
+                                            <h6 class="card-subtitle">Specification Engineer</h6>
+                                            <a href="mailto:joe.rushin@us.abb.com"
+                                                class="card-link">joe.rushin@us.abb.com</a><br><br>
+                                            <p class="card-text">Work Phone: (303) 627-0608</p>
+                                            <p class="card-text">Mobile: (303) 263-1506</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card for Will Weishuhn-->
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">William H. Weishuhn</h3>
+                                            <h6 class="card-subtitle">Field Application Engineer</h6>
+                                            <a href="mailto:william.h.weishuhn@us.abb.com"
+                                                class="card-link">william.h.weishuhn@us.abb.com</a><br><br>
+                                            <!-- <p class="card-text">Work Phone: (303) 805-9956</p> -->
+                                            <p class="card-text">Mobile Phone: (303) 947-6093</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card for Jeff Maas-->
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Jeff Maas</h3>
+                                            <h6 class="card-subtitle">Tech/Sales Support</h6>
+                                            <!-- <a href="mailto:juan.llaneza@ge.com"
+                                                class="card-link">juan.llaneza@ge.com</a><br><br> -->
+                                            <p class="card-text">Work Phone: (720) 524-4548</p>
+                                            <!-- <p class="card-text">Mobile Phone: (720) 289-6783</p> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- ABB Information -->
+                        <div class="card">
+                            <ul
+                                class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
+                                <li class="list-group-item">
+                                    <a href="https://new.abb.com/us" target="_blank" class="fw-bolder">ABB</a>
+                                    <!-- <p card-text>Office Phone: (303) 762-3537 <br>
+                                        Address: 1210 South Jason Street, Denver, CO 80223</p> -->
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://electrification.us.abb.com/products" target="_blank"
+                                        class="fw-bolder">Products</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://empower.abb.com/ecatalog/ec/EN_NA/c/Electrical_Distribution_1000"
+                                        target="_blank" class="fw-bolder">Product Selector</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://electrification.us.abb.com/buylog" target="_blank"
+                                        class="fw-bolder">BuyLog</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://electrification.us.abb.com/publibrary" target="_blank"
+                                        class="fw-bolder">Publications</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://electrification.us.abb.com/webinar-center" target="_blank"
+                                        class="fw-bolder">Webinars</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- End of Information -->
+                    </div>
+                </div>
+            </div>
+            <!-- End of Accordion item #1 -->
+
+            <!-- Accordion item #2 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <img src="../images/amp-logo-type.svg" class="img-fluid im" style="height: 50pt;"
+                            alt="American Midwest Power"></i>
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div class="card-group">
+                            <!-- Card for Henry Espinoza -->
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="../images/AMP-HenryEspinoza.jpg" class="card-img">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Henry Espinoza</h3>
+                                            <h6 class="card-subtitle">Sales Engineer</h6>
+                                            <a href="mailto:hespinoza@ampmfg.com"
+                                                class="card-link">hespinoza@ampmfg.com</a><br><br>
+                                            <p class="card-text">Work Phone: (763) 852-3626</p>
+                                            <p class="card-text">Mobile: (720) 301-2255</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card for Jeremy Schmidt -->
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Jeremy Schmidt</h3>
+                                            <h6 class="card-subtitle">Sales Engineer</h6>
+                                            <a href="mailto:jdschmidt@ampmfg.com"
+                                                class="card-link">jdschmidt@ampmfg.com</a><br><br>
+                                            <p class="card-text">Work Phone: (763) 852-3646</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card for Joseph Hafer -->
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Joseph Hafer</h3>
+                                            <h6 class="card-subtitle">Sales Engineer</h6>
+                                            <a href="mailto:jhafer@ampmfg.com"
+                                                class="card-link">jhafer@ampmfg.com</a><br><br>
+                                            <p class="card-text">Work Phone: (763) 852-3627</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- End of Card -->
+                        <!-- AMP Information -->
+                        <div class="card">
+                            <ul
+                                class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
+                                <li class="list-group-item">
+                                    <a href="https://www.ampmfg.com/" target="_blank" class="fw-bolder">American
+                                        Midwest
+                                        Power</a>
+                                    <p card-text>Office Phone: (303) 973-1018 <br>
+                                        Address: 6225 South Oak Way, Littleton, CO 80127</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.ampmfg.com/products" target="_blank" class="fw-bolder">
+                                        Products</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.ampmfg.com/publications" target="_blank"
+                                        class="fw-bolder">Publications</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.ampmfg.com/videos" target="_blank" class="fw-bolder">Videos</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- End of Information -->
+                    </div>
+                </div>
+            </div>
+            <!-- End of Accordion Item #2 -->
+
+            <!-- Accordion item #2A -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwoA">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwoA" aria-expanded="false" aria-controls="collapseTwoA">
+                        <img src="../images/wagner-cat-logo.png" class="img-fluid im" style="height: 50pt;"
+                            alt="Caterpillar"></i>
+                    </button>
+                </h2>
+                <div id="collapseTwoA" class="accordion-collapse collapse" aria-labelledby="headingTwoA"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div class="card-group">
+                            
+                            <!-- Card -->
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Donald A Armijo</h3>
+                                            <h6 class="card-subtitle">Power Systems Sales Manager</h6>
+                                            <a href="mailto:armijo_donald@wagnerequipment.com"
+                                                class="card-link">armijo_donald@wagnerequipment.com</a><br><br>
+                                            <p class="card-text">Phone: (303) 378-8660</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card -->
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <!-- <div class="col-md-4">
+                                        <img src="/images/AMP-HenryEspinoza.jpg" class="card-img">
+                                    </div> -->
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Jayme Boden</h3>
+                                            <h6 class="card-subtitle">Sales Engineer</h6>
+                                            <a href="mailto:jboden@wagnerequipment.com"
+                                                class="card-link">jboden@wagnerequipment.com</a><br><br>
+                                            <p class="card-text">Work Phone: (303) 365-8935</p>
+                                            <p class="card-text">Mobile: (720) 281-1589</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card -->
+                            <!-- <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Jim Siffring</h3>
+                                            <h6 class="card-subtitle">Power Systems Sales Representative</h6>
+                                            <a href="mailto:siffring_jim@wagnerequipment.com"
+                                                class="card-link">siffring_jim@wagnerequipment.com</a><br><br>
+                                            <p class="card-text">Mobile: (303) 324-7231</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                        </div>
+                        <!-- End of Card Group -->
+                        <!-- Wagner-CAT Information -->
+                        <div class="card">
+                            <ul
+                                class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
+                                <li class="list-group-item">
+                                    <a href="https://www.wagnerequipment.com/power-systems/" target="_blank"
+                                        class="fw-bolder">Wagner-CAT</a>
+                                    <p card-text>Office Phone: (303) 739-3000 <br>
+                                        Address: 18000 Smith Road, Aurora, CO 80011</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.cat.com/en_US/products/new/power-systems/electric-power.html"
+                                        target="_blank" class="fw-bolder"> CAT Generators</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.cat.com/en_US/support/operations/cat-training.html"
+                                        target="_blank" class="fw-bolder">CAT Training</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- End of Information -->
+                    </div>
+                </div>
+            </div>
+            <!-- End of Accordion Item #2A -->
+
+            <!-- Accordion item #3 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <img src="../images/Challenge-Technology-logo-2020.webp" class="img-fluid"
+                            alt="Challenge Technology"></i>
+                        <img src="../images/eaton-poweradvantage.jpg" class="img-fluid" alt="Challenge Technology"></i>
+                        <img src="../images/APC-logo.png" class="img-fluid" alt="Challenge Technology"></i>
+                        <img src="../images/GE-critical-power-blue800.jpg" class="img-fluid"
+                            alt="Challenge Technology"></i>
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div class="card-group">
+                            <!-- Card for Mike Haley -->
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Mike Haley</h3>
+                                            <h6 class="card-subtitle">Sales Engineer</h6>
+                                            <a href="mailto:mike@challengetech.com"
+                                                class="card-link">mike@challengetech.com</a><br><br>
+                                            <p class="card-text">Work Phone: (303) 421-9400</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card for Scott Miller -->
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Scott Miller</h3>
+                                            <h6 class="card-subtitle">President</h6>
+                                            <a href="mailto:scott@challengetech.com"
+                                                class="card-link">scott@challengetech.com</a><br><br>
+                                            <p class="card-text">Work Phone: (303) 421-9400</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card for Susan Miller -->
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Susan Miller</h3>
+                                            <h6 class="card-subtitle">VP Business Development</h6>
+                                            <a href="mailto:susan@challengetech.com"
+                                                class="card-link">susan@challengetech.com</a><br><br>
+                                            <p class="card-text">Work Phone: (303) 421-9400</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End of Card -->
+                        <!-- Challenge Technology Information -->
+                        <div class="card">
+                            <ul
+                                class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
+                                <li class="list-group-item">
+                                    <a href="https://www.challengetech.com/" target="_blank" class="fw-bolder">Challenge
+                                        Technology, Inc.</a>
+                                    <p card-text>Office Phone: (303) 421-9400 <br>
+                                        Address: 685 South Arthur Avenue, #9, Louisville, CO 80027</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.challengetech.com/uninterruptible-power" target="_blank"
+                                        class="fw-bolder">
+                                        UPS</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.challengetech.com/surge-protection" target="_blank"
+                                        class="fw-bolder">Surge Protection</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.challengetech.com/electrical-distribution" target="_blank"
+                                        class="fw-bolder">Electrical Distribution</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.challengetech.com/services" target="_blank"
+                                        class="fw-bolder">Services</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.challengetech.com/other-products" target="_blank"
+                                        class="fw-bolder">Other Products</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- End of Information -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accordion item #4 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        <img src="../images/cft-logo.png" class="img-fluid" alt="Critical Facilities Technology"></i>
+                        <img src="../images/APC-logo.png" class="img-fluid" alt="APC by Schindler Electric"></i>
+                        <img src="../images/powersmith-logo.png" class="img-fluid" alt="Powersmiths"></i>
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <!-- Cards group -->
+                        <div class="card-group">
+                            <!-- Card for Troy Hetes -->
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="../images/CFD-TroyHetes.jpg" class="card-img">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Troy Hetes</h3>
+                                            <h6 class="card-subtitle">Owner/Partner</h6>
+                                            <a href="mailto:thetes@cftrm.com"
+                                                class="card-link">thetes@cftrm.com</a><br><br>
+                                            <p class="card-text">Mobile: (303) 968-9840</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card for Robert Strong -->
+                            <div class="card mb-3">
+                                <div class=" row g-0">
+                                    <div class="col-md-4">
+                                        <img src="../images/CFD-RobertStrong.jpg" class="card-img">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Robert Strong</h3>
+                                            <h6 class="card-subtitle">Owner/Partner</h6>
+                                            <!-- <a href="mailto:mike@mhlighting.com"
+                                        class="card-link">mike@mhlighting.com</a><br><br> -->
+                                            <!-- <p class="card-text">Mobile: (720) 904-8537 ext.151</p> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- The CFT Information -->
+                        <div class="card">
+                            <ul
+                                class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
+                                <li class="list-group-item">
+                                    <a href="https://www.cftrm.com/" target="_blank" class="fw-bolder">Critical
+                                        Facilities
+                                        Technology</a>
+                                    <p card-text>Office Phone: (720) 370-3033 <br>
+                                        Address: 6380 West 54th Avenue, Suite 100, Arvada, CO 80002</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.apc.com/us/en/" target="_blank" class="fw-bolder">
+                                        APC by Schneider Electric</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.powersmiths.com/#" target="_blank"
+                                        class="fw-bolder">Powersmiths</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- End of Information -->
+                    </div>
+                </div>
+            </div>
+            <!-- End of Accordion item #4 -->
+
+            <!-- Accordion item #5 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFive">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        <img src="../images/cummins-logo.png" class="img-fluid" alt="Cummins"></i>
+                    </button>
+                </h2>
+                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <!-- Cards group -->
+                        <div class="card-group">
+                            <!-- Card for Chris Scott -->
+                            <div class="card mb-3" style="max-width: 50%;">
+                                <div class="row g-0">
+                                    <!-- <div class="col-md-4">
+                                    <img src="/images/TLA-Kristin-Murphy-1.jpg" class="card-img">
+                                </div> -->
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Chris Scott</h3>
+                                            <h6 class="card-subtitle">Consulting Engineering Manager</h6>
+                                            <a href="mailto:gj654@cummins.com"
+                                                class="card-link">gj654@cummins.com</a><br><br>
+                                            <p class="card-text">Work: (303) 927-2208</p>
+                                            <p class="card-text">Mobile: (720) 534-6591</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card for Earnest Glaser -->
+                            <div class="card mb-3" style="max-width: 50%;">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="../images/cummins-EarnestGlaser.jpg" class="card-img">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Earnest Glaser</h3>
+                                            <h6 class="card-subtitle">Product Specialist</h6>
+                                            <a href="mailto:earnest.a.glaser@cummins.com"
+                                                class="card-link">earnest.a.glaser@cummins.com</a><br><br>
+                                            <p class="card-text">Work: (303) 927-2221</p>
+                                            <p class="card-text">Mobile: (303) 549-6855</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Cummins Sales and Services Information -->
+                        <div class="card">
+                            <ul
+                                class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
+                                <li class="list-group-item">
+                                    <a href="https://www.cummins.com/" target="_blank" class="fw-bolder">Cummins
+                                        </a>
+                                    <p card-text>Office Phone: (303) 287-0201 <br>
+                                        Address: 8211 East 96th Avenue, Henderson, CO 80640</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.cummins.com/parts-and-service/digital-products-and-services/powersuite"
+                                        target="_blank" class="fw-bolder">
+                                        Power Suite</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- End of Information -->
+                    </div>
+                </div>
+            </div>
+            <!-- End of Accordion item #5 -->
+
+            <!-- Accordion item #6 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingSix">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                        <img src="../images/DVL_logo-beyond-the-product.jpg" class="img-fluid" alt="DVL"></i>
+                        <img src="../images/generac-logo.png" class="img-fluid" alt="Generac"></i>
+                    </button>
+                </h2>
+                <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <!-- Cards group -->
+                        <div class="card-group">
+                            <!-- Card for Travis Holland -->
+                            <div class="card mb-3" style="max-width: 50%;">
+                                <div class="row g-0">
+                                    <!-- <div class="col-md-4">
+                                    <img src="/images/TLA-Kristin-Murphy-1.jpg" class="card-img">
+                                </div> -->
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Travis Holland</h3>
+                                            <h6 class="card-subtitle">Power Sales Manager</h6>
+                                            <a href="mailto:tholland@dvlnet.com"
+                                                class="card-link">tholland@dvlnet.com</a><br><br>
+                                            <p class="card-text">Mobile: (303) 519-8634</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card for Brian Taylor -->
+                            <div class="card mb-3" style="max-width: 50%;">
+                                <div class="row g-0">
+                                    <!-- <div class="col-md-4">
+                                    <img src="/images/TLA-Kristin-Murphy-1.jpg" class="card-img">
+                                </div> -->
+                                    <!-- <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Brian Taylor</h3>
+                                            <h6 class="card-subtitle">Power Sales Manager - Generators</h6>
+                                            <a href="mailto:btaylor@dvlnet.com"
+                                                class="card-link">btaylor@dvlnet.com</a><br><br>
+                                            <p class="card-text">Mobile: (303) 775-9975</p>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="card mb-3" style="max-width: 50%;">
+                                <div class="row g-0">
+                                    <div class="col-md-10">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Josh Manfred</h3>
+                                            <h6 class="card-subtitle">National Account Manager</h6>
+                                            <a href="mailto:peter.smith@generac.com"
+                                                class="card-link">josh.manfred@generac.com</a><br><br>
+                                            <a href="mailto:IndustrialDealerSales@generac.com"
+                                                class="card-link">IndustrialDealerSales@generac.com</a><br><br>
+                                            <p class="card-text">Phone: (425) 420-3483</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- DVL Information -->
+                        <div class="card">
+                            <ul
+                                class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
+                                <li class="list-group-item">
+                                    <a href="https://www.dvlnet.com/" target="_blank" class="fw-bolder">DVL</a>
+                                    <p card-text>Office Phone: (303) 771-5000 <br>
+                                        Address: 6555 South Kenton Street, Suite 304, Centennial, CO 80111</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.generac.com/industrial/tools-resources/design-planning/" target="_blank"
+                                        class="fw-bolder">
+                                        Design & Planning Resources</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://pdp.powerdesignpro.com/login?returnUrl=%2Fhome" target="_blank"
+                                        class="fw-bolder">
+                                        Power Design Pro</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- End of Information -->
+                    </div>
+                </div>
+            </div>
+            <!-- End of Accordion item #6 -->
+
+            <!-- Accordion item #7 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingSeven">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                        <img src="../images/eaton-logo-small.png" class="img-fluid" alt="Eaton"></i>
+                    </button>
+                </h2>
+                <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <!-- Cards group -->
+                        <div class="card-group">
+                            <!-- Card for Joel Benzing -->
+                            <div class="card mb-3" style="max-width: 50%;">
+                                <div class="row g-0">
+                                    <!-- <div class="col-md-4">
+                                    <img src="../images/VI-BryanKlammer.png" class="card-img">
+                                </div> -->
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Joel Benzing</h3>
+                                            <h6 class="card-subtitle">Application Engineer</h6>
+                                            <a href="mailto:joelebenzing@eaton.com"
+                                                class="card-link">joelebenzing@eaton.com</a><br><br>
+                                            <p class="card-text">Work Phone: (303) 738-2300</p>
+                                            <p class="card-text">Mobile: (828) 242-4625</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card for Technical Support -->
+                            <div class="card mb-3" style="max-width: 50%;">
+                                <div class="row g-0">
+                                    <!-- <div class="col-md-4">
+                                    <img src="../images/VI-AlyssaWeber.jpg" class="card-img">
+                                </div> -->
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Eaton Technical Support</h3>
+                                            <p class="card-text">Phone: (877) 386-2273</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Eaton Information -->
+                        <div class="card">
+                            <ul
+                                class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
+                                <li class="list-group-item">
+                                    <a href="https://www.eaton.com/us/en-us.html" target="_blank"
+                                        class="fw-bolder">Eaton</a>
+                                    <p card-text>Address: 8022 Southpark Circle, Suite 300, Littleton, CO 80120</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.eaton.com/us/en-us/support/business-resources/consultants-engineers.html"
+                                        target="_blank" class="fw-bolder">Engineers Resources</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.eaton.com/us/en-us/support/business-resources/consultants-engineers/consultant-resources.html"
+                                        target="_blank" class="fw-bolder"> Electrical Consultant Design Support</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.eaton.com/us/en-us/support/education-training.html"
+                                        target="_blank" class="fw-bolder"> Training</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- End of Information -->
+                    </div>
+                </div>
+            </div>
+            <!-- End of Accordion Item #7 -->
+            
+            <!-- Accordion item #7A for eGauge-->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingSevenA">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseSevenA" aria-expanded="false" aria-controls="collapseSevenA">
+                        <img src="../images/eGauge-Systems-logo.jpg" class="img-fluid" alt="eGauge"></i>
+                    </button>
+                </h2>
+                <div id="collapseSevenA" class="accordion-collapse collapse" aria-labelledby="headingSevenA"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <!-- Cards group -->
+                        <div class="card-group">
+                            <!-- Card for Ben Rather -->
+                            <div class="card mb-3" style="max-width: 50%;">
+                                <div class="row g-0">
+                                    <!-- <div class="col-md-4">
+                                    <img src="../images/VI-BryanKlammer.png" class="card-img">
+                                </div> -->
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Ben Rather</h3>
+                                            <h6 class="card-subtitle">Application Engineer</h6>
+                                            <a href="mailto:ben@egauge.net"
+                                                class="card-link">ben@egauge.net</a><br><br>
+                                            <p class="card-text">Work Phone: (720) 545-9767 ext. 527</p>
+                                            <!-- <p class="card-text">Mobile: (828) 242-4625</p> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card for Technical Support -->
+                            <div class="card mb-3" style="max-width: 50%;">
+                                <div class="row g-0">
+                                    <!-- <div class="col-md-4">
+                                    <img src="../images/VI-AlyssaWeber.jpg" class="card-img">
+                                </div> -->
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">eGauge Office</h3>
+                                            <p class="card-text">Phone: (877) 342-8431</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- eGauge Information -->
+                        <div class="card">
+                            <ul
+                                class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
+                                <li class="list-group-item">
+                                    <a href="https://www.egauge.net/" target="_blank"
+                                        class="fw-bolder">eGauge</a>
+                                    <p card-text>Address: eGauge Systems LLC, 1644 Conestoga Street, Suite 2, Boulder, CO 80301</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://kb.egauge.net/"
+                                        target="_blank" class="fw-bolder">eGauge Support Library</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.egauge.net/commercial-energy-monitor/"
+                                        target="_blank" class="fw-bolder"> Power and Energy Meter</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://store.egauge.net/meters/"
+                                        target="_blank" class="fw-bolder"> Energy Meters</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- End of Information -->
+                    </div>
+                </div>
+            </div>
+            <!-- End of Accordion Item #7A -->
+
+            <!-- Accordion item #8 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingEight">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                        <img src="../images/Legrand Logo.png" class="img-fluid" alt="Legrand"></i>
+                    </button>
+                </h2>
+                <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <!-- Cards group -->
+                        <div class="card-group">
+                            <!-- Card for Sara Walker (Schmidt) -->
+                            <div class="card mb-3" style="max-width: 100%;">
+                                <div class="row g-0">
+                                    <!-- <div class="col-md-4">
+                                    <img src="../images/VI-BryanKlammer.png" class="card-img">
+                                </div> -->
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Sara Walker</h3>
+                                            <h6 class="card-subtitle">Global Accunt Manager</h6>
+                                            <a href="mailto:sara.walker@legrand.com"
+                                                class="card-link">sara.walker@legrand.com</a><br><br>
+                                            <p class="card-text">Work Phone: (303) 335-7985</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Legrand Information -->
+                        <div class="card">
+                            <ul
+                                class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
+                                <li class="list-group-item">
+                                    <a href="https://www.legrand.us/" target="_blank" class="fw-bolder">Legrand</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.legrand.us/wiring-devices" target="_blank"
+                                        class="fw-bolder">Wiring
+                                        Devices</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.legrand.us/wire-and-cable-management" target="_blank"
+                                        class="fw-bolder"> Wire and Cable Management</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://go.bluevolt.com/Legrand/s/" target="_blank" class="fw-bolder">
+                                        Legrand
+                                        University</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- End of Information -->
+                    </div>
+                </div>
+            </div>
+            <!-- End of Accordion Item #8 -->
+
+            <!-- Accordion item #8B -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingEightB">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseEightB" aria-expanded="false" aria-controls="collapseEightB">
+                        <img src="../images/Leviton-Logo_Preferred_Web.png" class="img-fluid" alt="Leviton"></i>
+                    </button>
+                </h2>
+                <div id="collapseEightB" class="accordion-collapse collapse" aria-labelledby="headingEightB"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <!-- Cards group -->
+                        <div class="card-group">
+                            <!-- Card for Alex Paola -->
+                            <div class="card mb-3" style="max-width: 100%;">
+                                <div class="row g-0">
+                                    <!-- <div class="col-md-4">
+                                    <img src="../images/VI-BryanKlammer.png" class="card-img">
+                                </div> -->
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Alex Paola</h3>
+                                            <h6 class="card-subtitle">Specialist, Construction & Technical Sales</h6>
+                                            <a href="mailto:alex.paola@leviton.com"
+                                                class="card-link">alex.paola@leviton.com</a><br><br>
+                                            <p class="card-text">Cell Phone: (303) 564-9945</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Leviton Information -->
+                        <div class="card">
+                            <ul
+                                class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
+                                <li class="list-group-item">
+                                    <a href="https://leviton.com/" target="_blank" class="fw-bolder">Leviton</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://leviton.com/products/commercial/submetering" target="_blank"
+                                        class="fw-bolder">Submetering</a>
+                                </li>
+                                <!-- <li class="list-group-item">
+                                    <a href="https://www.legrand.us/wire-and-cable-management" target="_blank"
+                                        class="fw-bolder"> Wire and Cable Management</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://go.bluevolt.com/Legrand/s/" target="_blank" class="fw-bolder">
+                                        Legrand
+                                        University</a>
+                                </li> -->
+                            </ul>
+                        </div>
+                        <!-- End of Information -->
+                    </div>
+                </div>
+            </div>
+            <!-- End of Accordion Item #8B -->
+
+            <!-- Accordion item #8A -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingEightA">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseEightA" aria-expanded="false" aria-controls="collapseEightA">
+                        <img src="../images/mtuonsiteenergy-logo.jpg" class="img-fluid" alt="MTU Onsite Energy"></i>
+                        <img src="../images/smithpower-logo.jfif" class="img-fluid" alt="MTU Onsite Energy"></i>
+                    </button>
+                </h2>
+                <div id="collapseEightA" class="accordion-collapse collapse" aria-labelledby="headingEightA"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <!-- Cards group -->
+                        <div class="card-group">
+                            <!-- Card for Darrell Caldwell -->
+                            <div class="card mb-3" style="max-width: 100%;">
+                                <div class="row g-0">
+                                    <!-- <div class="col-md-4">
+                                    <img src="../images/VI-BryanKlammer.png" class="card-img">
+                                </div> -->
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Darrell Caldwell</h3>
+                                            <h6 class="card-subtitle">Power Generation Engineering Sales</h6>
+                                            <a href="mailto:dcaldwell@smithppi.com"
+                                                class="card-link">dcaldwell@smithppi.com</a><br><br>
+                                            <p class="card-text">Mobile Phone: (303) 927-8469</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-3" style="max-width: 100%;">
+                                <div class="row g-0">
+                                    <!-- <div class="col-md-4">
+                                    <img src="../images/VI-BryanKlammer.png" class="card-img">
+                                </div> -->
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Jeremy Frum</h3>
+                                            <h6 class="card-subtitle">Power Generation Engineering Sales</h6>
+                                            <a href="mailto:jfrum@smithppi.com"
+                                                class="card-link">jfrum@smithppi.com</a><br><br>
+                                            <p class="card-text">Work Phone: (720) 755-9830</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-3" style="max-width: 100%;">
+                                <div class="row g-0">
+                                    <!-- <div class="col-md-4">
+                                    <img src="../images/VI-BryanKlammer.png" class="card-img">
+                                </div> -->
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Nick Paolo, PE</h3>
+                                            <h6 class="card-subtitle">Engineering Sales - MTU Rolls Royce</h6>
+                                            <a href="mailto:npaolo@smithppi.com"
+                                                class="card-link">npaolo@smithppi.com</a><br><br>
+                                            <p class="card-text">Mobile Phone: (303) 810-1085</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-3" style="max-width: 100%;">
+                                <div class="row g-0">
+                                    <!-- <div class="col-md-4">
+                                    <img src="../images/VI-BryanKlammer.png" class="card-img">
+                                </div> -->
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Ryan Davis</h3>
+                                            <h6 class="card-subtitle">Engineering Sales - MTU Rolls Royce</h6>
+                                            <a href="mailto:npaolo@smithppi.com"
+                                                class="card-link">rdavis@smithppi.com</a><br><br>
+                                            <p class="card-text">Mobile Phone: (720) 3409067</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- MTU Generators Information -->
+                        <div class="card">
+                            <ul
+                                class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
+                                <li class="list-group-item">
+                                    <a href="https://www.mtu-solutions.com/na/en/applications/power-generation/power-generation-solutions.html"
+                                        target="_blank" class="fw-bolder">MTU Generators</a>
+                                    <p card-text>Address: 5681 Iris Parkway, Frederick, CO 80504</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.mtu-solutions.com/na/en/products/power-generation-products-list.html"
+                                        target="_blank" class="fw-bolder">Product Finder</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.mtu-solutions.com/na/en/technical-information/tools-and-downloads.html"
+                                        target="_blank" class="fw-bolder"> Tools and Downloads</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- End of Information -->
+                    </div>
+                </div>
+            </div>
+            <!-- End of Accordion Item #8A -->
+
+            <!-- Accordion item #9 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingNine">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                        <img src="../images/NLP-logo.jpg" class="img-fluid"
+                            alt="National Lightning Protection Company"></i>
+                    </button>
+                </h2>
+                <div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="headingNine"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <!-- Cards group -->
+                        <div class="card-group">
+                            <!-- Card for Dave McIntosh -->
+                            <div class="card mb-3" style="max-width: 100%;">
+                                <div class="row g-0">
+                                    <div class="col-md-4">
+                                        <img src="../images/DaveMcIntosh.jfif" class="card-img">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Dave McIntosh</h3>
+                                            <h6 class="card-subtitle">National Sales Manager</h6>
+                                            <a href="mailto:dmcintosh@nlpcorp.com"
+                                                class="card-link">dmcintosh@nlpcorp.com</a><br><br>
+                                            <p class="card-text">Mobile Phone: (303) 269-9840</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- NLP Information -->
+                            <div class="card">
+                                <ul
+                                    class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
+                                    <li class="list-group-item">
+                                        <a href="http://www.theprotectionsource.com/" target="_blank"
+                                            class="fw-bolder">National Lightning Protection Corporation</a>
+                                        <p card-text>Office Phone: (303) 295-1695, (800) 628-2816 <br>
+                                            Address: 13550 Smith Road, Suite 150, Aurora, CO 80011</p>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <a href="http://www.theprotectionsource.com/Prevectron/prevectron.html"
+                                            target="_blank" class="fw-bolder">
+                                            Prevectron</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End of Information -->
+                    </div>
+                </div>
+            </div>
+            <!-- End of Accordion Item #9 -->
+
+            <!-- Accordion item #10 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading10">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapse10" aria-expanded="false" aria-controls="collapse10">
+                        <img src="../images/schneiderelectric-logo.png" class="img-fluid" alt="Schneider Electric"></i>
+                        <img src="../images/SquareD-logo.png" class="img-fluid" alt="Square D"></i>
+                    </button>
+                </h2>
+                <div id="collapse10" class="accordion-collapse collapse" aria-labelledby="heading10"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <!-- Cards group -->
+                        <div class="card-group">
+                            <!-- Card -->
+                            <div class="card">
+                                <div class="row g-0">
+                                    <div class="col-md-12">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Digital Consulting Engineer Specialist</h3>
+                                            <h6 class="card-subtitle">Partner Project Division</h6>
+                                            <a href="mailto:consultingengineersupport@schneider-electric.com"
+                                                class="card-link">consultingengineersupport@schneider-electric.com</a><br><br>
+                                            <p class="card-text">Phone: (888) 778-2733</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Card for Local Support Team -->
+                            <div class="card mb-3 p-0">
+                                <div class="row g-0">
+                                    <div class="col">
+                                        <div class="card-body">
+                                            <h3 class="card-title ">Local Support Team:</h3>
+                                            <p class="card-text p-0">Scott Wallace, P.E., Phone: (303) 393-5842,
+                                                Mobile:
+                                                (303) 638-4701. <br> Email: scott.wallace@us.schneider-electric.com
+                                            </p>
+                                            <p class="card-text p-0">Gerald Musyi, Mobile: (303) 513-9524. <br>
+                                                Email:
+                                                scott.gerald.musyi@schneider-electric.com</p>
+                                            <p class="card-text p-0">Harrison Coker, Mobile: (720) 621-9735. <br>
+                                                Email:
+                                                harrison.coker@schneider-electric.com</p>
+                                            <p class="card-text p-0">Larry Elarton, Phone: (303) 393-5843, Mobile:
+                                                (303) 956-4534. <br> Email: larry.elarton@us.schneider-electric.com
+                                            </p>
+                                            <p class="card-text p-0">Jeanine John, Phone: (303) 393-5833, Mobile:
+                                                (720) 250-6347. <br> Email: jeanine.john@us.schneider-electric.com
+                                            </p>
+                                            <p class="card-text p-0">Dough McIntire, P.E., Mobile:
+                                                (720) 503-5143. <br> Email: douglas.mcintire@schneider-electric.com
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Schneider Electric Information -->
+                        <div class="card">
+                            <ul
+                                class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
+                                <li class="list-group-item">
+                                    <a href="https://www.se.com/us/en/" target="_blank" class="fw-bolder">Schneider
+                                        Electric</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.se.com/myschneider/" target="_blank"
+                                        class="fw-bolder">MySchneider Portal</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.se.com/us/en/brands/squared/" target="_blank"
+                                        class="fw-bolder"> Square D</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://www.se.com/us/en/work/support/resources-and-tools/digestplus/"
+                                        target="_blank" class="fw-bolder"> DigestPLUS Online Catalog</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://layoutfast.se.com/index.html?code=bab846c75ec9d81234e83ceef97834f8dd716987&state=P2N0YT0mbWt0X3Rvaz1NVGM0TFVkWlJDMDJOamdBQUFGOGNJVjRod3A1TEJmSUVnS2tZUXZsZHFjNEN3cWFHTFRXb1RMeWhNd0N4V2EtbGN2RmJmSmprUUd2eG8xM0Z2a0FMdHUwQUJOUjJ5elo0MUg2Sml6UXJDWEhOa2xHQ3VWNW5TQXZDQVVrU3NYbkllcWUzQSZMb2dpbkF0dGVtcHRzPTEmbXlfcmVmPWh0dHBzJTNBJTJGJTJGbGF5b3V0ZmFzdC5zZS5jb20lMkYm"
+                                        target="_blank" class="fw-bolder"> LayoutFast</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- End of Information -->
+                    </div>
+                </div>
+            </div>
+            <!-- End of Accordion Item #10 -->
+
+            <!-- Accordion item #11 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading11">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapse11" aria-expanded="false" aria-controls="collapse11">
+                        <img src="../images/siemens-logo-default.png" class="img-fluid" alt="Siemens"></i>
+                    </button>
+                </h2>
+                <div id="collapse11" class="accordion-collapse collapse" aria-labelledby="heading11"
+                    data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <!-- Cards group -->
+                        <!-- <div class="card-group"> -->
+                        <!-- Card -->
+                        <div class="card">
+                            <div class="row g-0">
+                                <div class="col-md-12">
+                                    <div class="card-body">
+                                        <h3 class="card-title ">Nathan Diaz</h3>
+                                        <h6 class="card-subtitle">Application Engineer</h6>
+                                        <a href="nathandiaz@siemens.com"
+                                            class="card-link">nathandiaz@siemens.com</a><br><br>
+                                        <p class="card-text">Work Phone: (303) 229-9573</p>
+                                        <p class="card-text">Work Phone: (720) 448-1723</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- </div> -->
+                        <!-- Siemens Information -->
+                        <div class="card">
+                            <ul
+                                class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
+                                <li class="list-group-item">
+                                    <a href="https://new.siemens.com/us/en/products/energy/low-voltage.html"
+                                        target="_blank" class="fw-bolder">Siemens</a>
+                                    <p card-text>Address: 7810 Shaffer Parkway, Suite 100, Littleton, CO 80127</p>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://new.siemens.com/us/en/products/energy/low-voltage/speedfax.html"
+                                        target="_blank" class="fw-bolder"> Speedfax Product Catalog</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <a href="https://new.siemens.com/us/en/products/energy/low-voltage/consulting-engineers/resources.html"
+                                        target="_blank" class="fw-bolder"> Resources for Consulting Engineers</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- End of Information -->
+                    </div>
+                </div>
+            </div>
+            <!-- End of Accordion Item #11 -->
+
+        </div>
+
+
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <!-- <script src="js/script.js"></script> -->
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>

@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Oleg Duday" />
+    <title>NEMA Twist-Lock</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+    <!-- Fonts Awesome 4 CDN -->
+    <!-- <script src="https://use.fontawesome.com/e2a0e7c2b4.js"></script> -->
+
+    <!-- Font Awesome 5 JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+        crossorigin="anonymous"></script>
+
+    <!-- Logo image on top of the tab -->
+    <link rel="icon" href="../images/website-favicon-32x32.png" />
+</head>
+
+<body>
+    <div class="container">
+        <!-- Top Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <!-- Logo in the top left corner with the link to main web site -->
+            <a class="navbar-brand" href="http://mdpeg.com/">
+                <img src="../images/MDP_Engineering_Logo-72dpi.png" alt="MDP Logo" style="width: 150px" /></a>
+            <!-- Button navigation for small screens -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
+                <!-- Navigation menu on top -->
+                <div class="navbar-nav nav-justified w-100 nav-pills rounded-pill">
+                    <a class="nav-link " href="../index.html"><i class="fa fa-home" aria-disabled="true"
+                            style="font-size: 50px"></i></a>
+                    <a class="nav-link" href="../tables/table310-16.html"><i class="fa fa-table" aria-hidden="true"
+                            style="font-size: 50px"></i></a>
+                    <a class="nav-link disabled" href="#"><i class="fa fa-calculator" aria-disabled="true"
+                            style="font-size: 50px"></i></a>
+                    <a class="nav-link disabled" href="#"><i class="fa fa-book" aria-disabled="true"
+                            style="font-size: 50px"></i></a>
+                    <a class="nav-link" href="../light/light-start.html"><i class="fa fa-lightbulb" aria-disabled="true"
+                            style="font-size: 50px;"></i></a>
+                    <a class="nav-link active bg-secondary" aria-current="page" href="../power/power-start.html"><i
+                            class="fa fa-plug" aria-hidden="true" style="font-size: 50px; color: white;"></i></a>
+                    <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Dropdown Button on top with more options -->
+    <div class="container">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                More
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenu2">
+                <li><a class="dropdown-item" href="../power/power-start.html">Representatives</a></li>
+                <li><a class="dropdown-item" href="../power/typical_loads.html">Typical Loads</a></li>
+                <li><a class="dropdown-item" href="../power/fuse_selection.html">Fuse Selection Chart</a></li>
+                <li><a class="dropdown-item" href="../power/NEMA_non-locking.html">NEMA Non-Locking (Straight Blade) Connectors</a>
+                </li>
+                <li><a class="dropdown-item active bg-secondary" href="../power/NEMA_twist-lock.html"
+                        aria-current="page">NEMA Locking (Twist-Lock) Connectors</a>
+                </li>
+                <li><a class="dropdown-item disabled" href="#">Another action</a></li>
+                <li><a class="dropdown-item disabled" href="#">Something else here</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+
+    <div class="container">
+        <h2 class="fw-bold">
+            NEMA Locking (Twist-Lock) Connectors Reference Chart
+        </h2>
+
+        <table class="table table-bordered border-dark table-striped table-hover text-center table-sm w-auto">
+            <!-- Table header -->
+            <thead class="align-middle">
+                <tr>
+                    <th>Configuration</th>
+                    <th>NEMA #</th>
+                    <th>Amperage</th>
+                    <th>Voltage</th>
+                    <th>Wires</th>
+                    <th>Poles</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <!-- Table body -->
+            <tbody>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l1-15p.gif"></td>
+                    <td>L1-15</td>
+                    <td>15A</td>
+                    <td>125V AC</td>
+                    <td>2 Wires</td>
+                    <td>2 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l2-20p.gif"></td>
+                    <td>L2-20</td>
+                    <td>20A</td>
+                    <td>250V AC</td>
+                    <td>2 Wires</td>
+                    <td>2 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l5-15p.gif"></td>
+                    <td>L5-15</td>
+                    <td>30A</td>
+                    <td rowspan="5">125V AC</td>
+                    <td rowspan="5">3 Wires</td>
+                    <td rowspan="5">2 Poles</td>
+                    <TD></TD>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l5-20p.gif"></td>
+                    <td>L5-20</td>
+                    <td>20A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l5-30p.gif"></td>
+                    <td>L5-30</td>
+                    <td>30A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l5-50p.gif"></td>
+                    <td>L5-50</td>
+                    <td>50A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l5-60p.gif"></td>
+                    <td>L5-60</td>
+                    <td>60A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l25-30p.gif"></td>
+                    <td>L25-30</td>
+                    <td>30A</td>
+                    <td>240V AC</td>
+                    <td>3 Wires</td>
+                    <td>2 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l6-15p.gif"></td>
+                    <td>L6-15</td>
+                    <td>15A</td>
+                    <td rowspan="5">250V AC</td>
+                    <td rowspan="5">3 Wires</td>
+                    <td rowspan="5">2 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l6-20p.gif"></td>
+                    <td>L6-20</td>
+                    <td>20A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l6-30p.gif"></td>
+                    <td>L6-30</td>
+                    <td>30A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l6-50p.gif"></td>
+                    <td>L6-50</td>
+                    <td>50A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l6-60p.gif"></td>
+                    <td>L6-60</td>
+                    <td>60A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l7-15p.gif"></td>
+                    <td>L7-15</td>
+                    <td>15A</td>
+                    <td rowspan="5">277V AC</td>
+                    <td rowspan="5">3 Wires</td>
+                    <td rowspan="5">2 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td rowspan="2"><img src="../images/NEMA/nema_l7-30p.gif"></td>
+                    <td>L7-20</td>
+                    <td>20A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>L7-30</td>
+                    <td>30A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l7-50p.gif"></td>
+                    <td>L7-50</td>
+                    <td>50A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l7-60p.gif"></td>
+                    <td>L7-60</td>
+                    <td>60A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l24-20p.gif"></td>
+                    <td>L24-20</td>
+                    <td>20A</td>
+                    <td>347V AC</td>
+                    <td>3 Wires</td>
+                    <td>2 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l8-20p.gif"></td>
+                    <td>L8-20</td>
+                    <td>20A</td>
+                    <td rowspan="4">480V AC</td>
+                    <td rowspan="4">3 Wires</td>
+                    <td rowspan="4">2 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l8-30p.gif"></td>
+                    <td>L8-30</td>
+                    <td>30A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l8-50p.gif"></td>
+                    <td>L8-50</td>
+                    <td>50A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l8-60p.gif"></td>
+                    <td>L8-60</td>
+                    <td>60A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l9-20p.gif"></td>
+                    <td>L9-20</td>
+                    <td>20A</td>
+                    <td rowspan="4">600V AC</td>
+                    <td rowspan="4">3 Wires</td>
+                    <td rowspan="4">2 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l9-30p.gif"></td>
+                    <td>L9-30</td>
+                    <td>30A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l9-50p.gif"></td>
+                    <td>L9-50</td>
+                    <td>50A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l9-60p.gif"></td>
+                    <td>L9-60</td>
+                    <td>60A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l10-20p.gif"></td>
+                    <td>L10-20</td>
+                    <td>20A</td>
+                    <td rowspan="2">125/250V AC</td>
+                    <td rowspan="2">3 Wires</td>
+                    <td rowspan="2">3 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l10-30p.gif"></td>
+                    <td>L10-30</td>
+                    <td>30A</td>
+                    <td>Non-NEMA</td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l26-30p.gif"></td>
+                    <td>L26-30</td>
+                    <td>30A</td>
+                    <td>240/415V 3&#8960Y</td>
+                    <td>5 Wires</td>
+                    <td>4 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l11-15p.gif"></td>
+                    <td>L11-15</td>
+                    <td>15A</td>
+                    <td rowspan="3">250V 3&#8960 AC</td>
+                    <td rowspan="3">3 Wires</td>
+                    <td rowspan="3">3 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l11-20p.gif"></td>
+                    <td>L11-20</td>
+                    <td>20A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l11-30p.gif"></td>
+                    <td>L11-30</td>
+                    <td>30A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l12-20p.gif"></td>
+                    <td>L12-20</td>
+                    <td>20A</td>
+                    <td rowspan="2">480V 3&#8960 AC</td>
+                    <td rowspan="2">3 Wires</td>
+                    <td rowspan="2">3 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l12-30p.gif"></td>
+                    <td>L12-30</td>
+                    <td>30A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l13-30p.gif"></td>
+                    <td>L13-30</td>
+                    <td>30A</td>
+                    <td>600V 3&#8960 AC</td>
+                    <td>3 Wires</td>
+                    <td>3 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l14-20p.gif"></td>
+                    <td>L14-20</td>
+                    <td>20A</td>
+                    <td rowspan="4">125/250V</td>
+                    <td rowspan="4">4 Wires</td>
+                    <td rowspan="4">3 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l14-30p.gif"></td>
+                    <td>L14-30</td>
+                    <td>30A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l14-50p.gif"></td>
+                    <td>L14-50</td>
+                    <td>50A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l14-60p.gif"></td>
+                    <td>L14-60</td>
+                    <td>60A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l15-20p.gif"></td>
+                    <td>L15-20</td>
+                    <td>20A</td>
+                    <td rowspan="4">250V 3&#8960 AC</td>
+                    <td rowspan="4">4 Wires</td>
+                    <td rowspan="4">3 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l15-30p.gif"></td>
+                    <td>L15-30</td>
+                    <td>30A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l15-50p.gif"></td>
+                    <td>L15-50</td>
+                    <td>50A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l15-60p.gif"></td>
+                    <td>L15-60</td>
+                    <td>60A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l16-20p.gif"></td>
+                    <td>L16-20</td>
+                    <td>20A</td>
+                    <td rowspan="4">480V 3&#8960 AC</td>
+                    <td rowspan="4">4 Wires</td>
+                    <td rowspan="4">3 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l16-30p.gif"></td>
+                    <td>L16-30</td>
+                    <td>30A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l16-50p.gif"></td>
+                    <td>L16-50</td>
+                    <td>50A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l16-60p.gif"></td>
+                    <td>L16-60</td>
+                    <td>60A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l17-30p.gif"></td>
+                    <td>L17-30</td>
+                    <td>30A</td>
+                    <td rowspan="3">600V 3&#8960 AC</td>
+                    <td rowspan="3">4 Wires</td>
+                    <td rowspan="3">3 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l17-50p.gif"></td>
+                    <td>L17-50</td>
+                    <td>50A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l17-60p.gif"></td>
+                    <td>L17-60</td>
+                    <td>60A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l18-20p.gif"></td>
+                    <td>L18-20</td>
+                    <td>20A</td>
+                    <td rowspan="2">120/208V 3&#8960Y AC</td>
+                    <td rowspan="2">4 Wires</td>
+                    <td rowspan="2">4 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l18-30p.gif"></td>
+                    <td>L18-30</td>
+                    <td>30A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l19-20p.gif"></td>
+                    <td>L19-20</td>
+                    <td>20A</td>
+                    <td rowspan="2">277/480V 3&#8960Y AC</td>
+                    <td rowspan="2">4 Wires</td>
+                    <td rowspan="2">4 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l19-30p.gif"></td>
+                    <td>L19-30</td>
+                    <td>30A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l20-20p.gif"></td>
+                    <td>L20-20</td>
+                    <td>20A</td>
+                    <td rowspan="2">347/600V 3&#8960Y AC</td>
+                    <td rowspan="2">4 Wires</td>
+                    <td rowspan="2">4 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l20-30p.gif"></td>
+                    <td>L20-30</td>
+                    <td>30A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l21-20p.gif"></td>
+                    <td>L21-20</td>
+                    <td>20A</td>
+                    <td rowspan="4">120/208V 3&#8960Y AC</td>
+                    <td rowspan="4">5 Wires</td>
+                    <td rowspan="4">4 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l21-30p.gif"></td>
+                    <td>L21-30</td>
+                    <td>30A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l21-50p.gif"></td>
+                    <td>L21-50</td>
+                    <td>50A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l21-60p.gif"></td>
+                    <td>L21-60</td>
+                    <td>60A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l22-20p.gif"></td>
+                    <td>L22-20</td>
+                    <td>20A</td>
+                    <td rowspan="4">277/480V 3&#8960Y AC</td>
+                    <td rowspan="4">5 Wires</td>
+                    <td rowspan="4">4 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l22-30p.gif"></td>
+                    <td>L22-30</td>
+                    <td>30A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l22-50p.gif"></td>
+                    <td>L22-50</td>
+                    <td>50A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l22-60p.gif"></td>
+                    <td>L22-60</td>
+                    <td>60A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l23-20p.gif"></td>
+                    <td>L23-20</td>
+                    <td>20A</td>
+                    <td rowspan="4">347/600V 3&#8960Y AC</td>
+                    <td rowspan="4">5 Wires</td>
+                    <td rowspan="4">4 Poles</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l23-30p.gif"></td>
+                    <td>L23-30</td>
+                    <td>30A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l23-50p.gif"></td>
+                    <td>L23-50</td>
+                    <td>50A</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/NEMA/nema_l23-60p.gif"></td>
+                    <td>L23-60</td>
+                    <td>60A</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Optional JavaScript; choose one of the two! -->
+
+        <!-- Option 1: Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+        <!-- <script src="js/script.js"></script> -->
+
+        <!-- Option 2: Separate Popper and Bootstrap JS -->
+        <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>
