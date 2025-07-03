@@ -11,10 +11,10 @@
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      href="css/style.css"
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+    <!-- Custom styles (dark mode, etc.) -->
     <link rel="stylesheet" href="/css/style.css" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 
@@ -109,18 +109,21 @@
             <a class="nav-link" href="power/power-start.html">
               <i class="fa fa-plug" style="font-size: 50px"></i>
             </a>
-
-            <!-- 🌙 Dark Mode Toggle Button -->
-            <button
-              id="darkModeToggle"
-              class="btn btn-outline-secondary ms-auto"
-              title="Toggle dark mode"
-              style="height: 50px; width: 50px; border-radius: 50%"
-            >
-              🌙
-            </button>
           </div>
         </div>
+        <div class="d-flex ms-auto align-items-center">
+  <!-- other nav items -->
+  <button
+    id="darkModeToggle"
+    class="btn btn-outline-secondary ms-2"
+    title="Toggle dark mode"
+    style="height: 40px; width: 40px; border-radius: 50%"
+  >
+    🌙
+  </button>
+</div>
+
+
       </nav>
     </div>
 
@@ -632,19 +635,21 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
     -->
     <script>
-      const toggle = document.getElementById("darkModeToggle");
-      const body = document.body;
+  const toggle = document.getElementById('darkModeToggle');
+  const body = document.body;
 
-      // Load previous preference
-      if (localStorage.getItem("dark-mode") === "true") {
-        body.classList.add("dark-mode");
-      }
+  // Apply saved theme on page load
+  if (localStorage.getItem('dark-mode') === 'true') {
+    body.classList.add('dark-mode');
+  }
 
-      toggle.addEventListener("click", () => {
-        body.classList.toggle("dark-mode");
-        localStorage.setItem("dark-mode", body.classList.contains("dark-mode"));
-      });
-    </script>
+  // Toggle and save preference
+  toggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    localStorage.setItem('dark-mode', body.classList.contains('dark-mode'));
+  });
+</script>
+
 
     <script src="js/script.js"></script>
   </body>
