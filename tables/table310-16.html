@@ -1,400 +1,549 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Oleg Duday" />
+    <title>Tables</title>
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="author" content="Oleg Duday" />
-  <title>Tables</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="../css/style.css" />
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <!-- Fonts Awesome 4 CDN -->
+    <!-- <script src="https://use.fontawesome.com/e2a0e7c2b4.js"></script> -->
 
-  <!-- Fonts Awesome 4 CDN -->
-  <!-- <script src="https://use.fontawesome.com/e2a0e7c2b4.js"></script> -->
+    <!-- Font Awesome 5 JS -->
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+      integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+      integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+      crossorigin="anonymous"
+    ></script>
 
-  <!-- Font Awesome 5 JS -->
-  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
-    integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
-    crossorigin="anonymous"></script>
-  <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
-    integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
-    crossorigin="anonymous"></script>
+    <!-- Logo image on top of the tab -->
+    <link rel="icon" href="../images/website-favicon-32x32.png" />
+  </head>
 
-  <!-- Logo image on top of the tab -->
-  <link rel="icon" href="../images/website-favicon-32x32.png" />
-</head>
-
-<body>
-  <div class="container">
-    <!-- Top Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
-      <!-- Logo in the top left corner with the link to main web site -->
-      <a class="navbar-brand" href="http://mdpeg.com/">
-        <img src="../images/MDP_Engineering_Logo-72dpi.png" alt="MDP Logo" style="width: 150px" /></a>
-      <!-- Button navigation for small screens -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-
-        <!-- Navigation menu on top -->
-        <div class="navbar-nav nav-justified w-100 nav-pills rounded-pill">
-          <a class="nav-link" aria-current="page" href="../index.html"><i class="fa fa-home" aria-hidden="true"
-              style="font-size: 50px;"></i></a>
-          <a class="nav-link active bg-secondary" href="#"><i class="fa fa-table" aria-hidden="true"
-              style="font-size: 50px; color: white;"></i></a>
-          <a class="nav-link disabled" href="#"><i class="fa fa-calculator" aria-disabled="true"
-              style="font-size: 50px; "></i></a>
-          <a class="nav-link disabled" href="#"><i class="fa fa-book" aria-disabled="true"
-              style="font-size: 50px"></i></a>
-          <a class="nav-link " href="../light/light-start.html"><i class="fa fa-lightbulb"
-              style="font-size: 50px"></i></a>
-          <a class="nav-link " href="../power/power-start.html"><i class="fa fa-plug" style="font-size: 50px"></i></a>
-          <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
+  <body>
+    <div class="container">
+      <!-- Top Navigation Bar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <!-- Logo in the top left corner with the link to main web site -->
+        <a class="navbar-brand" href="http://mdpeg.com/">
+          <img
+            src="../images/MDP_Engineering_Logo-72dpi.png"
+            alt="MDP Logo"
+            style="width: 150px"
+        /></a>
+        <!-- Button navigation for small screens -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <!-- Navigation menu on top -->
+          <div class="navbar-nav nav-justified w-100 nav-pills rounded-pill">
+            <a class="nav-link" aria-current="page" href="../index.html"
+              ><i
+                class="fa fa-home"
+                aria-hidden="true"
+                style="font-size: 50px"
+              ></i
+            ></a>
+            <a class="nav-link active bg-secondary" href="#"
+              ><i
+                class="fa fa-table"
+                aria-hidden="true"
+                style="font-size: 50px; color: white"
+              ></i
+            ></a>
+            <a class="nav-link disabled" href="#"
+              ><i
+                class="fa fa-calculator"
+                aria-disabled="true"
+                style="font-size: 50px"
+              ></i
+            ></a>
+            <a class="nav-link disabled" href="#"
+              ><i
+                class="fa fa-book"
+                aria-disabled="true"
+                style="font-size: 50px"
+              ></i
+            ></a>
+            <a class="nav-link" href="../light/light-start.html"
+              ><i class="fa fa-lightbulb" style="font-size: 50px"></i
+            ></a>
+            <a class="nav-link" href="../power/power-start.html"
+              ><i class="fa fa-plug" style="font-size: 50px"></i
+            ></a>
+            <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
+            <!-- 🌙 Dark Mode Toggle Button -->
+            <button
+              id="darkModeToggle"
+              class="btn btn-outline-secondary ms-auto"
+              title="Toggle dark mode"
+              style="height: 50px; width: 50px; border-radius: 50%"
+            >
+              🌙
+            </button>
+          </div>
         </div>
-      </div>
-    </nav>
-  </div>
-
-  <!-- Dropdown Button on top with more options -->
-  <div class="container">
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown"
-        aria-expanded="false">
-        More Tables
-      </button>
-      <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenu2">
-        <li><a class="dropdown-item active bg-secondary" href="table310-16.html" aria-current="page">Conductors
-            Sizing Based
-            on Current
-            Value (310-16)</a></li>
-        <li><a class="dropdown-item" href="table310-12.html">Single-Phase Dwelling Services and Feeders
-            Sizing</a></li>
-        <li><a class="dropdown-item" href="table310-15.html">Ambient Temperature Correction Factors
-            (310-15(B)(1))</a></li>
-        <li><a class="dropdown-item" href="table310-15C1.html">Adjustment Factors for More Than Three
-            Current-Carrying Conductors (310-15(C)(1))</a></li>
-        <li><a class="dropdown-item" href="table250-66.html">Grounding Electrode Conductor Sizing (250.66)</a>
-        </li>
-        <li><a class="dropdown-item" href="table250-102.html">Grounded Conductor, System Bonding Jumper Sizing
-            (250.102(C)(1))</a></li>
-        <li><a class="dropdown-item " href="table250-122.html">Equipment Grounding
-            Conductor Sizing (250.122)</a></li>
-        <li><a class="dropdown-item" href="table430-52.html">Maximum Motor OCPD
-            Rating (430.52)</a></li>
-        <li><a class="dropdown-item " href="table430-248.html">FLA for Single-Phase
-            Motors (430-248)</a></li>
-        <li><a class="dropdown-item " href="table430-250.html">FLA for Three-Phase
-            Motors (430-250)</a></li>
-        <li><a class="dropdown-item" href="table430-251B.html">Locked-Rotor
-            Motor Current for Selection of Disconnecting Means (430-251(B)) </a></li>
-        <li><a class="dropdown-item " href="table450-3B.html">Maximum Rating or
-            Settings of OCPD for Transformer (450.3(B))</a></li>
-        <li><a class="dropdown-item " href="tableC1-EMT.html">Maximum Number of
-            Conductors in Electrical Metallic Tubing (EMT) (C.1)</a></li>
-        <li><a class="dropdown-item " href="tableC3-FMC.html">Maximum Number of
-            Conductors in Flexible Metal Conduit (FMC) (C.3)</a></li>
-        <li><a class="dropdown-item " href="tableC11-PVC.html">Maximum Number of
-            Conductors in Rigid PVC Conduit, Schedule 40 and HDPE Conduit (C.11)</a></li>
-      </ul>
+      </nav>
     </div>
-  </div>
 
-  <!-- Page Content -->
+    <!-- Dropdown Button on top with more options -->
+    <div class="container">
+      <div class="dropdown">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenu2"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          More Tables
+        </button>
+        <ul
+          class="dropdown-menu dropdown-menu-dark"
+          aria-labelledby="dropdownMenu2"
+        >
+          <li>
+            <a
+              class="dropdown-item active bg-secondary"
+              href="table310-16.html"
+              aria-current="page"
+              >Conductors Sizing Based on Current Value (310-16)</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="table310-12.html"
+              >Single-Phase Dwelling Services and Feeders Sizing</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="table310-15.html"
+              >Ambient Temperature Correction Factors (310-15(B)(1))</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="table310-15C1.html"
+              >Adjustment Factors for More Than Three Current-Carrying
+              Conductors (310-15(C)(1))</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="table250-66.html"
+              >Grounding Electrode Conductor Sizing (250.66)</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="table250-102.html"
+              >Grounded Conductor, System Bonding Jumper Sizing
+              (250.102(C)(1))</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="table250-122.html"
+              >Equipment Grounding Conductor Sizing (250.122)</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="table430-52.html"
+              >Maximum Motor OCPD Rating (430.52)</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="table430-248.html"
+              >FLA for Single-Phase Motors (430-248)</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="table430-250.html"
+              >FLA for Three-Phase Motors (430-250)</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="table430-251B.html"
+              >Locked-Rotor Motor Current for Selection of Disconnecting Means
+              (430-251(B))
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="table450-3B.html"
+              >Maximum Rating or Settings of OCPD for Transformer (450.3(B))</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="tableC1-EMT.html"
+              >Maximum Number of Conductors in Electrical Metallic Tubing (EMT)
+              (C.1)</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="tableC3-FMC.html"
+              >Maximum Number of Conductors in Flexible Metal Conduit (FMC)
+              (C.3)</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="tableC11-PVC.html"
+              >Maximum Number of Conductors in Rigid PVC Conduit, Schedule 40
+              and HDPE Conduit (C.11)</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
 
-  <div class="container">
-    <h2 class="fw-bold ">
-      Table 310.16 Ampacities of Insulated Conductors with Not More Than Three Current-Carrying
-      Conductors in Raceway, Cable, or Earth (Directly Buried)
-    </h2>
-    <h5>
-      Allowable Ampacities of Insulated Conductors Rated Up to and Including 2000 Volts,
-      for Conductors rated 60&deg;C through 90&deg;C (140&deg;F through 194&deg;F), Not More Than Three Current-Carrying
-      Conductors in Raceway, Cable, or Earth (Directly
-      Buried), Based on Ambient Temperature of 30&deg;C (86&deg;F)
-    </h5>
+    <!-- Page Content -->
 
-    <table class="table table-bordered border-dark table-striped table-hover text-center table-sm w-auto">
-      <!-- Table header -->
-      <thead class="align-middle">
-        <tr>
-          <th rowspan="4" scope="col">Size AWG or kcmil</th>
-          <th colspan="6" scope="col">Temperature Rating of Conductor (See Table 310.4(A))</th>
-          <th rowspan="4">Area (circular mills)</th>
-        </tr>
-        <tr>
-          <th>60&deg;C (140&deg;F)</th>
-          <th>75&deg;C (167&deg;F)</th>
-          <th style="width: 25%;">90&deg;C (194&deg;F)</th>
-          <th>60&deg;C (140&deg;F)</th>
-          <th>75&deg;C (167&deg;F)</th>
-          <th style="width: 25%;">90&deg;C (194&deg;F)</th>
-        </tr>
-        <tr>
-          <th>Types TW, UF</th>
-          <th>Types RHW, THHW, THW, THWN, XHHW, XHWN, USE, ZW</th>
-          <th>Types TBS, SA, SIS, FEP, FEPB, MI, PFA, RHH, RHW-2, THHN, THHW, THW-2, THWN-2,
-            USE-2, XHH, XHHW, XHHW-2, XHWN, XHWN-2, XHHN, Z, ZW-2
-          </th>
-          <th>Types TW, UF</th>
-          <th>Types RHW, THHW, THW, THWN, XHHW, XHWN, USE</th>
-          <th>Types TBS, SA, SIS, THHN, THHW, THW-2, THWN-2, RHH, RHW-2, USE-2, XHH, XHHW,
-            XHHW-2, XHWN, XHWN-2, XHHN
-          </th>
-        </tr>
-        <tr>
-          <th colspan="3">COPPER</th>
-          <th colspan="3">ALUMINUM OR COPPER-CLAD ALUMINUM</th>
-        </tr>
-      </thead>
-      <!-- Table body -->
-      <tbody>
-        <tr>
-          <th scope="row">14</th>
-          <td>15</td>
-          <td>20</td>
-          <td>25</td>
-          <td>-</td>
-          <td>-</td>
-          <td>-</td>
-          <td>4,110</td>
-        </tr>
-        <tr>
-          <th scope="row">12</th>
-          <td>20</td>
-          <td>25</td>
-          <td>30</td>
-          <td>15</td>
-          <td>20</td>
-          <td>25</td>
-          <td>6,530</td>
-        </tr>
-        <tr>
-          <th scope="row">10</th>
-          <td>30</td>
-          <td>35</td>
-          <td>40</td>
-          <td>25</td>
-          <td>30</td>
-          <td>35</td>
-          <td>10,380</td>
-        </tr>
-        <tr>
-          <th scope="row">8</th>
-          <td>40</td>
-          <td>50</td>
-          <td>55</td>
-          <td>35</td>
-          <td>40</td>
-          <td>45</td>
-          <td>16,510</td>
-        </tr>
-        <tr style="border-top: 1pt solid black;">
-          <th scope="row">6</th>
-          <td>55</td>
-          <td>65</td>
-          <td>75</td>
-          <td>40</td>
-          <td>50</td>
-          <td>55</td>
-          <td>26,240</td>
-        </tr>
-        <tr>
-          <th scope="row">4</th>
-          <td>70</td>
-          <td>85</td>
-          <td>95</td>
-          <td>55</td>
-          <td>65</td>
-          <td>75</td>
-          <td>41,740</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>85</td>
-          <td>100</td>
-          <td>115</td>
-          <td>65</td>
-          <td>75</td>
-          <td>85</td>
-          <td>52,620</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>95</td>
-          <td>115</td>
-          <td>130</td>
-          <td>75</td>
-          <td>90</td>
-          <td>100</td>
-          <td>66,360</td>
-        </tr>
-        <tr>
-          <th scope="row">1</th>
-          <td>110</td>
-          <td>130</td>
-          <td>145</td>
-          <td>85</td>
-          <td>100</td>
-          <td>115</td>
-          <td>83,690</td>
-        </tr>
-        <tr style="border-top: 1pt solid black;">
-          <th scope="row">1/0</th>
-          <td>125</td>
-          <td>150</td>
-          <td>170</td>
-          <td>100</td>
-          <td>120</td>
-          <td>135</td>
-          <td>105,600</td>
-        </tr>
-        <tr>
-          <th scope="row">2/0</th>
-          <td>145</td>
-          <td>175</td>
-          <td>195</td>
-          <td>115</td>
-          <td>135</td>
-          <td>150</td>
-          <td>133,100</td>
-        </tr>
-        <tr>
-          <th scope="row">3/0</th>
-          <td>165</td>
-          <td>200</td>
-          <td>225</td>
-          <td>130</td>
-          <td>155</td>
-          <td>175</td>
-          <td>167,800</td>
-        </tr>
-        <tr>
-          <th scope="row">4/0</th>
-          <td>195</td>
-          <td>230</td>
-          <td>260</td>
-          <td>150</td>
-          <td>180</td>
-          <td>205</td>
-          <td>211,600</td>
-        </tr>
-        <tr style="border-top: 1pt solid black;">
-          <th scope="row">250</th>
-          <td>215</td>
-          <td>255</td>
-          <td>290</td>
-          <td>170</td>
-          <td>205</td>
-          <td>230</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <th scope="row">300</th>
-          <td>240</td>
-          <td>285</td>
-          <td>320</td>
-          <td>195</td>
-          <td>230</td>
-          <td>260</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <th scope="row">350</th>
-          <td>260</td>
-          <td>310</td>
-          <td>350</td>
-          <td>210</td>
-          <td>250</td>
-          <td>280</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <th scope="row">400</th>
-          <td>280</td>
-          <td>335</td>
-          <td>380</td>
-          <td>225</td>
-          <td>270</td>
-          <td>305</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <th scope="row">500</th>
-          <td>320</td>
-          <td>380</td>
-          <td>430</td>
-          <td>260</td>
-          <td>310</td>
-          <td>350</td>
-          <td>-</td>
-        </tr>
-        <tr style="border-top: 1pt solid black;">
-          <th scope="row">600</th>
-          <td>350</td>
-          <td>420</td>
-          <td>475</td>
-          <td>285</td>
-          <td>340</td>
-          <td>385</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <th scope="row">700</th>
-          <td>385</td>
-          <td>460</td>
-          <td>520</td>
-          <td>315</td>
-          <td>375</td>
-          <td>425</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <th scope="row">750</th>
-          <td>400</td>
-          <td>475</td>
-          <td>535</td>
-          <td>320</td>
-          <td>385</td>
-          <td>435</td>
-          <td>-</td>
-        </tr>
-      </tbody>
-    </table>
-    <footer>
-      1. Section 310.15(B) shall be referenced for ampacity correction factors where the ambient
-      temperature is other than 30&deg;C (86&deg;F).
-      <br>
-      2. Section 310.15(C)(1) shall be referenced for more than three current-carrying conductors.
-      <br>
-      3. Section 310.16 shall be referenced for conditions of use.
-      <br>
-      *Section 240.4(D) shall be referenced for conductor overcurrent protection limitations,
-      except as modified elsewhere in the Code.
-    </footer>
-  </div>
+    <div class="container">
+      <h2 class="fw-bold">
+        Table 310.16 Ampacities of Insulated Conductors with Not More Than Three
+        Current-Carrying Conductors in Raceway, Cable, or Earth (Directly
+        Buried)
+      </h2>
+      <h5>
+        Allowable Ampacities of Insulated Conductors Rated Up to and Including
+        2000 Volts, for Conductors rated 60&deg;C through 90&deg;C (140&deg;F
+        through 194&deg;F), Not More Than Three Current-Carrying Conductors in
+        Raceway, Cable, or Earth (Directly Buried), Based on Ambient Temperature
+        of 30&deg;C (86&deg;F)
+      </h5>
 
-  <!-- Optional JavaScript; choose one of the two! -->
+      <table
+        class="table table-bordered border-dark table-striped table-hover text-center table-sm w-auto"
+      >
+        <!-- Table header -->
+        <thead class="align-middle">
+          <tr>
+            <th rowspan="4" scope="col">Size AWG or kcmil</th>
+            <th colspan="6" scope="col">
+              Temperature Rating of Conductor (See Table 310.4(A))
+            </th>
+            <th rowspan="4">Area (circular mills)</th>
+          </tr>
+          <tr>
+            <th>60&deg;C (140&deg;F)</th>
+            <th>75&deg;C (167&deg;F)</th>
+            <th style="width: 25%">90&deg;C (194&deg;F)</th>
+            <th>60&deg;C (140&deg;F)</th>
+            <th>75&deg;C (167&deg;F)</th>
+            <th style="width: 25%">90&deg;C (194&deg;F)</th>
+          </tr>
+          <tr>
+            <th>Types TW, UF</th>
+            <th>Types RHW, THHW, THW, THWN, XHHW, XHWN, USE, ZW</th>
+            <th>
+              Types TBS, SA, SIS, FEP, FEPB, MI, PFA, RHH, RHW-2, THHN, THHW,
+              THW-2, THWN-2, USE-2, XHH, XHHW, XHHW-2, XHWN, XHWN-2, XHHN, Z,
+              ZW-2
+            </th>
+            <th>Types TW, UF</th>
+            <th>Types RHW, THHW, THW, THWN, XHHW, XHWN, USE</th>
+            <th>
+              Types TBS, SA, SIS, THHN, THHW, THW-2, THWN-2, RHH, RHW-2, USE-2,
+              XHH, XHHW, XHHW-2, XHWN, XHWN-2, XHHN
+            </th>
+          </tr>
+          <tr>
+            <th colspan="3">COPPER</th>
+            <th colspan="3">ALUMINUM OR COPPER-CLAD ALUMINUM</th>
+          </tr>
+        </thead>
+        <!-- Table body -->
+        <tbody>
+          <tr>
+            <th scope="row">14</th>
+            <td>15</td>
+            <td>20</td>
+            <td>25</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>4,110</td>
+          </tr>
+          <tr>
+            <th scope="row">12</th>
+            <td>20</td>
+            <td>25</td>
+            <td>30</td>
+            <td>15</td>
+            <td>20</td>
+            <td>25</td>
+            <td>6,530</td>
+          </tr>
+          <tr>
+            <th scope="row">10</th>
+            <td>30</td>
+            <td>35</td>
+            <td>40</td>
+            <td>25</td>
+            <td>30</td>
+            <td>35</td>
+            <td>10,380</td>
+          </tr>
+          <tr>
+            <th scope="row">8</th>
+            <td>40</td>
+            <td>50</td>
+            <td>55</td>
+            <td>35</td>
+            <td>40</td>
+            <td>45</td>
+            <td>16,510</td>
+          </tr>
+          <tr style="border-top: 1pt solid black">
+            <th scope="row">6</th>
+            <td>55</td>
+            <td>65</td>
+            <td>75</td>
+            <td>40</td>
+            <td>50</td>
+            <td>55</td>
+            <td>26,240</td>
+          </tr>
+          <tr>
+            <th scope="row">4</th>
+            <td>70</td>
+            <td>85</td>
+            <td>95</td>
+            <td>55</td>
+            <td>65</td>
+            <td>75</td>
+            <td>41,740</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>85</td>
+            <td>100</td>
+            <td>115</td>
+            <td>65</td>
+            <td>75</td>
+            <td>85</td>
+            <td>52,620</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>95</td>
+            <td>115</td>
+            <td>130</td>
+            <td>75</td>
+            <td>90</td>
+            <td>100</td>
+            <td>66,360</td>
+          </tr>
+          <tr>
+            <th scope="row">1</th>
+            <td>110</td>
+            <td>130</td>
+            <td>145</td>
+            <td>85</td>
+            <td>100</td>
+            <td>115</td>
+            <td>83,690</td>
+          </tr>
+          <tr style="border-top: 1pt solid black">
+            <th scope="row">1/0</th>
+            <td>125</td>
+            <td>150</td>
+            <td>170</td>
+            <td>100</td>
+            <td>120</td>
+            <td>135</td>
+            <td>105,600</td>
+          </tr>
+          <tr>
+            <th scope="row">2/0</th>
+            <td>145</td>
+            <td>175</td>
+            <td>195</td>
+            <td>115</td>
+            <td>135</td>
+            <td>150</td>
+            <td>133,100</td>
+          </tr>
+          <tr>
+            <th scope="row">3/0</th>
+            <td>165</td>
+            <td>200</td>
+            <td>225</td>
+            <td>130</td>
+            <td>155</td>
+            <td>175</td>
+            <td>167,800</td>
+          </tr>
+          <tr>
+            <th scope="row">4/0</th>
+            <td>195</td>
+            <td>230</td>
+            <td>260</td>
+            <td>150</td>
+            <td>180</td>
+            <td>205</td>
+            <td>211,600</td>
+          </tr>
+          <tr style="border-top: 1pt solid black">
+            <th scope="row">250</th>
+            <td>215</td>
+            <td>255</td>
+            <td>290</td>
+            <td>170</td>
+            <td>205</td>
+            <td>230</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <th scope="row">300</th>
+            <td>240</td>
+            <td>285</td>
+            <td>320</td>
+            <td>195</td>
+            <td>230</td>
+            <td>260</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <th scope="row">350</th>
+            <td>260</td>
+            <td>310</td>
+            <td>350</td>
+            <td>210</td>
+            <td>250</td>
+            <td>280</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <th scope="row">400</th>
+            <td>280</td>
+            <td>335</td>
+            <td>380</td>
+            <td>225</td>
+            <td>270</td>
+            <td>305</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <th scope="row">500</th>
+            <td>320</td>
+            <td>380</td>
+            <td>430</td>
+            <td>260</td>
+            <td>310</td>
+            <td>350</td>
+            <td>-</td>
+          </tr>
+          <tr style="border-top: 1pt solid black">
+            <th scope="row">600</th>
+            <td>350</td>
+            <td>420</td>
+            <td>475</td>
+            <td>285</td>
+            <td>340</td>
+            <td>385</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <th scope="row">700</th>
+            <td>385</td>
+            <td>460</td>
+            <td>520</td>
+            <td>315</td>
+            <td>375</td>
+            <td>425</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <th scope="row">750</th>
+            <td>400</td>
+            <td>475</td>
+            <td>535</td>
+            <td>320</td>
+            <td>385</td>
+            <td>435</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+      <footer>
+        1. Section 310.15(B) shall be referenced for ampacity correction factors
+        where the ambient temperature is other than 30&deg;C (86&deg;F).
+        <br />
+        2. Section 310.15(C)(1) shall be referenced for more than three
+        current-carrying conductors.
+        <br />
+        3. Section 310.16 shall be referenced for conditions of use.
+        <br />
+        *Section 240.4(D) shall be referenced for conductor overcurrent
+        protection limitations, except as modified elsewhere in the Code.
+      </footer>
+    </div>
 
-  <!-- Option 1: Bootstrap Bundle with Popper -->
+    <!-- Optional JavaScript; choose one of the two! -->
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
 
-  <!-- <script src="js/script.js"></script> -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
 
-  <!-- Option 2: Separate Popper and Bootstrap JS -->
-  <!--
+    <script>
+      const toggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+
+      // Apply saved theme on page load
+      if (localStorage.getItem("dark-mode") === "true") {
+        body.classList.add("dark-mode");
+      }
+
+      // Toggle and save preference
+      toggle.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+        localStorage.setItem("dark-mode", body.classList.contains("dark-mode"));
+      });
+    </script>
+
+    <script>
+  document.querySelectorAll('.table-hover tbody tr').forEach(row => {
+    row.addEventListener('click', () => {
+      // Remove from all rows
+      document.querySelectorAll('.table-hover tbody tr').forEach(r => r.classList.remove('active-row'));
+      // Add to clicked one
+      row.classList.add('active-row');
+    });
+  });
+</script>
+
+    <!-- <script src="js/script.js"></script> -->
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
     -->
-</body>
-
+  </body>
 </html>

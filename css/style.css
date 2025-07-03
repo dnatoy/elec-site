@@ -11,3 +11,119 @@
 .table td {
   font-weight: 500;
 }
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.dark-mode .navbar {
+  background-color: #1f1f1f !important;
+}
+
+.dark-mode .nav-link {
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .nav-link.active,
+.dark-mode .nav-link:hover {
+  background-color: #333 !important;
+}
+
+.dark-mode .accordion-button {
+  background-color: #2c2c2c;
+  color: #e0e0e0;
+}
+
+.dark-mode .accordion-body,
+.dark-mode .list-group-item {
+  background-color: #1e1e1e;
+  color: #ccc;
+}
+
+.dark-mode .btn-secondary,
+.dark-mode .btn-outline-secondary {
+  background-color: #333;
+  color: #eee;
+  border-color: #555;
+}
+
+.dark-mode .dropdown-menu {
+  background-color: #1f1f1f;
+  color: #e0e0e0;
+}
+
+.dark-mode .dropdown-item {
+  color: #ccc;
+}
+
+.dark-mode .dropdown-item:hover {
+  background-color: #333;
+  color: white;
+}
+
+.dark-mode .table {
+  background-color: #1f1f1f;
+  color: #e0e0e0;
+  border-color: #555 !important; /* outer border */
+}
+
+body.dark-mode .table th,
+body.dark-mode .table td {
+  border-color: #777 !important; /* cell borders */
+}
+
+body.dark-mode thead {
+  background-color: #2d2d2d;
+  color: #ffffff;
+}
+
+/* Optional: stronger contrast for thead */
+body.dark-mode .table thead th {
+  border-color: #666 !important;
+  background-color: #2c2c2c !important;
+  color: #fff !important;
+}
+
+/* Fix table stripe and hover contrast in dark mode */
+body.dark-mode .table-striped tbody tr:nth-of-type(odd) {
+  background-color: #1e1e1e !important;  /* Lighter dark stripe */
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .table-striped tbody tr:nth-of-type(even) {
+  background-color: #2a2a2a !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .table-hover tbody tr:hover {
+  background-color: #333 !important;
+  color: orange !important; /* Customize highlight text color here */
+}
+
+
+.dark-mode .table-hover tbody tr:hover {
+  background-color: #333;
+}
+
+/* Dark mode: use red or orange text on hover */
+body.dark-mode .table-hover tbody tr:hover {
+  background-color: #333 !important;
+  color: orange !important; /* or try red, gold, coral */
+}
+
+/* Base styling for highlighted (clicked) row */
+.table-hover tbody tr.active-row {
+  font-weight: bold;
+}
+
+/* Light mode: orange background + black text */
+.table-hover tbody tr.active-row {
+  background-color: #fff3cd !important; /* light orange */
+  color: #000 !important;
+}
+
+/* Dark mode: darker background + bright text */
+body.dark-mode .table-hover tbody tr.active-row {
+  background-color: #3a3a3a !important;
+  color: orange !important;
+}

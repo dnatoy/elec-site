@@ -59,6 +59,12 @@
           <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
         </div>
       </div>
+      <!-- 🌙 Dark Mode Toggle Button -->
+      <button id="darkModeToggle" class="btn btn-outline-secondary ms-auto" title="Toggle dark mode" style="height: 50px; width: 50px; border-radius: 50%;">
+        🌙
+      </button>
+      <!-- End of Dark Mode Toggle Button -->   
+
     </nav>
   </div>
 
@@ -242,6 +248,32 @@
       crossorigin="anonymous"></script>
 
     <!-- <script src="js/script.js"></script> -->
+    <script>
+  const toggle = document.getElementById('darkModeToggle');
+  const body = document.body;
+
+  // Apply saved theme on page load
+  if (localStorage.getItem('dark-mode') === 'true') {
+    body.classList.add('dark-mode');
+  }
+
+  // Toggle and save preference
+  toggle.addEventListener('click', () => {
+    body.classList.toggle('dark-mode');
+    localStorage.setItem('dark-mode', body.classList.contains('dark-mode'));
+  });
+</script>
+
+<script>
+  document.querySelectorAll('.table-hover tbody tr').forEach(row => {
+    row.addEventListener('click', () => {
+      // Remove from all rows
+      document.querySelectorAll('.table-hover tbody tr').forEach(r => r.classList.remove('active-row'));
+      // Add to clicked one
+      row.classList.add('active-row');
+    });
+  });
+</script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
