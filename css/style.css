@@ -135,3 +135,45 @@ body.dark-mode .table-hover tbody tr.active-row {
   background-color: #3a3a3a !important;
   color: orange !important;
 }
+
+/* Dark mode for cards and card body */
+body.dark-mode .card {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  border-color: #444;
+}
+
+body.dark-mode .card-body {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+}
+
+/* Optional: remove extra border contrast for list items inside cards */
+body.dark-mode .list-group-item {
+  border-color: #444;
+}
+
+/* Optional: fix accordion collapsed button background */
+body.dark-mode .accordion-button.collapsed {
+  background-color: #1f1f1f;
+  color: #e0e0e0;
+}
+
+/* Match list-group-item background to card color in dark mode */
+body.dark-mode .list-group-item {
+  background-color: #2a2a2a !important;  /* Match the .card background */
+  color: #e0e0e0;
+  border-color: #444 !important;
+}
+
+
+/* Optional: fix top/bottom spacing if needed */
+body.dark-mode .list-group-horizontal-lg > .list-group-item {
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Optional: remove border-radius if you want flush corners */
+body.dark-mode .card .list-group-item {
+  border-radius: 0 !important;
+}

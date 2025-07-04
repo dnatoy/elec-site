@@ -60,6 +60,17 @@
           <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
         </div>
       </div>
+      <div class="d-flex ms-auto align-items-center">
+        <button
+          id="darkModeToggle"
+          class="btn btn-outline-secondary ms-2"
+          title="Toggle dark mode"
+          style="height: 40px; width: 40px; border-radius: 50%"
+        >
+          🌙
+        </button>
+</div>
+
     </nav>
   </div>
 
@@ -328,6 +339,33 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
     -->
+    <script>
+      const toggleButton = document.getElementById("darkModeToggle");
+
+      // Apply saved theme on load
+      if (localStorage.getItem("dark-mode") === "true") {
+        document.body.classList.add("dark-mode");
+      }
+
+      // Toggle and store preference
+      toggleButton.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+        localStorage.setItem("dark-mode", document.body.classList.contains("dark-mode"));
+      });
+    </script>
+  </div>
+  <script>
+  // Optional: make table rows clickable to highlight
+  document.querySelectorAll('.table-hover tbody tr').forEach(row => {
+    row.addEventListener('click', () => {
+      // Remove class from all rows
+      document.querySelectorAll('.table-hover tbody tr').forEach(r => r.classList.remove('active-row'));
+      // Add to selected
+      row.classList.add('active-row');
+    });
+  });
+</script>
+
 </body>
 
 </html>
