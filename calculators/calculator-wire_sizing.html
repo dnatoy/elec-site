@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NEC Conductor and Raceway Sizing Calculator</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="container my-4">
+    <h2 class="fw-bold">NEC Conductor and Raceway Sizing Calculator</h2>
+    <form id="necCalculator">
+      <div class="row">
+        <div class="col-md-4">
+          <label for="amperageSelect" class="form-label">Load Amperage (Select or Enter)</label>
+          <select class="form-select" id="amperageSelect">
+  <option value="">-- Select Standard OCPD Value --</option>
+  <option value="10">10 A</option>
+  <option value="15">15 A</option>
+  <option value="20">20 A</option>
+  <option value="25">25 A</option>
+  <option value="30">30 A</option>
+  <option value="35">35 A</option>
+  <option value="40">40 A</option>
+  <option value="45">45 A</option>
+  <option value="50">50 A</option>
+  <option value="60">60 A</option>
+  <option value="70">70 A</option>
+  <option value="80">80 A</option>
+  <option value="90">90 A</option>
+  <option value="100">100 A</option>
+  <option value="110">110 A</option>
+  <option value="125">125 A</option>
+  <option value="150">150 A</option>
+  <option value="175">175 A</option>
+  <option value="200">200 A</option>
+  <option value="225">225 A</option>
+  <option value="250">250 A</option>
+  <option value="300">300 A</option>
+  <option value="350">350 A</option>
+  <option value="400">400 A</option>
+  <option value="450">450 A</option>
+  <option value="500">500 A</option>
+  <option value="600">600 A</option>
+  <option value="700">700 A</option>
+  <option value="800">800 A</option>
+  <option value="1000">1000 A</option>
+  <option value="1200">1200 A</option>
+  <option value="1600">1600 A</option>
+  <option value="2000">2000 A</option>
+  <option value="2500">2500 A</option>
+  <option value="3000">3000 A</option>
+  <option value="4000">4000 A</option>
+  <option value="5000">5000 A</option>
+  <option value="6000">6000 A</option>
+          </select>
+          <input type="number" class="form-control mt-2" id="amperageInput" placeholder="Or enter custom amperage">
+        </div>
+        <div class="col-md-4">
+          <label for="temperature" class="form-label">Ambient Temperature (°C)</label>
+          <select class="form-select" id="temperature">
+            <option value="30">30°C (86°F) - Standard</option>
+            <option value="35">35°C</option>
+            <option value="40">40°C</option>
+            <option value="45">45°C</option>
+            <option value="50">50°C</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label for="conductors" class="form-label"># of Current-Carrying Conductors</label>
+          <input type="number" class="form-control" id="conductors" value="4">
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-md-6">
+          <label class="form-label">Ground Information</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="groundType" id="service" value="service">
+            <label class="form-check-label" for="service">Service</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="groundType" id="transformer" value="transformer">
+            <label class="form-check-label" for="transformer">Secondary of Transformer</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="groundType" id="equipment" value="equipment" checked>
+            <label class="form-check-label" for="equipment">Equipment Grounding Conductor</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label">Conductor Material</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="wireMaterial" id="copper" value="copper" checked>
+            <label class="form-check-label" for="copper">Copper</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="wireMaterial" id="aluminum" value="aluminum">
+            <label class="form-check-label" for="aluminum">Aluminum</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <label for="maxWireSize" class="form-label">Maximum Wire Size (AWG/kcmil)</label>
+          <select class="form-select" id="maxWireSize">
+  <option value="1/0">1/0</option>
+  <option value="2/0">2/0</option>
+  <option value="3/0">3/0</option>
+  <option value="4/0">4/0</option>
+  <option value="250">250 kcmil</option>
+  <option value="300">300 kcmil</option>
+  <option value="350">350 kcmil</option>
+  <option value="400">400 kcmil</option>
+  <option value="500" selected>500 kcmil</option>
+  <option value="600">600 kcmil</option>
+  <option value="700">700 kcmil</option>
+  <option value="750">750 kcmil</option>
+  <option value="800">800 kcmil</option>
+  <option value="900">900 kcmil</option>
+  <option value="1000">1000 kcmil</option>
+  <option value="1100">1100 kcmil</option>
+  <option value="1250">1250 kcmil</option>
+  <option value="1500">1500 kcmil</option>
+  <option value="1750">1750 kcmil</option>
+  <option value="2000">2000 kcmil</option>
+</select>
+        </div>
+        <div class="col-md-6">
+          <label for="racewayType" class="form-label">Raceway Type</label>
+          <select class="form-select" id="racewayType">
+            <option value="EMT">EMT</option>
+            <option value="PVC">PVC</option>
+            <option value="FMC">FMC</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col text-center">
+          <button type="submit" class="btn btn-primary mb-3">Calculate</button>
+          <div id="results"></div>
+          <div class="text-start small text-muted mt-4">
+            <p><strong>Note:</strong></p>
+            <ul>
+              <li>Conductor size is based on NEC Table 310.16 and adjusted using the <strong>90°C ampacity</strong> column when applying derating.</li>
+              <li>Ambient temperature correction is applied per Table 310.15(B)(1).</li>
+              <li>Adjustment for number of current-carrying conductors is per Table 310.15(C)(1), except for service conductors up to 4 in a raceway.</li>
+              <li>If the adjusted ampacity is insufficient, the calculator determines the number of required parallel sets using the selected maximum wire size.</li>
+              <li>Grounding conductor sizes follow Tables 250.66, 250.102(C)(1), or 250.122 depending on grounding type.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+<script>
+// Convert NEC wire size strings into comparable numbers
+function sizeToNumber(size) {
+  if (size.includes("/0")) {
+    const parts = size.split("/");
+    return 1000 + parseInt(parts[0]);
+  }
+  return parseInt(size);
+}
+
+const ampacityTable = [
+  { size: "14", cu: 20, al: 15 }, { size: "12", cu: 25, al: 20 },
+  { size: "10", cu: 35, al: 30 }, { size: "8", cu: 50, al: 40 },
+  { size: "6", cu: 65, al: 50 }, { size: "4", cu: 85, al: 65 },
+  { size: "3", cu: 100, al: 75 }, { size: "2", cu: 115, al: 90 },
+  { size: "1", cu: 130, al: 100 }, { size: "1/0", cu: 150, al: 120 },
+  { size: "2/0", cu: 175, al: 135 }, { size: "3/0", cu: 200, al: 155 },
+  { size: "4/0", cu: 230, al: 180 }, { size: "250", cu: 255, al: 205 },
+  { size: "300", cu: 285, al: 230 }, { size: "350", cu: 310, al: 250 },
+  { size: "400", cu: 335, al: 270 }, { size: "500", cu: 380, al: 310 },
+  { size: "600", cu: 420, al: 340 }, { size: "700", cu: 460, al: 355 },
+  { size: "750", cu: 475, al: 385 }, { size: "800", cu: 490, al: 395 },
+  { size: "900", cu: 520, al: 435 }, { size: "1000", cu: 545, al: 445 },
+  { size: "1100", cu: 555, al: 455 }, { size: "1250", cu: 590, al: 475 },
+  { size: "1500", cu: 625, al: 500 }, { size: "1750", cu: 650, al: 520 },
+  { size: "2000", cu: 665, al: 545 }
+];
+
+document.getElementById("necCalculator").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const selectVal = parseFloat(document.getElementById("amperageSelect").value);
+  const inputVal = parseFloat(document.getElementById("amperageInput").value);
+  const amperage = !isNaN(inputVal) ? inputVal : selectVal;
+
+  if (isNaN(amperage)) {
+    document.getElementById("results").innerHTML = '<div class="alert alert-danger">Please select or enter a valid load amperage.</div>';
+    return;
+  }
+
+  const wireMaterial = document.querySelector("input[name='wireMaterial']:checked").value;
+  const ampacityKey = wireMaterial === 'copper' ? 'cu' : 'al';
+
+  const ambientTemp = parseInt(document.getElementById("temperature").value);
+  const tempCorrectionTable = { 30: 1.00, 35: 0.94, 40: 0.88, 45: 0.82, 50: 0.75 };
+  const tempFactor = tempCorrectionTable[ambientTemp] || 1.00;
+
+  const conductorCount = parseInt(document.getElementById("conductors").value);
+  let adjustmentFactor = 1.00;
+  const groundType = document.querySelector("input[name='groundType']:checked").value;
+  if (!(groundType === 'service' && conductorCount <= 4)) {
+    if (conductorCount >= 4 && conductorCount <= 6) adjustmentFactor = 0.80;
+    else if (conductorCount >= 7 && conductorCount <= 9) adjustmentFactor = 0.70;
+    else if (conductorCount >= 10 && conductorCount <= 20) adjustmentFactor = 0.50;
+    else if (conductorCount >= 21 && conductorCount <= 30) adjustmentFactor = 0.45;
+    else if (conductorCount >= 31 && conductorCount <= 40) adjustmentFactor = 0.40;
+    else if (conductorCount > 40) adjustmentFactor = 0.35;
+  }
+
+  const tempColumn = amperage <= 60 ? '60°C' : '75°C';
+  const maxWireSize = document.getElementById("maxWireSize").value;
+  const maxIndex = ampacityTable.findIndex(row => sizeToNumber(row.size) === sizeToNumber(maxWireSize));
+  const limitedTable = ampacityTable.slice(0, maxIndex + 1);
+
+  let bestMatch = null;
+let bestSets = Infinity;
+
+for (const row of limitedTable) {
+  const adjustedAmpacity = row[ampacityKey] * tempFactor * adjustmentFactor;
+  const sets = Math.ceil(amperage / adjustedAmpacity);
+  if (adjustedAmpacity * sets >= amperage && sets <= 6) {
+    if (!bestMatch || sets < bestSets || (sets === bestSets && sizeToNumber(row.size) < sizeToNumber(bestMatch.size))) {
+      bestMatch = row;
+      bestSets = sets;
+    }
+  }
+}
+
+const match = bestMatch;
+const parallelSets = bestSets;
+
+  let resultHTML = '';
+  if (match) {
+    resultHTML = `
+      <div class="alert alert-success">
+        <strong>Minimum Conductor Size:</strong> ${match.size} ${sizeToNumber(match.size) > 4 ? 'kcmil' : 'AWG'} (${wireMaterial.charAt(0).toUpperCase() + wireMaterial.slice(1)})<br>
+        <strong>Adjusted Ampacity (based on 90°C column):</strong> ${(match[ampacityKey] * tempFactor * adjustmentFactor).toFixed(1)} A<br><em>(using ${match.size} ${match.size.includes('kcmil') || parseInt(match.size) > 4 ? 'kcmil' : 'AWG'})</em><br>
+        ${parallelSets > 1 ? `<strong>Parallel Sets Required:</strong> ${parallelSets}` : ``}
+      </div>
+    `;
+  } else {
+    resultHTML = `<div class="alert alert-warning">No conductor size found for ${amperage} A with ${wireMaterial} in ${tempColumn} column.</div>`;
+  }
+
+  let groundingSize = '';
+  if (groundType === 'equipment') {
+    const egcTable = [
+      { maxOCPD: 15, cu: '14', al: '12' },
+      { maxOCPD: 20, cu: '12', al: '10' },
+      { maxOCPD: 60, cu: '10', al: '8' },
+      { maxOCPD: 100, cu: '8', al: '6' },
+      { maxOCPD: 200, cu: '6', al: '4' },
+      { maxOCPD: 300, cu: '4', al: '3' },
+      { maxOCPD: 400, cu: '3', al: '1' },
+      { maxOCPD: 500, cu: '2', al: '1/0' },
+      { maxOCPD: 600, cu: '1', al: '2/0' },
+      { maxOCPD: 800, cu: '1/0', al: '3/0' },
+      { maxOCPD: 1000, cu: '2/0', al: '4/0' },
+      { maxOCPD: 1200, cu: '3/0', al: '250' },
+      { maxOCPD: 1600, cu: '4/0', al: '350' },
+      { maxOCPD: 2000, cu: '250', al: '400' }
+    ];
+    const egc = egcTable.find(row => amperage <= row.maxOCPD) || egcTable[egcTable.length - 1];
+    groundingSize = wireMaterial === 'copper' ? egc.cu : egc.al;
+    resultHTML += `<div class="alert alert-info"><strong>Equipment Grounding Conductor (250.122):</strong> ${groundingSize} ${sizeToNumber(groundingSize) > 4 ? 'kcmil' : 'AWG'} (${wireMaterial})</div>`;
+  } else if (groundType === 'service') {
+    resultHTML += `<div class="alert alert-secondary"><strong>Service Grounding:</strong> No separate grounding conductor required. Bonding occurs at the main service entrance.</div>`;
+  } else if (groundType === 'transformer') {
+    const gndTable = [
+      { maxSize: 2, cu: '8', al: '6' },
+      { maxSize: 1/0, cu: '6', al: '4' },
+      { maxSize: 3/0, cu: '4', al: '2' },
+      { maxSize: 350, cu: '2', al: '1/0' },
+      { maxSize: 600, cu: '1/0', al: '3/0' },
+      { maxSize: 1100, cu: '2/0', al: '4/0' },
+      { maxSize: Infinity, cu: '3/0', al: '250' }
+    ];
+    const gnd = gndTable.find(row => amperage <= row.maxSize);
+    groundingSize = wireMaterial === 'copper' ? gnd.cu : gnd.al;
+    resultHTML += `<div class="alert alert-info"><strong>Supply-Side Bonding Jumper (250.102(C)(1)):</strong> ${groundingSize} ${groundingSize.includes('kcmil') || parseInt(groundingSize) > 4 ? 'kcmil' : 'AWG'} (${wireMaterial})</div>`;
+  }
+
+  document.getElementById("results").innerHTML = resultHTML;
+});
+</script>
+</body>
+</html>
