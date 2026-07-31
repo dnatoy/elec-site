@@ -49,7 +49,7 @@
               style="font-size: 50px;"></i></a>
           <a class="nav-link active bg-secondary" href="#"><i class="fa fa-table" aria-hidden="true"
               style="font-size: 50px; color: white;"></i></a>
-          <a class="nav-link disabled" href="#"><i class="fa fa-calculator" aria-disabled="true"
+          <a class="nav-link" href="../calculators/calculator-start.html"><i class="fa fa-calculator" aria-hidden="true"
               style="font-size: 50px; "></i></a>
           <a class="nav-link disabled" href="#"><i class="fa fa-book" aria-disabled="true"
               style="font-size: 50px"></i></a>
@@ -181,22 +181,7 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"></script>
 
-    <!-- <script src="js/script.js"></script> -->
-    <script>
-  const toggle = document.getElementById('darkModeToggle');
-  const body = document.body;
-
-  // Apply saved theme on page load
-  if (localStorage.getItem('dark-mode') === 'true') {
-    body.classList.add('dark-mode');
-  }
-
-  // Toggle and save preference
-  toggle.addEventListener('click', () => {
-    body.classList.toggle('dark-mode');
-    localStorage.setItem('dark-mode', body.classList.contains('dark-mode'));
-  });
-</script>
+    <script src="../js/script.js"></script>
 
 <script>
   document.querySelectorAll('.table-hover tbody tr').forEach(row => {

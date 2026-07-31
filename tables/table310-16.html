@@ -78,10 +78,10 @@
                 style="font-size: 50px; color: white"
               ></i
             ></a>
-            <a class="nav-link disabled" href="#"
+            <a class="nav-link" href="../calculators/calculator-start.html"
               ><i
                 class="fa fa-calculator"
-                aria-disabled="true"
+                aria-hidden="true"
                 style="font-size: 50px"
               ></i
             ></a>
@@ -511,21 +511,6 @@
       crossorigin="anonymous"
     ></script>
 
-    <script>
-      const toggle = document.getElementById("darkModeToggle");
-      const body = document.body;
-
-      // Apply saved theme on page load
-      if (localStorage.getItem("dark-mode") === "true") {
-        body.classList.add("dark-mode");
-      }
-
-      // Toggle and save preference
-      toggle.addEventListener("click", () => {
-        body.classList.toggle("dark-mode");
-        localStorage.setItem("dark-mode", body.classList.contains("dark-mode"));
-      });
-    </script>
 
     <script>
   document.querySelectorAll('.table-hover tbody tr').forEach(row => {
@@ -538,7 +523,7 @@
   });
 </script>
 
-    <!-- <script src="js/script.js"></script> -->
+    <script src="../js/script.js"></script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
