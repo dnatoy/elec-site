@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -485,6 +485,76 @@
             <td>435</td>
             <td>-</td>
           </tr>
+          <tr>
+            <th scope="row">800</th>
+            <td>410</td>
+            <td>490</td>
+            <td>555</td>
+            <td>330</td>
+            <td>395</td>
+            <td>445</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <th scope="row">900</th>
+            <td>435</td>
+            <td>520</td>
+            <td>585</td>
+            <td>355</td>
+            <td>425</td>
+            <td>480</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <th scope="row">1000</th>
+            <td>455</td>
+            <td>545</td>
+            <td>615</td>
+            <td>375</td>
+            <td>445</td>
+            <td>500</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <th scope="row">1250</th>
+            <td>495</td>
+            <td>590</td>
+            <td>665</td>
+            <td>405</td>
+            <td>485</td>
+            <td>545</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <th scope="row">1500</th>
+            <td>525</td>
+            <td>625</td>
+            <td>705</td>
+            <td>435</td>
+            <td>520</td>
+            <td>585</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <th scope="row">1750</th>
+            <td>545</td>
+            <td>650</td>
+            <td>735</td>
+            <td>455</td>
+            <td>545</td>
+            <td>615</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <th scope="row">2000</th>
+            <td>555</td>
+            <td>665</td>
+            <td>750</td>
+            <td>470</td>
+            <td>560</td>
+            <td>630</td>
+            <td>-</td>
+          </tr>
         </tbody>
       </table>
       <footer>
@@ -511,17 +581,18 @@
       crossorigin="anonymous"
     ></script>
 
-
     <script>
-  document.querySelectorAll('.table-hover tbody tr').forEach(row => {
-    row.addEventListener('click', () => {
-      // Remove from all rows
-      document.querySelectorAll('.table-hover tbody tr').forEach(r => r.classList.remove('active-row'));
-      // Add to clicked one
-      row.classList.add('active-row');
-    });
-  });
-</script>
+      document.querySelectorAll(".table-hover tbody tr").forEach((row) => {
+        row.addEventListener("click", () => {
+          // Remove from all rows
+          document
+            .querySelectorAll(".table-hover tbody tr")
+            .forEach((r) => r.classList.remove("active-row"));
+          // Add to clicked one
+          row.classList.add("active-row");
+        });
+      });
+    </script>
 
     <script src="../js/script.js"></script>
 
