@@ -1,3 +1,38 @@
+/* Navbar brand logo sizing (was inline style) */
+.navbar-logo {
+  width: 150px;
+}
+
+/* Navbar pill icon sizing (was inline style) */
+.nav-icon {
+  font-size: 50px;
+}
+
+.nav-link.active .nav-icon {
+  color: white;
+}
+
+/* Dark mode toggle button (was inline style) */
+#darkModeToggle {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+/* Accordion header logo sizing (was inline style) */
+.accordion-logo {
+  height: 50pt;
+}
+
+/* Card width variants used in rep listing cards (was inline style) */
+.card-max-50 {
+  max-width: 50%;
+}
+
+.card-max-100 {
+  max-width: 100%;
+}
+
 /* Custom color for hover row in the table */
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
   background-color: rgba(255, 255, 0, 0.137);
