@@ -35,7 +35,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <!-- Logo in the top left corner with the link to main web site -->
             <a class="navbar-brand" href="http://mdpeg.com/">
-                <img src="../images/MDP_Engineering_Logo-72dpi.png" alt="MDP Logo" style="width: 150px" /></a>
+                <img src="../images/MDP_Engineering_Logo-72dpi.png" alt="MDP Logo" class="navbar-logo" /></a>
             <!-- Button navigation for small screens -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,18 +45,13 @@
 
                 <!-- Navigation menu on top -->
                 <div class="navbar-nav nav-justified w-100 nav-pills rounded-pill">
-                    <a class="nav-link " href="../index.html"><i class="fa fa-home" aria-disabled="true"
-                            style="font-size: 50px"></i></a>
-                    <a class="nav-link" href="../tables/table310-16.html"><i class="fa fa-table" aria-hidden="true"
-                            style="font-size: 50px"></i></a>
-                    <a class="nav-link" href="../calculators/calculator-start.html"><i class="fa fa-calculator" aria-hidden="true"
-                            style="font-size: 50px"></i></a>
-                    <a class="nav-link disabled" href="#"><i class="fa fa-book" aria-disabled="true"
-                            style="font-size: 50px"></i></a>
-                    <a class="nav-link active bg-secondary" aria-current="page" href="light-start.html"><i
-                            class="fa fa-lightbulb" aria-hidden="true" style="font-size: 50px; color: white;"></i></a>
-                    <a class="nav-link" href="../power/power-start.html"><i class="fa fa-plug" aria-disabled="true"
-                            style="font-size: 50px"></i></a>
+                    <a class="nav-link " href="../index.html" aria-label="Home"><i class="fa fa-home nav-icon" aria-hidden="true"></i></a>
+                    <a class="nav-link" href="../tables/table310-16.html" aria-label="Ampacity Tables"><i class="fa fa-table nav-icon" aria-hidden="true"></i></a>
+                    <a class="nav-link" href="../calculators/calculator-start.html" aria-label="Calculators"><i class="fa fa-calculator nav-icon" aria-hidden="true"></i></a>
+                    <a class="nav-link disabled" href="#" aria-label="Reference" aria-disabled="true"><i class="fa fa-book nav-icon" aria-hidden="true"></i></a>
+                    <a class="nav-link active bg-secondary" aria-current="page" href="light-start.html" aria-label="Lighting"><i
+                            class="fa fa-lightbulb nav-icon" aria-hidden="true"></i></a>
+                    <a class="nav-link" href="../power/power-start.html" aria-label="Power"><i class="fa fa-plug nav-icon" aria-hidden="true"></i></a>
                     <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
                 </div>
             </div>
@@ -64,9 +59,9 @@
                 <!-- other nav items -->
                 <button
                     id="darkModeToggle"
+                    type="button"
                     class="btn btn-outline-secondary ms-2"
                     title="Toggle dark mode"
-                    style="height: 40px; width: 40px; border-radius: 50%"
                 >
                     🌙
                 </button>
@@ -102,7 +97,7 @@
                 <h2 class="accordion-header" id="headingOne">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <img src="../images/CT-logo.png" class="img-fluid" alt="CT Lighting and Sales"></i>
+                        <img src="../images/CT-logo.png" class="img-fluid" alt="CT Lighting and Sales">
                     </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse " aria-labelledby="headingOne"
@@ -114,7 +109,7 @@
                             <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="../images/CT-Deb-Lewis_1K_BW.jpg" class="card-img">
+                                        <img alt="Deb Lewis" src="../images/CT-Deb-Lewis_1K_BW.jpg" class="card-img">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
@@ -132,7 +127,7 @@
                             <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="../images/CT-Yancy-Green_1K_BW.jpg" class="card-img">
+                                        <img alt="Yancy Green" src="../images/CT-Yancy-Green_1K_BW.jpg" class="card-img">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
@@ -151,13 +146,13 @@
                             <ul
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
-                                    <a href="https://www.ct-lc.com/" target="_blank" class="fw-bolder">CT Lighting and
+                                    <a href="https://www.ct-lc.com/" target="_blank" rel="noopener noreferrer" class="fw-bolder">CT Lighting and
                                         Controls</a>
-                                    <p card-text>Office Phone: (303) 762-3537 <br>
+                                    <p class="card-text">Office Phone: (303) 762-3537 <br>
                                         Address: 1210 South Jason Street, Denver, CO 80223</p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://ct-lc.com/our-lines" target="_blank" class="fw-bolder">Line
+                                    <a href="https://ct-lc.com/our-lines" target="_blank" rel="noopener noreferrer" class="fw-bolder">Line
                                         Card</a>
                                 </li>
                                 <!-- <li class="list-group-item">
@@ -165,7 +160,7 @@
                                         class="fw-bolder">Light Fixtures Selection Guide</a>
                                 </li> -->
                                 <li class="list-group-item">
-                                    <a href="http://ct-lc.com/our-team/" target="_blank" class="fw-bolder">Contacts</a>
+                                    <a href="http://ct-lc.com/our-team/" target="_blank" rel="noopener noreferrer" class="fw-bolder">Contacts</a>
                                 </li>
                             </ul>
                         </div>
@@ -180,7 +175,7 @@
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                         <img src="../images/Fisher-Lighting-and-Controls-logo-header.png" class="img-fluid"
-                            alt="Fisher Lighting and Controls"></i>
+                            alt="Fisher Lighting and Controls">
                     </button>
                 </h2>
                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
@@ -263,26 +258,27 @@
                             <ul
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
-                                    <a href="https://fisherlightingandcontrols.com/" target="_blank"
+                                    <a href="https://fisherlightingandcontrols.com/" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder">Fisher Lighting and Controls</a>
-                                    <p card-text>Office Phone: (303) 973-1018 <br>
+                                    <p class="card-text">Office Phone: (303) 973-1018 <br>
                                         Address: 11786 Shaffer Place, Suite 210, Littleton, CO 80127</p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://fisherlightingandcontrols.com/our-line-card/" target="_blank"
+                                    <a href="https://fisherlightingandcontrols.com/our-line-card/" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder">
                                         Line Card</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://fisherlightingandcontrols.com/what-we-sell/" target="_blank"
+                                    <a href="https://fisherlightingandcontrols.com/what-we-sell/" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder">Featured Products</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://fisherlightingandcontrols.com/our-line-card/?lex%5Blocation%5D=project_template" target="_blank"
+                                    <a href="https://fisherlightingandcontrols.com/our-line-card/?lex%5Blocation%5D=project_template" 
+                                    target="_blank" rel="noopener noreferrer" 
                                         class="fw-bolder">Project Starter</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://fisherlightingandcontrols.com/who-we-are/" target="_blank"
+                                    <a href="https://fisherlightingandcontrols.com/who-we-are/" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder">Contacts</a>
                                 </li>
                             </ul>
@@ -297,7 +293,7 @@
                 <h2 class="accordion-header" id="headingOneA">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseOneA" aria-expanded="true" aria-controls="collapseOneA">
-                        <img src="../images/GLS-logo.png" class="img-fluid" alt="GLS Lighting and Controls"></i>
+                        <img src="../images/GLS-logo.png" class="img-fluid" alt="GLS Lighting and Controls">
                     </button>
                 </h2>
                 <div id="collapseOneA" class="accordion-collapse collapse " aria-labelledby="headingOneA"
@@ -309,7 +305,7 @@
                             <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="../images/GLS-ShaneLacey.jpg" class="card-img">
+                                        <img alt="Shane Lacey" src="../images/GLS-ShaneLacey.jpg" class="card-img">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
@@ -329,9 +325,9 @@
                             <ul
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
-                                    <a href="http://www.georgelaceysales.com/" target="_blank" class="fw-bolder">GLS
+                                    <a href="http://www.georgelaceysales.com/" target="_blank" rel="noopener noreferrer" class="fw-bolder">GLS
                                         Lighting and Controls</a>
-                                    <p card-text>Office Phone: (303) 394-0220 <br>
+                                    <p class="card-text">Office Phone: (303) 394-0220 <br>
                                         Address: 15485 West 44th Avenue, Golden, CO 80403</p>
                                 </li>
                                 <!-- <li class="list-group-item">
@@ -355,7 +351,7 @@
                 <h2 class="accordion-header" id="headingThree">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        <img src="../images/IS-icon.png" class="img-fluid" alt="Illumination Systems"></i>
+                        <img src="../images/IS-icon.png" class="img-fluid" alt="Illumination Systems">
                     </button>
                 </h2>
                 <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
@@ -407,33 +403,33 @@
                             <ul
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
-                                    <a href="https://www.illumsys.com/" target="_blank" class="fw-bolder">Illumination
+                                    <a href="https://www.illumsys.com/" target="_blank" rel="noopener noreferrer" class="fw-bolder">Illumination
                                         Systems</a>
-                                    <p card-text>Office Phone: (303) 295-2900 <br>
+                                    <p class="card-text">Office Phone: (303) 295-2900 <br>
                                         Address: 5 South Kalamath Street, Denver, CO 80223</p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://www.illumsys.com/line-card-co-swy-pne/#/line_card" target="_blank" class="fw-bolder">
+                                    <a href="https://www.illumsys.com/line-card-co-swy-pne/#/line_card" target="_blank" rel="noopener noreferrer" class="fw-bolder">
                                         Line Card</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://www.illumsys.com/line-card-co-swy-pne/#/quick_search" target="_blank" class="fw-bolder">
+                                    <a href="https://www.illumsys.com/line-card-co-swy-pne/#/quick_search" target="_blank" rel="noopener noreferrer" class="fw-bolder">
                                         Product Search</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://www.illumsys.com/line-card-co-swy-pne/#/project_template" target="_blank" class="fw-bolder">
+                                    <a href="https://www.illumsys.com/line-card-co-swy-pne/#/project_template" target="_blank" rel="noopener noreferrer" class="fw-bolder">
                                         Project Starter</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://www.cooperlighting.com/global/controls-wiring/commercial-lighting-controls" target="_blank"
-                                        class="fw-bolder">Commercial Lighting Controls</a>
+                                    <a href="https://www.cooperlighting.com/global/controls-wiring/commercial-lighting-controls" 
+                                    target="_blank" rel="noopener noreferrer" class="fw-bolder">Commercial Lighting Controls</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://buildingandcontrols.com/" target="_blank"
+                                    <a href="https://buildingandcontrols.com/" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder">Controls</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://www.illumsys.com/contact-co-swy-pne/" target="_blank"
+                                    <a href="https://www.illumsys.com/contact-co-swy-pne/" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder">Contacts</a>
                                 </li>
                             </ul>
@@ -441,7 +437,7 @@
                         <!-- End of Information -->
                         <!-- WaveLinx Wireless Section -->
                         <div class="bg-secondary p-2">
-                            <a href="https://www.cooperlighting.com/global/brands/wavelinx/wireless" target="_blank"
+                            <a href="https://www.cooperlighting.com/global/brands/wavelinx/wireless" target="_blank" rel="noopener noreferrer"
                                 class="fw-bolder link-light">WaveLinx PRO Wireless Lighting Control System</a>
                         </div>
                         <div class="card">
@@ -449,23 +445,23 @@
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
                                     <a href="https://www.cooperlighting.com/global/product-list#filters=cooper-lighting%3Afilters%2Fcontrol-smart-iot-system%2Fwavelinx-wireless&sort=newest&c=cooper-lighting%3Aproduct-category%2Fcontrols-wiring"
-                                        target="_blank" class="fw-bolder">Products</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Products</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.cooperlighting.com/global/product-list#filters=cooper-lighting%3Afilters%2Fcontrol-smart-iot-system%2Fwavelinx-wireless%2Ccooper-lighting%3Afilters%2Fproduct-type%2Fdaylight-sensors%2Ccooper-lighting%3Afilters%2Fproduct-type%2Foccupancy-sensors&sort=newest&c=cooper-lighting%3Aproduct-category%2Fcontrols-wiring"
-                                        target="_blank" class="fw-bolder">Sensors</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Sensors</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.cooperlighting.com/global/brands/wavelinx/929872/wavelinx-area-controller-2nd-gen-wac2"
-                                        target="_blank" class="fw-bolder">Area Controller</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Area Controller</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.cooperlighting.com/global/product-list#filters=cooper-lighting%3Afilters%2Fproduct-type%2Fin-wall-sensor-prod-type&sort=newest&c=cooper-lighting%3Aproduct-category%2Fcontrols-wiring&excludedMarketingStatus=Discontinued"
-                                        target="_blank" class="fw-bolder">Switches</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Switches</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.cooperlighting.com/global/product-list#filters=cooper-lighting%3Afilters%2Fcontrol-smart-iot-system%2Fwavelinx-wireless%2Ccooper-lighting%3Afilters%2Fproduct-type%2Fload-controllers&sort=newest&c=cooper-lighting%3Aproduct-category%2Fcontrols-wiring"
-                                        target="_blank" class="fw-bolder">Load Controllers</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Load Controllers</a>
                                 </li>
                             </ul>
                         </div>
@@ -473,26 +469,26 @@
                         <!-- WaveLinx LITE Section -->
                         <div class="bg-secondary p-2">
                             <a href="https://www.cooperlighting.com/global/brands/wavelinx/lite" target="_blank"
-                                class="fw-bolder link-light">WaveLinx LITE Lighting Control System</a>
+                                rel="noopener noreferrer" class="fw-bolder link-light">WaveLinx LITE Lighting Control System</a>
                         </div>
                         <div class="card">
                             <ul
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
                                     <a href="https://www.cooperlighting.com/global/brands/wavelinx/lite#Single%20Spaces"
-                                        target="_blank" class="fw-bolder">Single Spaces</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Single Spaces</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.cooperlighting.com/global/product-list#filters=cooper-lighting%3Afilters%2Fcontrol-smart-iot-system%2Fwavelinx-lite&sort=newest&c=cooper-lighting%3Aproduct-category%2Fcontrols-wiring"
-                                        target="_blank" class="fw-bolder">Products</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Products</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.cooperlighting.com/global/brands/wavelinx/lite#Features"
-                                        target="_blank" class="fw-bolder">Features</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Features</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.cooperlighting.com/global/search#filters=cooper-lighting:brands/wavelinx,cooper-lighting:filters/control-smart-iot-system/wavelinx-lite&sort=relevance&c=cooper-lighting:resources/product-documents&tab=resources"
-                                        target="_blank" class="fw-bolder">Resources</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Resources</a>
                                 </li>
                             </ul>
                         </div>
@@ -500,26 +496,26 @@
                         <!-- WaveLinx CAT Section -->
                         <div class="bg-secondary p-2">
                             <a href="https://www.cooperlighting.com/global/brands/wavelinx/cat" target="_blank"
-                                class="fw-bolder link-light">WaveLinx CAT Lighting Control System</a>
+                                rel="noopener noreferrer"  class="fw-bolder link-light">WaveLinx CAT Lighting Control System</a>
                         </div>
                         <div class="card">
                             <ul
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
                                     <a href="https://www.cooperlighting.com/global/brands/wavelinx/cat#Single%20Spaces"
-                                        target="_blank" class="fw-bolder">Single Spaces</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Single Spaces</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.cooperlighting.com/global/brands/wavelinx/cat#Products"
-                                        target="_blank" class="fw-bolder">Products</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Products</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.cooperlighting.com/global/brands/wavelinx/cat#Connected%20Spaces"
-                                        target="_blank" class="fw-bolder">Connected Spaces</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Connected Spaces</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.cooperlighting.com/global/brands/wavelinx/cat#Resources"
-                                        target="_blank" class="fw-bolder">Resources</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Resources</a>
                                 </li>
                             </ul>
                         </div>
@@ -527,26 +523,26 @@
                         <!-- Greengate Section -->
                         <div class="bg-secondary p-2">
                             <a href="https://www.cooperlighting.com/global/brands/greengate" target="_blank"
-                                class="fw-bolder link-light">Greengate Lighting Controls</a>
+                                rel="noopener noreferrer" class="fw-bolder link-light">Greengate Lighting Controls</a>
                         </div>
                         <div class="card">
                             <ul
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
                                     <a href="https://www.cooperlighting.com/global/product-list#filters=cooper-lighting%3Abrands%2Fgreengate&sort=newest&c=cooper-lighting%3Aproduct-category%2Fcontrols-wiring&excludedMarketingStatus=Discontinued"
-                                        target="_blank" class="fw-bolder">Products</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Products</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.cooperlighting.com/global/product-list#filters=cooper-lighting:filters/product-type/occupancy-sensors,cooper-lighting:brands/greengate&sort=newest&c=cooper-lighting:product-category/controls-wiring/occupancy-vacancy-sensors"
-                                        target="_blank" class="fw-bolder">Sensors</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Sensors</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.cooperlighting.com/global/product-list#filters=cooper-lighting%3Afilters%2Fproduct-type%2Fcontrol-panels%2Ccooper-lighting%3Abrands%2Fgreengate&sort=newest&c=cooper-lighting%3Aproduct-category%2Fcontrols-wiring&excludedMarketingStatus=Discontinued"
-                                        target="_blank" class="fw-bolder">Panel Based Lighting Controls</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Panel Based Lighting Controls</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.cooperlighting.com/global/product-list#filters=cooper-lighting%3Abrands%2Fgreengate%2Ccooper-lighting%3Afilters%2Fproduct-type%2Femergency&sort=newest&c=cooper-lighting%3Aproduct-category%2Fcontrols-wiring&excludedMarketingStatus=Discontinued"
-                                        target="_blank" class="fw-bolder">UL924 Emergency Lighting Solutions</a>
+                                        target="_blank" rel="noopener noreferrer"  class="fw-bolder">UL924 Emergency Lighting Solutions</a>
                                 </li>
                             </ul>
                         </div>
@@ -560,7 +556,7 @@
                 <h2 class="accordion-header" id="headingFour">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        <img src="../images/MH-new-logo.png" class="img-fluid" alt="MH Lighting"></i>
+                        <img src="../images/MH-new-logo.png" class="img-fluid" alt="MH Lighting">
                     </button>
                 </h2>
                 <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
@@ -572,7 +568,7 @@
                              <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="../images/MH-KatieJohnson.png" class="card-img">
+                                        <img alt="Katie Johnson" src="../images/MH-KatieJohnson.png" class="card-img">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
@@ -590,7 +586,7 @@
                             <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="../images/MH-SteveBarrett.jpg" class="card-img">
+                                        <img alt="Steve Barrett" src="../images/MH-SteveBarrett.jpg" class="card-img">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
@@ -608,7 +604,7 @@
                             <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="../images/MH-MikeBohomolov.jpg" class="card-img">
+                                        <img alt="Mike Bogomolov" src="../images/MH-MikeBohomolov.jpg" class="card-img">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
@@ -627,26 +623,26 @@
                             <ul
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
-                                    <a href="https://themhcompanies.com/" target="_blank" class="fw-bolder">The MH
+                                    <a href="https://themhcompanies.com/" target="_blank" rel="noopener noreferrer" class="fw-bolder">The MH
                                         Companies</a>
-                                    <p card-text>Office Phone: (303) 573-0222 <br>
+                                    <p class="card-text">Office Phone: (303) 573-0222 <br>
                                         Address: 1044 Speer Boulevard, Denver, CO 80204</p>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://themhcompanies.lighting.specseek.com/MHSeek/UI?PageID=SpecSeekSearch&Region=Colorado%20/%20WY#/" target="_blank"
-                                        class="fw-bolder"> Line Card</a>
+                                        rel="noopener noreferrer" class="fw-bolder"> Line Card</a>
                                 </li>
                                 <!-- <li class="list-group-item">
                                     <a href="https://specseek.themhcompanies.com/" target="_blank"
-                                        class="fw-bolder">Light Fixtures Product Selector</a>
+                                        rel="noopener noreferrer" class="fw-bolder">Light Fixtures Product Selector</a>
                                 </li> -->
                                 <li class="list-group-item">
                                     <a href="https://themhcompanies.com/controls-corner/" target="_blank"
-                                        class="fw-bolder">MH Controls Corner</a>
+                                        rel="noopener noreferrer" class="fw-bolder">MH Controls Corner</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://themhcompanies.com/employee-directory/" target="_blank"
-                                        class="fw-bolder">Contacts</a>
+                                        rel="noopener noreferrer" class="fw-bolder">Contacts</a>
                                 </li>
                             </ul>
                         </div>
@@ -654,7 +650,7 @@
                         <!-- Wattstopper Lighting Controls Section -->
                         <div class="bg-secondary p-2">
                             <a href="https://www.legrand.us/wattstopper" target="_blank"
-                                class="fw-bolder link-light">Wattstopper
+                                rel="noopener noreferrer" class="fw-bolder link-light">Wattstopper
                                 Digital Lighting Controls</a>
                         </div>
 
@@ -663,11 +659,11 @@
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
                                     <a href="https://www.legrand.us/solutions/digital-lighting-management"
-                                        target="_blank" class="fw-bolder"> Digital Lighting Management Solutions</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Digital Lighting Management Solutions</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.legrand.us/solutions/wireless-digital-lighting-management"
-                                        target="_blank" class="fw-bolder"> Wireless Digital Lighting Management
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Wireless Digital Lighting Management
                                         Solutions</a>
                                 </li>
                             </ul>
@@ -675,31 +671,31 @@
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
                                     <a href="https://www.legrand.us/lighting-controls-and-systems/digital-lighting-management/occupancy-and-vacancy-sensors/c/lgnd050306"
-                                        target="_blank" class="fw-bolder">Sensors</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Sensors</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.legrand.us/lighting-controls-and-systems/digital-lighting-management/load-controllers/c/lgnd050304"
-                                        target="_blank" class="fw-bolder">Load Controllers</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Load Controllers</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.legrand.us/lighting-controls-and-systems/digital-lighting-management/personal-controls/c/lgnd050307"
-                                        target="_blank" class="fw-bolder">Switches</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Switches</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.legrand.us/lighting-controls-and-systems/digital-lighting-management/daylight-sensors/c/lgnd050301"
-                                        target="_blank" class="fw-bolder">Daylight Sensors</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Daylight Sensors</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.legrand.us/lighting-controls-and-systems/wireless-controls"
-                                        target="_blank" class="fw-bolder">Wireless DLM</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Wireless DLM</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.legrand.us/lighting-controls-and-systems/power-packs-and-load-controllers/emergency-lighting-control-units/c/lgnd050702"
-                                        target="_blank" class="fw-bolder">Emergency Lighting Controls</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Emergency Lighting Controls</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.legrand.us/solutions/energy-code" target="_blank"
-                                        class="fw-bolder text-danger">Energy Codes</a>
+                                        rel="noopener noreferrer" class="fw-bolder text-danger">Energy Codes</a>
                                 </li>
                             </ul>
                         </div>
@@ -707,7 +703,7 @@
                         <!-- Occupancy Sensors Section -->
                         <div class="bg-secondary p-2">
                             <a href="https://www.legrand.us/lighting-controls-and-systems/occupancy-vacancy-sensors"
-                                target="_blank" class="fw-bolder link-light">Wattstopper
+                                target="_blank" rel="noopener noreferrer" class="fw-bolder link-light">Wattstopper
                                 Occupancy Sensors</a>
                         </div>
 
@@ -716,15 +712,15 @@
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
                                     <a href="https://www.legrand.us/lighting-controls-and-systems/occupancy-and-vacancy-sensors/wall-switch-occupancy-and-vacancy-sensors/c/lgnd050607"
-                                        target="_blank" class="fw-bolder"> Wall Switch Sensors</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Wall Switch Sensors</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.legrand.us/lighting-controls-and-systems/occupancy-and-vacancy-sensors/ceilingwall-mount-occupancy-sensors/c/lgnd050602"
-                                        target="_blank" class="fw-bolder"> Ceiling Sensors</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Ceiling Sensors</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.legrand.us/lighting-controls-and-systems/occupancy-and-vacancy-sensors/power-packs/c/lgnd050605"
-                                        target="_blank" class="fw-bolder"> Power Packs</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Power Packs</a>
                                 </li>
                             </ul>
                         </div>
@@ -732,7 +728,7 @@
                         <!-- Lighting Control Panels Section -->
                         <div class="bg-secondary p-2">
                             <a href="https://www.legrand.us/lighting-controls-and-systems/lighting-control-panels/c/lgnd050400"
-                                target="_blank" class="fw-bolder link-light">Wattstopper Lighting Control Panels</a>
+                                target="_blank" rel="noopener noreferrer" class="fw-bolder link-light">Wattstopper Lighting Control Panels</a>
                         </div>
 
                         <div class="card">
@@ -740,30 +736,30 @@
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
                                     <a href="https://www.legrand.us/lighting-controls-and-systems/lighting-control-panels/digital-lighting-management/c/lgnd050401"
-                                        target="_blank" class="fw-bolder"> Digital Light Management</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Digital Light Management</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.legrand.us/lighting-controls-and-systems/lighting-control-panels/stand-alone-panels/c/lgnd050403"
-                                        target="_blank" class="fw-bolder"> Stand-Alone Panels</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Stand-Alone Panels</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.legrand.us/lighting-controls-and-systems/architectural-dimming"
-                                        target="_blank" class="fw-bolder"> Architectural Dimming</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Architectural Dimming</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.legrand.us/lighting-controls-and-systems/lighting-control-panels/wall-controls/c/lgnd050404"
-                                        target="_blank" class="fw-bolder"> Wall Controls</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Wall Controls</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.legrand.us/lighting-controls-and-systems/vantage-controls/c/lgnd051400"
-                                        target="_blank" class="fw-bolder"> Vantage Controls</a>
+                                        target="_blank" rel="noopener noreferrer"   class="fw-bolder"> Vantage Controls</a>
                                 </li>
                             </ul>
                         </div>
                         <!-- End of Lighting Control Panels Section -->
                         <!-- Legrand University Section-->
                         <div class="bg-secondary p-2">
-                            <a href="https://go.bluevolt.com/Legrand/s/" target="_blank"
+                            <a href="https://go.bluevolt.com/Legrand/s/" target="_blank" rel="noopener noreferrer"  
                                 class="fw-bolder link-light">Legrand University</a>
                         </div>
 
@@ -771,15 +767,15 @@
                             <ul
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
-                                    <a href="https://www.legrand.us/wattstopper/spec-tools" target="_blank"
+                                    <a href="https://www.legrand.us/wattstopper/spec-tools" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder">Wattstopper Design Assets</a>
                                 </li>
                                 <!-- <li class="list-group-item">
-                                    <a href="https://themhcompanies.com/learning-opportunities/" target="_blank"
+                                    <a href="https://themhcompanies.com/learning-opportunities/" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder"> Learning Opportunities</a>
                                 </li> -->
                                 <li class="list-group-item">
-                                    <a href="https://themhcompanies.com/wednesdays-with-mh" target="_blank"
+                                    <a href="https://themhcompanies.com/wednesdays-with-mh" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder"> Wednesdays with MH</a>
                                 </li>
 
@@ -796,7 +792,7 @@
                 <h2 class="accordion-header" id="headingFive">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                        <img src="../images/TLA-logo.jpg" class="img-fluid" alt="The Lighting Agency"></i>
+                        <img src="../images/TLA-logo.jpg" class="img-fluid" alt="The Lighting Agency">
                     </button>
                 </h2>
                 <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
@@ -808,7 +804,7 @@
                             <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="../images/TLA-Kristin-Murphy-1.jpg" class="card-img">
+                                        <img alt="Kristin Murphy" src="../images/TLA-Kristin-Murphy-1.jpg" class="card-img">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
@@ -825,7 +821,7 @@
                             <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="../images/TLA-Nick-Berry.jpg" class="card-img">
+                                        <img alt="Nick Berry" src="../images/TLA-Nick-Berry.jpg" class="card-img">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
@@ -844,25 +840,25 @@
                             <ul
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
-                                    <a href="https://thelightingagency.com/" target="_blank" class="fw-bolder">The
+                                    <a href="https://thelightingagency.com/" target="_blank" rel="noopener noreferrer" class="fw-bolder">The
                                         Lighting Agency</a>
-                                    <p card-text>Office Phone: (303) 455-1012 <br>
+                                    <p class="card-text">Office Phone: (303) 455-1012 <br>
                                         Address: 2661 17th Street Denver, CO 80211</p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://thelightingagency.com/line-card-tla/?lex%5Blocation%5D=line_card" target="_blank" class="fw-bolder">
+                                    <a href="https://thelightingagency.com/line-card-tla/?lex%5Blocation%5D=line_card" target="_blank" rel="noopener noreferrer" class="fw-bolder">
                                         Line Card</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://90pluslighting.com/" target="_blank" class="fw-bolder">
+                                    <a href="https://90pluslighting.com/" target="_blank" rel="noopener noreferrer" class="fw-bolder">
                                         Lamps</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.acuitybrands.com/products/controls/application-guides"
-                                        target="_blank" class="fw-bolder">Lighting Controls Application Guides</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Lighting Controls Application Guides</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://thelightingagency.com/about/our-team/" target="_blank"
+                                    <a href="https://thelightingagency.com/about/our-team/" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder">Contacts</a>
                                 </li>
                             </ul>
@@ -873,15 +869,15 @@
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
                                     <a href="https://docs.google.com/spreadsheets/d/1dyxc3TFrxa-oNPTI2hZYUlpdslfsPMe30WbU2JYmBu8/edit#gid=1789691702"
-                                        target="_blank" class="fw-bolder"> TLA Controls Catalog 6/10/21</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> TLA Controls Catalog 6/10/21</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://nlight.acuitybrands.com/products/detail/664533/nlight/arp-relay-panel/nlightr-relay-panels"
-                                        target="_blank" class="fw-bolder"> nLight ARP Relay Panel</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> nLight ARP Relay Panel</a>
                                 </li>
                                 <!-- <li class="list-group-item">
                                     <a href="https://www.acuitybrands.com/products/detail/306073/lighting-controls-design/blue-boxt-ltd/cost-effective-dimming-and-switching"
-                                        target="_blank" class="fw-bolder"> Blue Box LTD</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Blue Box LTD</a>
                                 </li> -->
                             </ul>
                         </div>
@@ -889,7 +885,7 @@
                         <!-- End of Information -->
                         <!-- nLight Section -->
                         <div class="bg-secondary p-2">
-                            <a href="https://nlight.acuitybrands.com/" target="_blank"
+                            <a href="https://nlight.acuitybrands.com/" target="_blank" rel="noopener noreferrer"
                                 class="fw-bolder link-light">nLight Controls Platform</a>
                         </div>
                         <div class="card">
@@ -899,54 +895,54 @@
                                 <li class="list-group-item">
                                     <a href="https://nam04.safelinks.protection.outlook.com/?url=https%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1dyxc3TFrxa-oNPTI2hZYUlpdslfsPMe30WbU2JYmBu8%2Fedit%3Fusp%3Dsharing&data=04%7C01%7Coduday%40mdpeg.com%7Ceae6c9a14bf74c37fb3408d9e73b03a7%7Cf15d7bee36d94d2c924290c65749f440%7C0%7C0%7C637795062932136725%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000&sdata=o8BE4g2hxE072m6bX6l3hQs8mEmWYUDLKqpV2fhjb3w%3D&reserved=0"
                                         aria-label="Spreadsheet with nLight devices and links to the specification pages"
-                                        target="_blank" class="fw-bolder"> Interactive Controls Catalog</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Interactive Controls Catalog</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://nlight.acuitybrands.com/nlight-wired" target="_blank"
+                                    <a href="https://nlight.acuitybrands.com/nlight-wired" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder"> nLight Wired</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://nlight.acuitybrands.com/nlight-air" target="_blank"
+                                    <a href="https://nlight.acuitybrands.com/nlight-air" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder"> nLight AIR</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://nlight.acuitybrands.com/resources" target="_blank"
+                                    <a href="https://nlight.acuitybrands.com/resources" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder"> Resources</a>
                                 </li>
                             </ul>
                             <ul
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
-                                    <a href="https://nlight.acuitybrands.com/products/sensors" target="_blank"
+                                    <a href="https://nlight.acuitybrands.com/products/sensors" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder">Sensors</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://nlight.acuitybrands.com/products/load-controllers" target="_blank"
+                                    <a href="https://nlight.acuitybrands.com/products/load-controllers" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder">Load Controllers</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://nlight.acuitybrands.com/products/switches" target="_blank"
+                                    <a href="https://nlight.acuitybrands.com/products/switches" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder">Switches</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.acuitybrands.com/products/detail/1048575/nlight/ndtc/nlightr-digital-time-clock"
-                                        target="_blank" class="fw-bolder">Digital Time Clock nDTC</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Digital Time Clock nDTC</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://nlight.acuitybrands.com/products/panels" target="_blank"
+                                    <a href="https://nlight.acuitybrands.com/products/panels" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder">Lighting Control Panels</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://nlight.acuitybrands.com/products/controllers" target="_blank"
+                                    <a href="https://nlight.acuitybrands.com/products/controllers" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder">Controllers</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://nlight.acuitybrands.com/products/nlight-wireless-luminaires"
-                                        target="_blank" class="fw-bolder">Luminaires with Integrated Wireless Lighting
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Luminaires with Integrated Wireless Lighting
                                         Controls</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://nlight.acuitybrands.com/resources/app-guides" target="_blank"
+                                    <a href="https://nlight.acuitybrands.com/resources/app-guides" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder text-danger">Energy Codes</a>
                                 </li>
                             </ul>
@@ -955,30 +951,30 @@
                         <!-- SensorSwitch Section -->
                         <div class="bg-secondary p-2">
                             <a href="https://www.acuitybrands.com/who-we-are/acuity-brands-lighting/sensorswitch"
-                                target="_blank" class="fw-bolder link-light">SensorSwitch</a>
+                                target="_blank" rel="noopener noreferrer" class="fw-bolder link-light">SensorSwitch</a>
                         </div>
                         <div class="card">
                             <ul
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
                                     <a href="https://www.acuitybrands.com/who-we-are/acuity-brands-lighting/sensorswitch/sensor-switch-controls"
-                                        target="_blank" class="fw-bolder"> Products</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Products</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.acuitybrands.com/who-we-are/acuity-brands-lighting/sensorswitch/jot"
-                                        target="_blank" class="fw-bolder"> JOT</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> JOT</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://sensorswitch.acuitybrands.com/-/media/abl/sensorswitch/files/resources/sensorswitch-application-solution-guide.pdf?forceBehavior=open"
-                                        target="_blank" class="fw-bolder"> Quick Recommendation Guide</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Quick Recommendation Guide</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.acuitybrands.com/-/media/abl/acuitybrands/files/sensor-switch/selecting-the-right-sensor-flipbook.pdf?la=en&hash=AE7399085218C009E54B86E15AA515B2&forceBehavior=open"
-                                        target="_blank" class="fw-bolder"> Selecting Sensor</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Selecting Sensor</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.acuitybrands.com/who-we-are/acuity-brands-lighting/sensorswitch/resources"
-                                        target="_blank" class="fw-bolder"> Resources</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Resources</a>
                                 </li>
                             </ul>
                         </div>
@@ -986,22 +982,22 @@
                         <!-- Fresco Section -->
                         <div class="bg-secondary p-2">
                             <a href="https://www.acuitybrands.com/who-we-are/acuity-brands-lighting/fresco"
-                                target="_blank" class="fw-bolder link-light">Fresco</a>
+                                target="_blank" rel="noopener noreferrer" class="fw-bolder link-light">Fresco</a>
                         </div>
                         <div class="card">
                             <ul
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
                                     <a href="https://www.acuitybrands.com/search#sort=relevancy&layout=card&f:@productbrandname=[Fresco]"
-                                        target="_blank" class="fw-bolder"> Products</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Products</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://img.acuitybrands.com/public-assets/catalog/223381/dynamic-spaces-application-guide.pdf?abl_version=04%2f22%2f2019+21:39:21&DOC_Type=Other_Information"
-                                        target="_blank" class="fw-bolder"> Application Guide</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Application Guide</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.acuitybrands.com/who-we-are/acuity-brands-lighting/fresco/resources"
-                                        target="_blank" class="fw-bolder"> Resources</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Resources</a>
                                 </li>
                             </ul>
                         </div>
@@ -1016,7 +1012,7 @@
                 <h2 class="accordion-header" id="headingSix">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                        <img src="../images/VI-GreyWhiteRGBLogo_Site.png" class="img-fluid" alt="Visual Interest"></i>
+                        <img src="../images/VI-GreyWhiteRGBLogo_Site.png" class="img-fluid" alt="Visual Interest">
                     </button>
                 </h2>
                 <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
@@ -1028,7 +1024,7 @@
                             <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="../images/VI-BryanKlammer.png" class="card-img">
+                                        <img alt="Bryan Klammer" src="../images/VI-BryanKlammer.png" class="card-img">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
@@ -1046,7 +1042,7 @@
                             <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="../images/VI-Jarrod Reimer.jpg" class="card-img">
+                                        <img alt="Jarrod Reimer" src="../images/VI-Jarrod Reimer.jpg" class="card-img">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
@@ -1065,37 +1061,37 @@
                             <ul
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
-                                    <a href="https://www.visualinterest.com/" target="_blank" class="fw-bolder">Visual
+                                    <a href="https://www.visualinterest.com/" target="_blank" rel="noopener noreferrer" class="fw-bolder">Visual
                                         Interest</a>
-                                    <p card-text>Office Phone: (303) 861-8448 <br>
+                                    <p class="card-text">Office Phone: (303) 861-8448 <br>
                                         Address: 3444 Brighton Boulevard, Denver, CO 80216</p>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://www.visualinterest.com/colorado/interactive-line-card?lex%5Blocation%5D=line_card" target="_blank"
+                                    <a href="https://www.visualinterest.com/colorado/interactive-line-card?lex%5Blocation%5D=line_card" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder"> Lighting Line Card</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://greencreative.com/product-category/lamps/" target="_blank"
+                                    <a href="https://greencreative.com/product-category/lamps/" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder"> Lamps</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://www.visualinterest.com/lighting-controls" target="_blank"
+                                    <a href="https://www.visualinterest.com/lighting-controls" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder">Lighting Controls</a>
                                 </li>
                                 <!-- <li class="list-group-item">
                                     <a href="https://www.visualinterest.com/s/VI_Folding_IECC2018_11x17-7mrk.pdf"
-                                        target="_blank" class="fw-bolder">2018 IECC Design Guide</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">2018 IECC Design Guide</a>
                                 </li> -->
                                 <li class="list-group-item">
-                                    <a href="https://viez.visualinterest.com/" target="_blank" class="fw-bolder">VI EZ
+                                    <a href="https://viez.visualinterest.com/" target="_blank" rel="noopener noreferrer" class="fw-bolder">VI EZ
                                         Fixture Search</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://www.visualinterest.com/lightsoup" target="_blank"
+                                    <a href="https://www.visualinterest.com/lightsoup" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder">Light Soup</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://www.visualinterest.com/meet-the-team" target="_blank"
+                                    <a href="https://www.visualinterest.com/meet-the-team" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder">Contacts</a>
                                 </li>
                             </ul>
@@ -1103,26 +1099,26 @@
                         <!-- End of Visual Interest Information -->
                         <!-- Crestron Section -->
                         <div class="bg-secondary p-2">
-                            <a href="https://www.crestronlighting.com/" target="_blank"
+                            <a href="https://www.crestronlighting.com/" target="_blank" rel="noopener noreferrer"
                                 class="fw-bolder link-light">Crestron Zum Lighting Control System</a>
                         </div>
                         <div class="card">
                             <ul
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
-                                    <a href="https://www.crestron.com/Products/Featured-Solutions/Zum-Lighting-Control-Systems/Zum-Wired-Lighting-Control-Systems" target="_blank"
+                                    <a href="https://www.crestron.com/Products/Featured-Solutions/Zum-Lighting-Control-Systems/Zum-Wired-Lighting-Control-Systems" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder"> Zum Wired</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://www.crestron.com/Products/Featured-Solutions/Zum-Lighting-Control-Systems/Zum-Wireless-Lighting-Control-Systems" target="_blank"
+                                    <a href="https://www.crestron.com/Products/Featured-Solutions/Zum-Lighting-Control-Systems/Zum-Wireless-Lighting-Control-Systems" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder"> Zum Wireless</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://www.crestron.com/Products/Featured-Solutions/Zum-Lighting-Control-Systems/Zum-Din-Rail-Control-Systems" target="_blank"
+                                    <a href="https://www.crestron.com/Products/Featured-Solutions/Zum-Lighting-Control-Systems/Zum-Din-Rail-Control-Systems" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder"> Zum DIN Rail Solutions</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://www.crestron.com/Support/Resource-Library" target="_blank"
+                                    <a href="https://www.crestron.com/Support/Resource-Library" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder"> Resource Library</a>
                                 </li>
                                 <!-- <li class="list-group-item">
@@ -1135,54 +1131,54 @@
                                 </li> -->
                                 <li class="list-group-item">
                                     <a href="https://assets.website-files.com/6048c87b5d337d220c1d42b8/60c35af48672247a41a7b130_zum_technical_brochure%20(1).pdf"
-                                        target="_blank" class="fw-bolder"> Application Guide</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Application Guide</a>
                                 </li>
                                 <!-- <li class="list-group-item">
                                     <a href="https://www.crestronlighting.com/category/steinel-by-crestron"
-                                        target="_blank" class="fw-bolder"> Steinel Sensors</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Steinel Sensors</a>
                                 </li> -->
                             </ul>
                         </div>
                         <!-- End of Crestron Section -->
                         <!-- Steinel Section -->
                         <div class="bg-secondary p-2">
-                            <a href="https://www.steinel.net/en/lighting-controls/" target="_blank"
+                            <a href="https://www.steinel.net/en/lighting-controls/" target="_blank" rel="noopener noreferrer"
                                 class="fw-bolder link-light">Steinel Lighting Controls</a>
                         </div>
                         <div class="card">
                             <ul
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
-                                    <a href="https://www.steinel.net/en/products/product-overview/digital-control-solution/" target="_blank" class="fw-bolder"> Digital
+                                    <a href="https://www.steinel.net/en/products/product-overview/digital-control-solution/" target="_blank" rel="noopener noreferrer" class="fw-bolder"> Digital
                                         Control Solutions</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://www.steinel.net/en/products/product-overview/presence-occupancy-detectors/" target="_blank"
+                                    <a href="https://www.steinel.net/en/products/product-overview/presence-occupancy-detectors/" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder"> Sensors</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://www.steinel.net/en/products/product-overview/wall-switches/" target="_blank" class="fw-bolder">
+                                    <a href="https://www.steinel.net/en/products/product-overview/wall-switches/" target="_blank" rel="noopener noreferrer" class="fw-bolder">
                                         Wall Switch Sensors</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://www.steinel.net/en/products/product-overview/vacancy-sensors/" target="_blank"
+                                    <a href="https://www.steinel.net/en/products/product-overview/vacancy-sensors/" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder">Vacancy Sensors</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://www.steinel.net/en/products/product-overview/power-packs/" target="_blank" class="fw-bolder">
+                                    <a href="https://www.steinel.net/en/products/product-overview/power-packs/" target="_blank" rel="noopener noreferrer" class="fw-bolder">
                                         Power Packs</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <a href="https://www.steinel.net/en/products/product-overview/high-bay-sensors/" target="_blank"
+                                    <a href="https://www.steinel.net/en/products/product-overview/high-bay-sensors/" target="_blank" rel="noopener noreferrer"
                                         class="fw-bolder"> High Bay Sensors</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.steinel.net/Lighting-Controls/Support/Product-Literature/Catalog-Brochures/"
-                                        target="_blank" class="fw-bolder"> Catalog</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Catalog</a>
                                 </li>
                                 <!-- <li class="list-group-item">
                                     <a href="https://www.steinel.net/out/pictures/ddmedia/DCS%20Full%20Product%20Line%20Brochure.pdf"
-                                        target="_blank" class="fw-bolder"> Data Sheets</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Data Sheets</a>
                                 </li> -->
                             </ul>
                         </div>
@@ -1190,54 +1186,54 @@
                         <!-- Leviton Section -->
                         <div class="bg-secondary p-2">
                             <a href="https://www.leviton.com/en/support/professionals/lighting-controls/products"
-                                target="_blank" class="fw-bolder link-light">Leviton Lighting Controls</a>
+                                target="_blank" rel="noopener noreferrer" class="fw-bolder link-light">Leviton Lighting Controls</a>
                         </div>
                         <div class="card">
                             <ul
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
                                     <a href="https://www.leviton.com/en/products/commercial/lighting-controls/occupancy-sensors-and-vacancy-sensors/wall-switch#t=Products&sort=%40wcs_site_tree_rank%20ascending&layout=card"
-                                        target="_blank" class="fw-bolder"> Wall Switch Sensors</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Wall Switch Sensors</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.leviton.com/en/products/commercial/lighting-controls/occupancy-sensors-and-vacancy-sensors/ceiling-mounted#t=Products&sort=%40wcs_site_tree_rank%20ascending&layout=card&numberOfResults=48"
-                                        target="_blank" class="fw-bolder"> Ceiling Sensors</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Ceiling Sensors</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.leviton.com/en/products/commercial/lighting-controls/occupancy-sensors-and-vacancy-sensors/fixture-mount#t=Products&sort=%40wcs_site_tree_rank%20ascending&layout=card"
-                                        target="_blank" class="fw-bolder">Fixture Mount</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Fixture Mount</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.leviton.com/en/products/commercial/lighting-controls/occupancy-sensors-and-vacancy-sensors/wall-mount#t=Products&sort=%40wcs_site_tree_rank%20ascending&layout=card"
-                                        target="_blank" class="fw-bolder">Wall Mount</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Wall Mount</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.leviton.com/en/products/all-products/lighting-controls/photocells#t=Products&sort=%40partnumber%20ascending&layout=card"
-                                        target="_blank" class="fw-bolder">Photocells</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Photocells</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.leviton.com/en/products/commercial/lighting-controls/occupancy-sensors-and-vacancy-sensors/power-packs#t=Products&sort=%40wcs_site_tree_rank%20ascending&layout=card"
-                                        target="_blank" class="fw-bolder">Power Packs</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Power Packs</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.leviton.com/en/products/commercial/lighting-controls/distributed-controls/wireless-zone-controls#t=Products&sort=%40wcs_site_tree_rank%20ascending&layout=card"
-                                        target="_blank" class="fw-bolder">Wireless Lumina RF</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Wireless Lumina RF</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.leviton.com/en/products/commercial/lighting-controls/room-control"
-                                        target="_blank" class="fw-bolder">Room Control</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Room Control</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.leviton.com/en/products/commercial/lighting-controls/relay-panels"
-                                        target="_blank" class="fw-bolder">Relay Panels</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Relay Panels</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.leviton.com/en/products/commercial/lighting-controls/emergency-controls#t=Products&sort=%40partnumber%20ascending&layout=card"
-                                        target="_blank" class="fw-bolder">Emergency Controls</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Emergency Controls</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://catalogs.leviton.com/BookshelfView/"
-                                        target="_blank" class="fw-bolder">Brochures and Catalogs</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Brochures and Catalogs</a>
                                 </li>
                             </ul>
                         </div>
@@ -1252,8 +1248,8 @@
                 <h2 class="accordion-header" id="headingSeven">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                        <img src="../images/CETDiamond.png" class="img-fluid" alt="Lutron"></i>
-                        <img src="../images/Lutron Logo.png" class="img-fluid" alt="Lutron"></i>
+                        <img src="../images/CETDiamond.png" class="img-fluid" alt="Lutron">
+                        <img src="../images/Lutron Logo.png" class="img-fluid" alt="Lutron">
                     </button>
                 </h2>
                 <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
@@ -1301,7 +1297,7 @@
                             <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="../images/Lutron-Blake-Powell.jpg" class="card-img">
+                                        <img alt="Blake Powell" src="../images/Lutron-Blake-Powell.jpg" class="card-img">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
@@ -1320,21 +1316,21 @@
                             <ul
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
-                                    <a href="https://www.cetandassociates.com/" target="_blank" class="fw-bolder">CET
+                                    <a href="https://www.cetandassociates.com/" target="_blank" rel="noopener noreferrer" class="fw-bolder">CET
                                         and Associates</a>
-                                    <p card-text>Office Phone: (303) 758-5530 <br>
+                                    <p class="card-text">Office Phone: (303) 758-5530 <br>
                                         Address: 4704 Harlan Street, Suite 300, Denver, CO 80212</p>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.cetandassociates.com/#page-section-60401ff88b0e4500747e893e"
-                                        target="_blank" class="fw-bolder"> Line Card</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Line Card</a>
                                 </li>
                             </ul>
                         </div>
                         <!-- End of Information -->
                         <!-- Lutron Section -->
                         <div class="bg-secondary p-2">
-                            <a href="https://www.lutron.com/en-US/pages/default.aspx" target="_blank"
+                            <a href="https://www.lutron.com/en-US/pages/default.aspx" target="_blank" rel="noopener noreferrer"
                                 class="fw-bolder link-light">Lutron</a>
                         </div>
                         <div class="card">
@@ -1342,39 +1338,39 @@
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/en-US/Products/Pages/StandAloneControls/Dimmers-Switches/DimmersSwitches.aspx"
-                                        target="_blank" class="fw-bolder">Dimmers and Switches</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Dimmers and Switches</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/en-US/Products/Pages/StandAloneControls/FanControls/FanControls.aspx"
-                                        target="_blank" class="fw-bolder">Fan Controls</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Fan Controls</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/en-US/Products/Pages/StandAloneControls/Timers/MaestroTimer/Models.aspx"
-                                        target="_blank" class="fw-bolder">Timers</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Timers</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/en-US/Products/Pages/Sensors/Occupancy-Vacancy/MaestroOccVacSensors/overview.aspx"
-                                        target="_blank" class="fw-bolder">Wall Sensors</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Wall Sensors</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/en-US/Products/Pages/Sensors/Occupancy-Vacancy/Occupancy.aspx"
-                                        target="_blank" class="fw-bolder">Sensors</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Sensors</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/en-US/Products/Pages/Sensors/RadioPowrSavrDaylightSensor/Overview.aspx"
-                                        target="_blank" class="fw-bolder"> Daylight Sensor</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder"> Daylight Sensor</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/en-US/Products/Pages/SingleRoomControls/GrafikEyeQS/Overview.aspx"
-                                        target="_blank" class="fw-bolder">GRAFIK Eye QS</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">GRAFIK Eye QS</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/en-US/products/pages/wholebuildingsystems/athena/overview.aspx"
-                                        target="_blank" class="fw-bolder">Athena</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Athena</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/en-US/Pages/LutronLCIOnline.aspx" target="_blank"
-                                        class="fw-bolder"> Lighting Control Institute</a>
+                                        rel="noopener noreferrer" class="fw-bolder"> Lighting Control Institute</a>
                                 </li>
                             </ul>
                         </div>
@@ -1382,38 +1378,38 @@
                         <!-- Lutron Vive Section -->
                         <div class="bg-secondary p-2">
                             <a href="https://www.lutron.com/en-US/products/pages/wholebuildingsystems/vive/overview.aspx"
-                                target="_blank" class="fw-bolder link-light">Lutron Vive Wireless</a>
+                                target="_blank" rel="noopener noreferrer" class="fw-bolder link-light">Lutron Vive Wireless</a>
                         </div>
                         <div class="card">
                             <ul
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/en-US/pages/supportcenter/support.aspx?productName=Vive&SECTION=Documents&PRDCMP=TRUE&SubGroup=Sensors&ct=Product%20Specification%20Submittals"
-                                        target="_blank" class="fw-bolder">Products</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Products</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/TechnicalDocumentLibrary/3691150.pdf"
-                                        target="_blank" class="fw-bolder">Phase Select Dimming Load Controller</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Phase Select Dimming Load Controller</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/technicaldocumentlibrary/369913_eng.pdf"
-                                        target="_blank" class="fw-bolder">0-10V Dimming Load Controller</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">0-10V Dimming Load Controller</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/technicaldocumentlibrary/369908_eng.pdf"
-                                        target="_blank" class="fw-bolder">Switching Load Controller</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Switching Load Controller</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/technicaldocumentlibrary/3691034.pdf"
-                                        target="_blank" class="fw-bolder">Wireless Receptacle</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Wireless Receptacle</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/en-US/pages/supportcenter/support.aspx?productName=Vive&SECTION=Documents&PRDCMP=TRUE&ct=product%20brochures"
-                                        target="_blank" class="fw-bolder">Product Brochures</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Product Brochures</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/en-US/service-support/pages/technical/appguides.aspx"
-                                        target="_blank" class="fw-bolder"> Application Guides</a>
+                                        target="_blank" rel="noopener noreferrer"    class="fw-bolder"> Application Guides</a>
                                 </li>
                             </ul>
                         </div>
@@ -1424,31 +1420,31 @@
                                 class="list-group list-group-flush list-group-horizontal-lg d-flex justify-content-evenly">
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/technicaldocumentlibrary/048628.pdf" target="_blank"
-                                        class="fw-bolder">Emergency Load Controllers</a>
+                                        rel="noopener noreferrer" class="fw-bolder">Emergency Load Controllers</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/technicaldocumentlibrary/369902_eng.pdf"
-                                        target="_blank" class="fw-bolder">Vive Wireless Hub</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Vive Wireless Hub</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/technicaldocumentlibrary/369612.pdf" target="_blank"
-                                        class="fw-bolder">Pico Wireless Control</a>
+                                        rel="noopener noreferrer" class="fw-bolder">Pico Wireless Control</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/technicaldocumentlibrary/369904_eng.pdf"
-                                        target="_blank" class="fw-bolder">Vive Maestro</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Vive Maestro</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/technicaldocumentlibrary/3691097_eng.pdf"
-                                        target="_blank" class="fw-bolder">Maestro RF 0-10V Wall Sensor</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Maestro RF 0-10V Wall Sensor</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/technicaldocumentlibrary/369480_eng.pdf"
-                                        target="_blank" class="fw-bolder">Wireless Sensors</a>
+                                        target="_blank" rel="noopener noreferrer" class="fw-bolder">Wireless Sensors</a>
                                 </li>
                                 <li class="list-group-item">
                                     <a href="https://www.lutron.com/technicaldocumentlibrary/369262.pdf" target="_blank"
-                                        class="fw-bolder"> Wireless Daylight</a>
+                                        rel="noopener noreferrer" class="fw-bolder"> Wireless Daylight</a>
                                 </li>
                             </ul>
                         </div>

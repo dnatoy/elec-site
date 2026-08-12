@@ -24,6 +24,11 @@
   height: 50pt;
 }
 
+/* Accordion header icon sizing (was inline style) */
+.accordion-icon-lg {
+  font-size: xx-large;
+}
+
 /* Card width variants used in rep listing cards (was inline style) */
 .card-max-50 {
   max-width: 50%;

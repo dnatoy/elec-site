@@ -51,7 +51,7 @@
           <img
             src="images/MDP_Engineering_Logo-72dpi.png"
             alt="MDP Logo"
-            style="width: 150px"
+            class="navbar-logo"
           />
         </a>
 
@@ -75,39 +75,45 @@
               class="nav-link active bg-secondary"
               aria-current="page"
               href="#"
+              aria-label="Home"
             >
-              <i
-                class="fa fa-home"
-                aria-hidden="true"
-                style="font-size: 50px; color: white"
-              ></i>
+              <i class="fa fa-home nav-icon" aria-hidden="true"></i>
             </a>
-            <a class="nav-link" href="tables/table310-16.html">
-              <i
-                class="fa fa-table"
-                aria-hidden="true"
-                style="font-size: 50px"
-              ></i>
+            <a
+              class="nav-link"
+              href="tables/table310-16.html"
+              aria-label="Ampacity Tables"
+            >
+              <i class="fa fa-table nav-icon" aria-hidden="true"></i>
             </a>
-            <a class="nav-link" href="calculators/calculator-start.html">
-              <i
-                class="fa fa-calculator"
-                aria-hidden="true"
-                style="font-size: 50px"
-              ></i>
+            <a
+              class="nav-link"
+              href="calculators/calculator-start.html"
+              aria-label="Calculators"
+            >
+              <i class="fa fa-calculator nav-icon" aria-hidden="true"></i>
             </a>
-            <a class="nav-link disabled" href="#">
-              <i
-                class="fa fa-book"
-                aria-disabled="true"
-                style="font-size: 50px"
-              ></i>
+            <a
+              class="nav-link disabled"
+              href="#"
+              aria-label="Reference"
+              aria-disabled="true"
+            >
+              <i class="fa fa-book nav-icon" aria-hidden="true"></i>
             </a>
-            <a class="nav-link" href="light/light-start.html">
-              <i class="fa fa-lightbulb" style="font-size: 50px"></i>
+            <a
+              class="nav-link"
+              href="light/light-start.html"
+              aria-label="Lighting"
+            >
+              <i class="fa fa-lightbulb nav-icon" aria-hidden="true"></i>
             </a>
-            <a class="nav-link" href="power/power-start.html">
-              <i class="fa fa-plug" style="font-size: 50px"></i>
+            <a
+              class="nav-link"
+              href="power/power-start.html"
+              aria-label="Power"
+            >
+              <i class="fa fa-plug nav-icon" aria-hidden="true"></i>
             </a>
           </div>
         </div>
@@ -115,9 +121,9 @@
           <!-- other nav items -->
           <button
             id="darkModeToggle"
+            type="button"
             class="btn btn-outline-secondary ms-2"
             title="Toggle dark mode"
-            style="height: 40px; width: 40px; border-radius: 50%"
           >
             🌙
           </button>
@@ -171,7 +177,7 @@
               aria-expanded="false"
               aria-controls="collapseOne"
             >
-              <i class="fa fa-table" style="font-size: xx-large"></i>
+              <i class="fa fa-table accordion-icon-lg"></i>
               &emsp;
               <strong>Reference Tables</strong>
             </button>
@@ -204,12 +210,8 @@
               aria-expanded="false"
               aria-controls="collapseTwo"
             >
-              <a
-                href="calculators/calculator-start.html"
-                class="text-decoration-none text-dark"
-                ><i class="fa fa-calculator" style="font-size: xx-large"></i>
-                &emsp; <strong>Calculators</strong></a
-              >
+              <i class="fa fa-calculator accordion-icon-lg"></i>
+              &emsp; <strong>Calculators</strong>
             </button>
           </h2>
           <div
@@ -219,8 +221,12 @@
             data-bs-parent="#accordionExample"
           >
             <div class="accordion-body">
-              <strong>The Calculators tab.</strong> It provides a variety of the
-              calculators for different purposes.
+              <a
+                href="calculators/calculator-start.html"
+                class="text-decoration-none text-dark"
+                ><strong>The Calculators tab.</strong> It provides a variety of
+                the calculators for different purposes.</a
+              >
             </div>
           </div>
         </div>
@@ -235,13 +241,9 @@
               aria-expanded="false"
               aria-controls="collapseThree"
             >
-              <a
-                href="/references/references-start.html"
-                class="text-decoration-none text-dark"
-                ><i class="fa fa-book" style="font-size: xx-large"></i>
-                &emsp;
-                <strong>References</strong></a
-              >
+              <i class="fa fa-book accordion-icon-lg"></i>
+              &emsp;
+              <strong>References</strong>
             </button>
           </h2>
           <div
@@ -251,8 +253,12 @@
             data-bs-parent="#accordionExample"
           >
             <div class="accordion-body">
-              <strong>The References tab.</strong> Provides access to the design
-              references.
+              <a
+                href="/references/references-start.html"
+                class="text-decoration-none text-dark"
+                ><strong>The References tab.</strong> Provides access to the
+                design references.</a
+              >
             </div>
           </div>
         </div>
@@ -267,7 +273,7 @@
               aria-expanded="false"
               aria-controls="collapseFour"
             >
-              <i class="fa fa-lightbulb" style="font-size: xx-large"></i>
+              <i class="fa fa-lightbulb accordion-icon-lg"></i>
               &emsp; <strong>Lighting Resources</strong>
             </button>
           </h2>
@@ -299,7 +305,7 @@
               aria-expanded="false"
               aria-controls="collapseFive"
             >
-              <i class="fa fa-plug" style="font-size: xx-large"></i>
+              <i class="fa fa-plug accordion-icon-lg"></i>
               &emsp;
               <strong> Power Resources </strong>
             </button>
@@ -333,7 +339,7 @@
               aria-expanded="true"
               aria-controls="collapseSix"
             >
-              <i class="fa fa-share-alt" style="font-size: xx-large"></i>
+              <i class="fa fa-share-alt accordion-icon-lg"></i>
               &emsp;
               <strong> Useful Links </strong>
             </button>
