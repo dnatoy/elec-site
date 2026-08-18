@@ -334,6 +334,11 @@ document.addEventListener('alpine:init', function () {
           sizeLabel: D.formatSize(picked.size),
           tableAmp: picked.tableAmp,
           correctedAmpacity: picked.corrected,
+          // NEC 310.10(H)(1): total circuit ampacity is the sum of each parallel
+          // set's corrected ampacity -- reuses correctedAmpacity and sets directly
+          // (rather than recomputing) so it can never drift from the values above.
+          totalCircuitAmpacity: picked.corrected * sets,
+          ocpdCheckPass: picked.corrected * sets >= ocpd,
           sets: sets,
           scheduleNotation: scheduleNotation,
           parallelNotAllowed: parallelNotAllowed,
