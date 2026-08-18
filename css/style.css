@@ -38,6 +38,139 @@
   max-width: 100%;
 }
 
+/* Table header column width variant (was inline style) */
+.col-w-25 {
+  width: 25%;
+}
+
+/* Hide Alpine.js templates until Alpine has initialized them */
+[x-cloak] {
+  display: none !important;
+}
+
+/* Brand accent for form controls (radios/checkboxes + focus rings) */
+.form-check-input {
+  accent-color: var(--mdp-color-accent);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--mdp-color-accent);
+  box-shadow: 0 0 0 0.25rem rgba(232, 71, 42, 0.25);
+}
+
+/* Vertical accent bar next to a section heading, e.g. "Circuit Inputs" --
+   matches the left-border-accent style already used on .result-callout */
+.heading-accent {
+  border-left: 4px solid var(--mdp-color-accent);
+  padding-left: var(--mdp-space-sm);
+}
+
+/* Icon-triggered info tooltip: a small button that opens a positioned box,
+   replacing persistent helper-text paragraphs under calculator fields */
+.info-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.35rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--mdp-color-primary);
+  font-size: 0.85rem;
+  line-height: 1;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.info-icon-btn:hover,
+.info-icon-btn:focus {
+  color: var(--mdp-color-accent);
+  outline: none;
+}
+
+.info-icon-btn:focus-visible {
+  outline: 2px solid var(--mdp-color-accent);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+/* Positioned relative to the field wrapper (which carries position: relative)
+   so max-width: 100% naturally clamps it to that field's own width, never
+   overflowing into a neighboring column. Shows below by default; JS toggles
+   .info-tooltip-above to flip it when there isn't room below in the viewport. */
+.info-tooltip {
+  position: absolute;
+  z-index: 1000;
+  top: 100%;
+  left: 0;
+  margin-top: 0.35rem;
+  width: max-content;
+  max-width: 100%;
+  background-color: var(--mdp-color-primary);
+  color: var(--mdp-color-white);
+  padding: var(--mdp-space-sm) var(--mdp-space-md);
+  border-radius: var(--mdp-radius-sm);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.info-tooltip.info-tooltip-above {
+  top: auto;
+  bottom: 100%;
+  margin-top: 0;
+  margin-bottom: 0.35rem;
+}
+
+/* Calculator live-result emphasis (shared across calculator pages) */
+.result-figure {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--mdp-color-primary);
+}
+
+.result-figure .unit {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6c757d;
+}
+
+.result-callout {
+  border-left: 4px solid var(--mdp-color-accent);
+  background-color: var(--mdp-color-tint-light);
+  padding: var(--mdp-space-md) var(--mdp-space-lg);
+  border-radius: 0 var(--mdp-radius-sm) var(--mdp-radius-sm) 0;
+}
+
+/* Small uppercase heading at the top of a .result-callout used to group
+   related fields (e.g. Circuit Inputs sections) -- subtle, doesn't compete
+   with the field labels inside the box. */
+.group-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6c757d;
+  margin-bottom: var(--mdp-space-sm);
+}
+
+/* Accent (brand orange) button, e.g. the schedule-notation copy button */
+.btn-accent {
+  background-color: var(--mdp-color-accent);
+  border-color: var(--mdp-color-accent);
+  color: var(--mdp-color-white);
+}
+
+.btn-accent:hover,
+.btn-accent:focus {
+  background-color: var(--mdp-color-accent-dark);
+  border-color: var(--mdp-color-accent-dark);
+  color: var(--mdp-color-white);
+}
+
 /* Custom color for hover row in the table */
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
   background-color: rgba(255, 255, 0, 0.137);
@@ -254,4 +387,64 @@ body.dark-mode .status-in-progress {
 body.dark-mode .status-planned {
   background-color: #333;
   color: #ccc;
+}
+
+/* Dark mode for calculator forms and live-result panels */
+body.dark-mode .form-control,
+body.dark-mode .form-select {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  border-color: #444;
+}
+
+body.dark-mode .form-control:focus,
+body.dark-mode .form-select:focus {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+}
+
+body.dark-mode .form-label,
+body.dark-mode .form-check-label {
+  color: #e0e0e0;
+}
+
+body.dark-mode .text-muted {
+  color: #adb5bd !important;
+}
+
+body.dark-mode .group-label {
+  color: #adb5bd;
+}
+
+body.dark-mode .result-figure {
+  color: #ffffff;
+}
+
+body.dark-mode .result-figure .unit {
+  color: #adb5bd;
+}
+
+body.dark-mode .result-callout {
+  background-color: #1f2124;
+}
+
+body.dark-mode .alert-warning {
+  background-color: #4a3b00;
+  color: #ffd766;
+  border-color: #6b5700;
+}
+
+body.dark-mode .alert-danger {
+  background-color: #4a1f1f;
+  color: #ff9d9d;
+  border-color: #6b2c2c;
+}
+
+body.dark-mode .info-icon-btn {
+  color: #adb5bd;
+}
+
+body.dark-mode .info-icon-btn:hover,
+body.dark-mode .info-icon-btn:focus {
+  color: var(--mdp-color-accent);
 }

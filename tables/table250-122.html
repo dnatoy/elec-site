@@ -29,6 +29,11 @@
   <!-- Alpine.js (prep for interactive calculators) -->
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js" integrity="sha384-l8f0VcPi/M1iHPv8egOnY/15TDwqgbOR1anMIJWvU6nLRgZVLTLSaNqi/TOoT5Fh" crossorigin="anonymous"></script>
 
+  <!-- Shared NEC reference data -- this table's rows render from NEC_DATA.EGC_250_122
+       (js/nec-data.js) instead of being hand-typed here, so it stays in sync with any
+       calculator using the same table. -->
+  <script src="../js/nec-data.js"></script>
+
   <!-- Logo image on top of the tab -->
   <link rel="icon" href="../images/website-favicon-32x32.png" />
 </head>
@@ -91,115 +96,31 @@
       <!-- Table Header -->
       <thead class="align-middle">
         <tr>
-          <th rowspan="2" style="width: 25%">Rating or Setting of Automatic Overcurrent Device in Circuit Ahead
+          <th rowspan="2" class="col-w-25">Rating or Setting of Automatic Overcurrent Device in Circuit Ahead
             of Equipment, Conduit, etc., Not Exceeding (Amperes)
           </th>
           <th colspan="2">Size (AWG/kcmil)</th>
 
         </tr>
         <tr>
-          <th style="width: 25%">Copper</th>
-          <th style="width: 25%">Aluminum or Copper-Clad Aluminum</th>
+          <th class="col-w-25">Copper</th>
+          <th class="col-w-25">Aluminum or Copper-Clad Aluminum</th>
         </tr>
       </thead>
-      <!-- Table Body -->
-      <tr>
-        <th scope="row">15</th>
-        <td>14</td>
-        <td>12</td>
-      </tr>
-      <tr>
-        <th scope="row">20</th>
-        <td>12</td>
-        <td>10</td>
-      </tr>
-      <tr>
-        <th scope="row">60</th>
-        <td>10</td>
-        <td>8</td>
-      </tr>
-      <tr>
-        <th scope="row">100</th>
-        <td>8</td>
-        <td>6</td>
-      </tr>
-      <tr>
-        <th scope="row">200</th>
-        <td>6</td>
-        <td>4</td>
-      </tr>
-      <tr>
-        <th scope="row">300</th>
-        <td>4</td>
-        <td>2</td>
-      </tr>
-      <tr>
-        <th scope="row">400</th>
-        <td>3</td>
-        <td>1</td>
-      </tr>
-      <tr>
-        <th scope="row">500</th>
-        <td>2</td>
-        <td>1/0</td>
-      </tr>
-      <tr>
-        <th scope="row">600</th>
-        <td>1</td>
-        <td>2/0</td>
-      </tr>
-      <tr>
-        <th scope="row">800</th>
-        <td>1/0</td>
-        <td>3/0</td>
-      </tr>
-      <tr>
-        <th scope="row">1000</th>
-        <td>2/0</td>
-        <td>4/0</td>
-      </tr>
-      <tr>
-        <th scope="row">1200</th>
-        <td>3/0</td>
-        <td>250</td>
-      </tr>
-      <tr>
-        <th scope="row">1600</th>
-        <td>4/0</td>
-        <td>350</td>
-      </tr>
-      <tr>
-        <th scope="row">2000</th>
-        <td>250</td>
-        <td>400</td>
-      </tr>
-      <tr>
-        <th scope="row">2500</th>
-        <td>350</td>
-        <td>600</td>
-      </tr>
-      <tr>
-        <th scope="row">3000</th>
-        <td>400</td>
-        <td>600</td>
-      </tr>
-      <tr>
-        <th scope="row">4000</th>
-        <td>500</td>
-        <td>750</td>
-      </tr>
-      <tr>
-        <th scope="row">5000</th>
-        <td>700</td>
-        <td>1250</td>
-      </tr>
-      <tr>
-        <th scope="row">6000</th>
-        <td>800</td>
-        <td>1250</td>
-      </tr>
-
+      <!-- Table Body: rendered from NEC_DATA.EGC_250_122 by the script below -->
+      <tbody id="egc-250-122-body"></tbody>
     </table>
+    <script>
+      (function () {
+        var tbody = document.getElementById('egc-250-122-body');
+        if (!tbody || !window.NEC_DATA) return;
+        window.NEC_DATA.EGC_250_122.forEach(function (row) {
+          var tr = document.createElement('tr');
+          tr.innerHTML = '<th scope="row">' + row.maxOCPD + '</th><td>' + row.cu + '</td><td>' + row.al + '</td>';
+          tbody.appendChild(tr);
+        });
+      })();
+    </script>
     <footer>
       Notes:<br>
 
