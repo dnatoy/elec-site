@@ -217,3 +217,41 @@ body.dark-mode .list-group-horizontal-lg > .list-group-item {
 body.dark-mode .card .list-group-item {
   border-radius: 0 !important;
 }
+
+/* Dark mode for the calculators card grid */
+body.dark-mode .page-body-tint {
+  background-color: #16181a;
+}
+
+body.dark-mode .calc-card {
+  background-color: #2a2a2a;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+body.dark-mode a.calc-card:hover {
+  border-color: var(--mdp-color-accent);
+}
+
+body.dark-mode .calc-card.calc-card-disabled .calc-card-icon {
+  color: #6c757d;
+}
+
+body.dark-mode .calc-card-desc {
+  color: #ccc;
+}
+
+body.dark-mode .status-available {
+  background-color: #1f3d29;
+  color: #6fd992;
+}
+
+body.dark-mode .status-in-progress {
+  background-color: #4a3b00;
+  color: #ffd766;
+}
+
+body.dark-mode .status-planned {
+  background-color: #333;
+  color: #ccc;
+}

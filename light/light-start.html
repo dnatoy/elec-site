@@ -11,6 +11,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/style.css" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 
@@ -25,49 +26,16 @@
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
         crossorigin="anonymous"></script>
 
+    <!-- Alpine.js (prep for interactive calculators) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js" integrity="sha384-l8f0VcPi/M1iHPv8egOnY/15TDwqgbOR1anMIJWvU6nLRgZVLTLSaNqi/TOoT5Fh" crossorigin="anonymous"></script>
+
     <!-- Logo image on top of the tab -->
     <link rel="icon" href="../images/website-favicon-32x32.png" />
 </head>
 
 <body>
-    <div class="container">
-        <!-- Top Navigation Bar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-white">
-            <!-- Logo in the top left corner with the link to main web site -->
-            <a class="navbar-brand" href="http://mdpeg.com/">
-                <img src="../images/MDP_Engineering_Logo-72dpi.png" alt="MDP Logo" class="navbar-logo" /></a>
-            <!-- Button navigation for small screens -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-
-                <!-- Navigation menu on top -->
-                <div class="navbar-nav nav-justified w-100 nav-pills rounded-pill">
-                    <a class="nav-link " href="../index.html" aria-label="Home"><i class="fa fa-home nav-icon" aria-hidden="true"></i></a>
-                    <a class="nav-link" href="../tables/table310-16.html" aria-label="Ampacity Tables"><i class="fa fa-table nav-icon" aria-hidden="true"></i></a>
-                    <a class="nav-link" href="../calculators/calculator-start.html" aria-label="Calculators"><i class="fa fa-calculator nav-icon" aria-hidden="true"></i></a>
-                    <a class="nav-link disabled" href="#" aria-label="Reference" aria-disabled="true"><i class="fa fa-book nav-icon" aria-hidden="true"></i></a>
-                    <a class="nav-link active bg-secondary" aria-current="page" href="light-start.html" aria-label="Lighting"><i
-                            class="fa fa-lightbulb nav-icon" aria-hidden="true"></i></a>
-                    <a class="nav-link" href="../power/power-start.html" aria-label="Power"><i class="fa fa-plug nav-icon" aria-hidden="true"></i></a>
-                    <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
-                </div>
-            </div>
-            <div class="d-flex ms-auto align-items-center">
-                <!-- other nav items -->
-                <button
-                    id="darkModeToggle"
-                    type="button"
-                    class="btn btn-outline-secondary ms-2"
-                    title="Toggle dark mode"
-                >
-                    🌙
-                </button>
-            </div>
-        </nav>
-    </div>
+    <div id="site-header" data-active="light"></div>
+    <script src="../js/layout.js"></script>
 
     <!-- Dropdown Button on top with more options -->
     <div class="container">

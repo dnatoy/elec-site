@@ -1,0 +1,144 @@
+:root {
+  /* Brand colors */
+  --mdp-color-primary: #414C55;      /* steel blue */
+  --mdp-color-primary-dark: #313940; /* hover/pressed shade */
+  --mdp-color-accent: #E8472A;       /* red */
+  --mdp-color-accent-dark: #c93a20;
+  --mdp-color-tint-light: #F2F2F2;
+  --mdp-color-tint-subtle: #EAEBEC;
+  --mdp-color-text: #212529;
+  --mdp-color-white: #ffffff;
+
+  /* Typography */
+  --mdp-font-family-base: Arial, "Helvetica Neue", Helvetica, sans-serif;
+
+  /* Spacing scale */
+  --mdp-space-xs: 0.25rem;
+  --mdp-space-sm: 0.5rem;
+  --mdp-space-md: 1rem;
+  --mdp-space-lg: 1.5rem;
+  --mdp-space-xl: 2.5rem;
+
+  /* Radius scale */
+  --mdp-radius-sm: 0.25rem;
+  --mdp-radius-md: 0.5rem;
+  --mdp-radius-pill: 50rem;
+}
+
+body {
+  font-family: var(--mdp-font-family-base);
+}
+
+/* Brand the active nav pill. Scoped to #site-header (not a global
+   .active/.bg-secondary override) because bg-secondary/btn-secondary
+   is also used by the unrelated "More" dropdown button on several pages. */
+#site-header .nav-link.active {
+  background-color: var(--mdp-color-primary);
+  color: var(--mdp-color-white);
+}
+
+/* ---- Page header band: steel-blue bar + thin red accent rule ---- */
+.page-header-bar {
+  background-color: var(--mdp-color-primary);
+  border-bottom: 4px solid var(--mdp-color-accent);
+  padding: var(--mdp-space-xl) 0 var(--mdp-space-lg);
+  color: var(--mdp-color-white);
+}
+
+.page-header-bar h1 {
+  margin-bottom: var(--mdp-space-xs);
+}
+
+.page-header-bar .page-header-subtitle {
+  margin-bottom: 0;
+  color: var(--mdp-color-tint-light);
+}
+
+/* Page body area tinted so white cards/panels stand out */
+.page-body-tint {
+  background-color: var(--mdp-color-tint-subtle);
+  min-height: 60vh;
+}
+
+/* ---- Card grid (calculators hub, and reusable elsewhere) ---- */
+.calc-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: var(--mdp-space-lg);
+  background-color: var(--mdp-color-white);
+  border: 1px solid #d7d9db;
+  border-radius: var(--mdp-radius-md);
+  text-decoration: none;
+  color: var(--mdp-color-text);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+a.calc-card:hover,
+a.calc-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--mdp-color-primary);
+  color: var(--mdp-color-text);
+  text-decoration: none;
+}
+
+.calc-card-icon {
+  font-size: 2rem;
+  color: var(--mdp-color-primary);
+  margin-bottom: var(--mdp-space-md);
+}
+
+.calc-card-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--mdp-space-sm);
+  margin-bottom: var(--mdp-space-sm);
+}
+
+.calc-card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.calc-card-desc {
+  margin: 0;
+  color: #495057;
+  font-size: 0.95rem;
+}
+
+/* Cards without a live target page yet (In progress / Planned) */
+.calc-card.calc-card-disabled {
+  cursor: default;
+}
+
+.calc-card.calc-card-disabled .calc-card-icon {
+  color: #9aa1a7;
+}
+
+/* ---- Status badges ---- */
+.status-badge {
+  display: inline-block;
+  flex-shrink: 0;
+  padding: 0.25em 0.65em;
+  border-radius: var(--mdp-radius-pill);
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-available {
+  background-color: #d4edda;
+  color: #1e7e34;
+}
+
+.status-in-progress {
+  background-color: #fff3cd;
+  color: #8a6100;
+}
+
+.status-planned {
+  background-color: var(--mdp-color-tint-subtle);
+  color: #5a6268;
+}

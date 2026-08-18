@@ -11,11 +11,8 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/style.css" />
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-
-    <!-- Fonts Awesome 4 CDN -->
-    <!-- <script src="https://use.fontawesome.com/e2a0e7c2b4.js"></script> -->
 
     <!-- Font Awesome 5 JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
@@ -25,79 +22,113 @@
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
         crossorigin="anonymous"></script>
 
+    <!-- Alpine.js (prep for interactive calculators) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"
+        integrity="sha384-l8f0VcPi/M1iHPv8egOnY/15TDwqgbOR1anMIJWvU6nLRgZVLTLSaNqi/TOoT5Fh"
+        crossorigin="anonymous"></script>
+
     <!-- Logo image on top of the tab -->
     <link rel="icon" href="../images/website-favicon-32x32.png" />
 </head>
 
 <body>
-    <div class="container">
-        <!-- Top Navigation Bar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-white">
-            <!-- Logo in the top left corner with the link to main web site -->
-            <a class="navbar-brand" href="http://mdpeg.com/">
-                <img src="../images/MDP_Engineering_Logo-72dpi.png" alt="MDP Logo" style="width: 150px" /></a>
-            <!-- Button navigation for small screens -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div id="site-header" data-active="calculators"></div>
+    <script src="../js/layout.js"></script>
 
-                <!-- Navigation menu on top -->
-                <div class="navbar-nav nav-justified w-100 nav-pills rounded-pill">
-                    <a class="nav-link " href="../index.html"><i class="fa fa-home" aria-disabled="true"
-                            style="font-size: 50px"></i></a>
-                    <a class="nav-link" href="../tables/table310-16.html"><i class="fa fa-table" aria-hidden="true"
-                            style="font-size: 50px"></i></a>
-                    <a class="nav-link active bg-secondary" aria-current="page" href="../calculators/calculator-start.html"><i
-                            class="fa fa-calculator" aria-hidden="true" style="font-size: 50px; color: white;"></i></a>
-                    <a class="nav-link disabled" href="#"><i class="fa fa-book" aria-disabled="true"
-                            style="font-size: 50px"></i></a>
-                    <a class="nav-link" href="../light/light-start.html"><i class="fa fa-lightbulb" aria-disabled="true"
-                            style="font-size: 50px;"></i></a>
-                    <a class="nav-link" href="../power/power-start.html"><i
-                            class="fa fa-plug" aria-hidden="true" style="font-size: 50px;"></i></a>
-                    <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a> -->
-                </div>
-            </div>
-            <div class="d-flex ms-auto align-items-center">
-                <button
-                    id="darkModeToggle"
-                    class="btn btn-outline-secondary ms-2"
-                    title="Toggle dark mode"
-                    style="height: 40px; width: 40px; border-radius: 50%"
-                >
-                    🌙
-                </button>
-            </div>
-
-        </nav>
-    </div>
+    <!-- Page header band: steel-blue with thin red accent rule -->
+    <header class="page-header-bar">
+        <div class="container">
+            <h1>Calculators</h1>
+            <p class="page-header-subtitle">Select a calculator to get started.</p>
+        </div>
+    </header>
 
     <!-- Page Content -->
-    <div class="container">
-        <h1 class="mt-3 mb-3">Calculators</h1>
-        <p>Select a calculator below.</p>
-        <ul class="list-group">
-            <li class="list-group-item">
-                <a href="calculator-wire_sizing.html">NEC Conductor and Raceway Sizing Calculator</a>
-            </li>
-        </ul>
-    </div>
+    <main class="page-body-tint">
+        <div class="container py-4 py-md-5">
+            <div class="row g-4">
 
-    <!-- Optional JavaScript; choose one of the two! -->
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <a class="calc-card" href="calculator-wire_sizing.html">
+                        <i class="fa fa-ruler-combined calc-card-icon" aria-hidden="true"></i>
+                        <div class="calc-card-title-row">
+                            <h2 class="calc-card-title">Conductor and Raceway Sizing</h2>
+                            <span class="status-badge status-available">Available</span>
+                        </div>
+                        <p class="calc-card-desc">Size conductors and raceways per NEC ampacity, correction, and fill
+                            tables.</p>
+                    </a>
+                </div>
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="calc-card calc-card-disabled" aria-disabled="true">
+                        <i class="fa fa-cog calc-card-icon" aria-hidden="true"></i>
+                        <div class="calc-card-title-row">
+                            <h2 class="calc-card-title">Motor OCPD Selection</h2>
+                            <span class="status-badge status-in-progress">In progress</span>
+                        </div>
+                        <p class="calc-card-desc">Select motor branch-circuit short-circuit and ground-fault
+                            protection per NEC 430.</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="calc-card calc-card-disabled" aria-disabled="true">
+                        <i class="fa fa-circle-notch calc-card-icon" aria-hidden="true"></i>
+                        <div class="calc-card-title-row">
+                            <h2 class="calc-card-title">Conduit Fill</h2>
+                            <span class="status-badge status-in-progress">In progress</span>
+                        </div>
+                        <p class="calc-card-desc">Determine minimum conduit trade size for a given set of
+                            conductors.</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="calc-card calc-card-disabled" aria-disabled="true">
+                        <i class="fa fa-chart-line calc-card-icon" aria-hidden="true"></i>
+                        <div class="calc-card-title-row">
+                            <h2 class="calc-card-title">Voltage Drop</h2>
+                            <span class="status-badge status-planned">Planned</span>
+                        </div>
+                        <p class="calc-card-desc">Estimate conductor voltage drop for a given length, load, and
+                            circuit type.</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="calc-card calc-card-disabled" aria-disabled="true">
+                        <i class="fa fa-exchange-alt calc-card-icon" aria-hidden="true"></i>
+                        <div class="calc-card-title-row">
+                            <h2 class="calc-card-title">Transformer Sizing</h2>
+                            <span class="status-badge status-planned">Planned</span>
+                        </div>
+                        <p class="calc-card-desc">Size dry-type and liquid-filled transformers from load kVA and
+                            voltage.</p>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="calc-card calc-card-disabled" aria-disabled="true">
+                        <i class="fa fa-bolt calc-card-icon" aria-hidden="true"></i>
+                        <div class="calc-card-title-row">
+                            <h2 class="calc-card-title">Fault Current</h2>
+                            <span class="status-badge status-planned">Planned</span>
+                        </div>
+                        <p class="calc-card-desc">Estimate available fault current at a point on a radial
+                            distribution system.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
     <script src="../js/script.js"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
-    -->
 
 </body>
 
