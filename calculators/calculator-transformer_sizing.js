@@ -590,23 +590,21 @@ document.addEventListener('alpine:init', function () {
         // primary-only has no separate secondary device to override). Unlike the
         // primary override, there's no "go higher" case here -- the computed rating
         // already IS the 450.3(B) ceiling for the secondary (no separate Recommended
-        // bracket the way primary has one), so this only ever goes down. Floor =
-        // smallest standard rating >= the RAW (100%, not derated) secondary FLC --
-        // same nuisance-tripping rationale as the primary override. Options are the
-        // nearest up-to-3 standard ratings <= Maximum, down to that floor (Maximum
-        // itself included, so the reference figure stays selectable/identifiable). ---
-        var secondaryOcpdFloorRating = null;
+        // bracket the way primary has one), so this only ever goes down. No floor is
+        // enforced -- picking something well below the raw secondary FLC (risking
+        // nuisance tripping under normal load) is left to the user's judgment, same
+        // as any other manual OCPD choice. Options are the nearest up-to-5 standard
+        // ratings <= Maximum (Maximum itself included, so the reference figure stays
+        // selectable/identifiable). ---
+        var secondaryOcpdFloorRating = D.getStandardOCPD(secondaryFLC);
         var secondaryOcpdOverrideRatings = [];
         var secondaryOcpdOverrideOptions = [];
         if (this.protectionMethod === 'primaryAndSecondary' && secondaryOcpdRating != null) {
-          secondaryOcpdFloorRating = D.getStandardOCPD(secondaryFLC);
-          if (secondaryOcpdFloorRating != null) {
-            secondaryOcpdOverrideRatings = D.STANDARD_OCPD_240_6A.filter(function (r) {
-              return r <= secondaryOcpdRating && r >= secondaryOcpdFloorRating;
-            });
-            if (secondaryOcpdOverrideRatings.length > 3) {
-              secondaryOcpdOverrideRatings = secondaryOcpdOverrideRatings.slice(secondaryOcpdOverrideRatings.length - 3);
-            }
+          secondaryOcpdOverrideRatings = D.STANDARD_OCPD_240_6A.filter(function (r) {
+            return r <= secondaryOcpdRating;
+          });
+          if (secondaryOcpdOverrideRatings.length > 5) {
+            secondaryOcpdOverrideRatings = secondaryOcpdOverrideRatings.slice(secondaryOcpdOverrideRatings.length - 5);
           }
           secondaryOcpdOverrideOptions = secondaryOcpdOverrideRatings.map(function (r) {
             return { value: r, label: r + ' A' + (r === secondaryOcpdRating ? ' (Maximum)' : '') };
