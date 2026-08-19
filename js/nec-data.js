@@ -1,9 +1,10 @@
 // Shared NEC reference data for table pages and calculators.
 // Figures mirror tables/table310-16.html, tables/table310-15.html,
 // tables/table310-15C1.html, tables/tableC1-EMT.html, tables/tableC3-FMC.html,
-// tables/tableC11-PVC.html, tables/table250-122.html, tables/table430-248.html,
-// tables/table430-250.html, tables/table430-251B.html, and tables/table430-52.html
-// -- keep those pages and this file in sync.
+// tables/tableC11-PVC.html, tables/table250-102.html, tables/table250-122.html,
+// tables/table430-248.html, tables/table430-250.html, tables/table430-251B.html,
+// tables/table430-52.html, and tables/table450-3B.html -- keep those pages and
+// this file in sync.
 (function (global) {
   'use strict';
 
@@ -203,6 +204,19 @@
     { maxOCPD: 6000, cu: '800', al: '1250' }
   ];
 
+  // Table 250.102(C)(1) - Supply-Side Bonding Jumper sizing for AC systems, keyed by
+  // the largest ungrounded (phase) conductor size actually installed. Cu and Al ranges
+  // don't align 1:1 (see tables/table250-102.html), so each row carries its own Cu and
+  // Al upper-bound breakpoint alongside the same-material bonding jumper size.
+  var SUPPLY_BONDING_JUMPER_250_102C1 = [
+    { cuMax: '2', alMax: '1/0', cu: '8', al: '6' },
+    { cuMax: '1/0', alMax: '3/0', cu: '6', al: '4' },
+    { cuMax: '3/0', alMax: '250', cu: '4', al: '2' },
+    { cuMax: '350', alMax: '500', cu: '2', al: '1/0' },
+    { cuMax: '600', alMax: '900', cu: '1/0', al: '3/0' },
+    { cuMax: '1100', alMax: '1750', cu: '2/0', al: '4/0' }
+  ];
+
   // Table 240.6(A) - Standard Ampere Ratings for Fuses and Inverse Time Circuit Breakers
   var STANDARD_OCPD_240_6A = [
     15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 110, 125, 150, 175, 200, 225, 250,
@@ -316,6 +330,40 @@
     { key: 'inverse', label: 'Inverse-Time Breaker' }
   ];
 
+  // Table 450.3(B) - Maximum Rating or Setting of Overcurrent Protection for
+  // Transformers 1000V and Less, as a percentage of transformer rated current.
+  // Only the primary-only and primary-and-secondary methods are modeled (Table
+  // 450.3(A), for transformers over 1000V, isn't in this data set). The 9A/2A
+  // breakpoints select which primary-only percentage applies; the primary-and-
+  // secondary method's primary percentage is flat 250% regardless of current
+  // (Note 3's coordinated-thermal-overload alternative, 6x/4x by impedance,
+  // isn't modeled here either).
+  var TRANSFORMER_OCPD_450_3B = {
+    primaryOnly: {
+      primary: { ge9: 125, lt9: 167, lt2: 300 } // Note 1: round up to next standard rating
+    },
+    primaryAndSecondary: {
+      primary: 250, // Note 3
+      secondary: { ge9: 125, lt9: 167 } // Note 1 on the ge9 bracket
+    }
+  };
+
+  // Typical commercial/industrial catalog kVA sizes -- field/catalog data, not an
+  // NEC table (cf. RECOMMENDED_OCPD_PERCENT in calculator-motor_ocpd.js). Sanity-
+  // check this list against actual supplier catalogs before relying on it. No
+  // liquid-filled single-phase list is carried -- liquid-filled units are
+  // typically specified three-phase for MDP's scope.
+  var STANDARD_TRANSFORMER_KVA = {
+    dry: {
+      three: [15, 30, 45, 75, 112.5, 150, 225, 300, 500, 750, 1000, 1500, 2000, 2500],
+      single: [5, 7.5, 10, 15, 25, 37.5, 50, 75, 100, 167, 250, 333, 500]
+    },
+    liquid: {
+      three: [75, 112.5, 150, 225, 300, 500, 750, 1000, 1500, 2000, 2500, 3750, 5000],
+      single: null
+    }
+  };
+
   function sizeIndex(size) {
     return WIRE_SIZES.indexOf(String(size));
   }
@@ -330,6 +378,55 @@
 
   function formatSize(size) {
     return size + (isKcmil(size) ? ' kcmil' : ' AWG');
+  }
+
+  // Circular-mil area for any AWG/kcmil size. AMPACITY_310_16's areaCmil column
+  // only covers 14 AWG through 4/0 -- kcmil sizes ARE their own area in thousands
+  // of circular mils by definition, so this fills in the rest without a table
+  // lookup. Returns null only if the size isn't recognized at all.
+  function getAreaCmil(size) {
+    var row = AMPACITY_310_16.filter(function (r) { return r.size === String(size); })[0];
+    if (row && row.areaCmil != null) return row.areaCmil;
+    return isKcmil(size) ? parseFloat(size) * 1000 : null;
+  }
+
+  // Smallest single WIRE_SIZES entry whose area is >= the combined area of `sets`
+  // parallel conductors of `size` -- the "equivalent area for parallel conductors"
+  // basis Table 250.102(C)(1) uses for sizing a single bonding jumper that spans
+  // multiple paralleled raceways together (as opposed to sizing one full bonding
+  // jumper per raceway off each raceway's own conductor). Returns null if no
+  // tabulated size is large enough (largest is 2000 kcmil).
+  function getEquivalentSingleSize(size, sets) {
+    var perConductorArea = getAreaCmil(size);
+    if (perConductorArea == null) return null;
+    var totalArea = perConductorArea * sets;
+    var match = WIRE_SIZES.filter(function (s) {
+      var a = getAreaCmil(s);
+      return a != null && a >= totalArea;
+    })[0];
+    return match === undefined ? null : match;
+  }
+
+  // Table 250.102(C)(1) Note 1: once the ungrounded conductor (or equivalent area
+  // for parallel conductors) exceeds the table's largest tabulated breakpoint
+  // (1100 kcmil Cu / 1750 kcmil Al), the bonding jumper/grounded conductor must
+  // have an area >= 12.5% of the ungrounded conductor's (or equivalent parallel)
+  // area -- but per Note 1's own second sentence, is never required to be larger
+  // than the ungrounded conductor actually installed in that raceway (`size`),
+  // regardless of how many sets it's paralleled with. `sets` defaults to 1 for a
+  // single (non-paralleled) oversized conductor. Returns `size` itself if even the
+  // 12.5% figure can't be met by any tabulated size (falls back to the cap).
+  function getNote1BondingJumperSize(size, sets) {
+    var perConductorArea = getAreaCmil(size);
+    if (perConductorArea == null) return null;
+    var totalArea = perConductorArea * (sets || 1);
+    var requiredArea = totalArea * 0.125;
+    var computed = WIRE_SIZES.filter(function (s) {
+      var a = getAreaCmil(s);
+      return a != null && a >= requiredArea;
+    })[0];
+    if (computed === undefined) return size;
+    return compareSizes(computed, size) > 0 ? size : computed;
   }
 
   function getAmpacity(size, material, tempRating) {
@@ -372,6 +469,20 @@
   // the next table rating). Returns null above the table's largest row (6000A).
   function getEGCSize(ocpd, material) {
     var row = EGC_250_122.filter(function (r) { return ocpd <= r.maxOCPD; })[0];
+    if (!row) return null;
+    return material === 'aluminum' ? row.al : row.cu;
+  }
+
+  // Table 250.102(C)(1) supply-side bonding jumper size for the given ungrounded
+  // (phase) conductor size actually installed. Returns null above the largest
+  // tabulated breakpoint (1100 kcmil Cu / 1750 kcmil Al) -- Note 1 there requires
+  // 12.5% of the ungrounded conductor's circular-mil area instead of a fixed size,
+  // which this function doesn't compute; callers must handle that case explicitly.
+  function getSupplyBondingJumperSize(conductorSize, material) {
+    var maxKey = material === 'aluminum' ? 'alMax' : 'cuMax';
+    var row = SUPPLY_BONDING_JUMPER_250_102C1.filter(function (r) {
+      return compareSizes(conductorSize, r[maxKey]) <= 0;
+    })[0];
     if (!row) return null;
     return material === 'aluminum' ? row.al : row.cu;
   }
@@ -450,6 +561,37 @@
     return null;
   }
 
+  // Smallest STANDARD_TRANSFORMER_KVA entry >= loadKVA for the given type/phase.
+  // Returns null if that type/phase combination has no catalog list (see the
+  // liquid-filled single-phase note above), or if loadKVA exceeds the largest
+  // tabulated size.
+  function getStandardTransformerKVA(transformerType, phase, loadKVA) {
+    var list = STANDARD_TRANSFORMER_KVA[transformerType] && STANDARD_TRANSFORMER_KVA[transformerType][phase];
+    if (!list) return null;
+    var match = list.filter(function (k) { return loadKVA <= k; })[0];
+    return match === undefined ? null : match;
+  }
+
+  // Table 450.3(B) primary-side percentage. The primary-and-secondary method is a
+  // flat 250% regardless of current; the primary-only method depends on which
+  // current bracket primaryFLC falls in.
+  function getTransformerPrimaryOCPDPercent(protectionMethod, primaryFLC) {
+    if (protectionMethod === 'primaryAndSecondary') {
+      return TRANSFORMER_OCPD_450_3B.primaryAndSecondary.primary;
+    }
+    var b = TRANSFORMER_OCPD_450_3B.primaryOnly.primary;
+    if (primaryFLC < 2) return b.lt2;
+    if (primaryFLC < 9) return b.lt9;
+    return b.ge9;
+  }
+
+  // Table 450.3(B) secondary-side percentage (primary-and-secondary method only --
+  // the primary-only method has "Not required" in the secondary columns).
+  function getTransformerSecondaryOCPDPercent(secondaryFLC) {
+    var b = TRANSFORMER_OCPD_450_3B.primaryAndSecondary.secondary;
+    return secondaryFLC < 9 ? b.lt9 : b.ge9;
+  }
+
   global.NEC_DATA = {
     WIRE_SIZES: WIRE_SIZES,
     AMPACITY_310_16: AMPACITY_310_16,
@@ -457,25 +599,35 @@
     ADJUSTMENT_310_15C1: ADJUSTMENT_310_15C1,
     CONDUCTOR_FILL: CONDUCTOR_FILL,
     EGC_250_122: EGC_250_122,
+    SUPPLY_BONDING_JUMPER_250_102C1: SUPPLY_BONDING_JUMPER_250_102C1,
     STANDARD_OCPD_240_6A: STANDARD_OCPD_240_6A,
     FLC_430_248: FLC_430_248,
     FLC_430_250: FLC_430_250,
     LRC_430_251B: LRC_430_251B,
     OCPD_PERCENT_430_52: OCPD_PERCENT_430_52,
     OCPD_DEVICE_TYPES: OCPD_DEVICE_TYPES,
+    TRANSFORMER_OCPD_450_3B: TRANSFORMER_OCPD_450_3B,
+    STANDARD_TRANSFORMER_KVA: STANDARD_TRANSFORMER_KVA,
     compareSizes: compareSizes,
     isKcmil: isKcmil,
     formatSize: formatSize,
+    getAreaCmil: getAreaCmil,
+    getEquivalentSingleSize: getEquivalentSingleSize,
+    getNote1BondingJumperSize: getNote1BondingJumperSize,
     getAmpacity: getAmpacity,
     getTempCorrectionFactor: getTempCorrectionFactor,
     getAdjustmentFactor: getAdjustmentFactor,
     getMinTradeSize: getMinTradeSize,
     getEGCSize: getEGCSize,
+    getSupplyBondingJumperSize: getSupplyBondingJumperSize,
     getStandardOCPD: getStandardOCPD,
     getStandardOCPDAtOrBelow: getStandardOCPDAtOrBelow,
     getFLC: getFLC,
     getLockedRotorCurrent: getLockedRotorCurrent,
     getOCPDPercent: getOCPDPercent,
-    getExceptionCapPercent: getExceptionCapPercent
+    getExceptionCapPercent: getExceptionCapPercent,
+    getStandardTransformerKVA: getStandardTransformerKVA,
+    getTransformerPrimaryOCPDPercent: getTransformerPrimaryOCPDPercent,
+    getTransformerSecondaryOCPDPercent: getTransformerSecondaryOCPDPercent
   };
 })(window);

@@ -1,0 +1,1341 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Oleg Duday" />
+    <title>Transformer Sizing Calculator</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <!-- Font Awesome 5 JS -->
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+      integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+      integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Shared NEC reference data (transformer OCPD %, ampacity, temp correction, raceway fill) -->
+    <script src="../js/nec-data.js"></script>
+
+    <!-- Alpine.js component -- registered before the Alpine CDN script so it's ready when alpine:init fires -->
+    <script defer src="calculator-transformer_sizing.js"></script>
+
+    <!-- Alpine.js -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"
+      integrity="sha384-l8f0VcPi/M1iHPv8egOnY/15TDwqgbOR1anMIJWvU6nLRgZVLTLSaNqi/TOoT5Fh"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Logo image on top of the tab -->
+    <link rel="icon" href="../images/website-favicon-32x32.png" />
+  </head>
+
+  <body>
+    <div id="site-header" data-active="calculators"></div>
+    <script src="../js/layout.js"></script>
+
+    <!-- Page header band: steel-blue with thin red accent rule -->
+    <header class="page-header-bar">
+      <div class="container">
+        <h1>Transformer Sizing</h1>
+        <p class="page-header-subtitle">
+          Standard kVA selection, primary/secondary full-load current, Table
+          450.3(B) OCPD sizing, and primary/secondary feeder conductor and
+          raceway sizing.
+        </p>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="page-body-tint">
+      <div
+        class="container py-4 py-md-5"
+        x-data="transformerSizingCalculator()"
+        x-cloak
+      >
+        <div class="row g-4">
+          <!-- Inputs -->
+          <div class="col-12 col-lg-5">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body p-4">
+                <h2 class="h5 fw-bold mb-4 heading-accent">Transformer Inputs</h2>
+
+                <div class="result-callout mb-4">
+                  <div class="group-label">Transformer Rating &amp; Load</div>
+
+                  <div class="mb-3">
+                    <label class="form-label d-block">Phase</label>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="phase"
+                        id="phaseThree"
+                        value="three"
+                        x-model="phase"
+                      />
+                      <label class="form-check-label" for="phaseThree"
+                        >Three-Phase</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="phase"
+                        id="phaseSingle"
+                        value="single"
+                        x-model="phase"
+                      />
+                      <label class="form-check-label" for="phaseSingle"
+                        >Single-Phase</label
+                      >
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label d-block">Transformer Type</label>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="transformerType"
+                        id="typeDry"
+                        value="dry"
+                        x-model="transformerType"
+                      />
+                      <label class="form-check-label" for="typeDry"
+                        >Dry-Type</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="transformerType"
+                        id="typeLiquid"
+                        value="liquid"
+                        x-model="transformerType"
+                      />
+                      <label class="form-check-label" for="typeLiquid"
+                        >Liquid-Filled</label
+                      >
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="standardKVA" class="form-label"
+                      >Transformer Size (kVA)</label
+                    >
+                    <select
+                      class="form-select"
+                      id="standardKVA"
+                      x-model="standardKVA"
+                    >
+                      <option value="" disabled>Select a standard size&hellip;</option>
+                      <template x-for="kva in kvaOptions" :key="kva">
+                        <option :value="kva" x-text="kva"></option>
+                      </template>
+                    </select>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-6 mb-3 d-flex flex-column position-relative">
+                      <label for="primaryVoltage" class="form-label"
+                        >Primary Voltage
+                        <button
+                          type="button"
+                          class="info-icon-btn"
+                          aria-label="More info"
+                          :aria-expanded="(openInfo === 'primVoltage').toString()"
+                          @click="toggleInfo('primVoltage')"
+                          @mouseenter="openFromHover('primVoltage')"
+                          @mouseleave="scheduleHideInfo('primVoltage')"
+                          @mousedown="skipNextFocus = true"
+                          @focus="handleFocus('primVoltage')"
+                          @blur="hideInfoIfOpen('primVoltage')"
+                        >
+                          <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        </button>
+                      </label>
+                      <div
+                        class="info-tooltip"
+                        x-ref="tip-primVoltage"
+                        x-show="openInfo === 'primVoltage'"
+                        x-cloak
+                        @mouseenter="cancelHideInfo()"
+                        @mouseleave="scheduleHideInfo('primVoltage')"
+                      >
+                        Standard nominal voltages per NEC 120.5(A) / 220.5(A):
+                        120, 120/240, 208Y/120, 240, 347, 480Y/277, 480,
+                        600Y/347, 600 V. Utility-primary jobs may run higher
+                        (2400-13800 V, also listed). This field reads only
+                        the leading number, so &ldquo;480Y/277&rdquo; or
+                        plain &ldquo;480&rdquo; both work.
+                      </div>
+                      <input
+                        type="text"
+                        inputmode="decimal"
+                        class="form-control mt-auto"
+                        id="primaryVoltage"
+                        x-model="primaryVoltage"
+                        list="primaryVoltagePresets"
+                        placeholder="e.g. 480"
+                        @focus="$el.select()"
+                      />
+                      <datalist id="primaryVoltagePresets">
+                        <option value="208"></option>
+                        <option value="240"></option>
+                        <option value="480"></option>
+                        <option value="600"></option>
+                        <option value="2400"></option>
+                        <option value="4160"></option>
+                        <option value="4800"></option>
+                        <option value="12000"></option>
+                        <option value="12470"></option>
+                        <option value="13200"></option>
+                        <option value="13800"></option>
+                      </datalist>
+                    </div>
+                    <div class="col-6 mb-3 d-flex flex-column position-relative">
+                      <label for="secondaryVoltage" class="form-label"
+                        >Secondary Voltage
+                        <button
+                          type="button"
+                          class="info-icon-btn"
+                          aria-label="More info"
+                          :aria-expanded="(openInfo === 'secVoltage').toString()"
+                          @click="toggleInfo('secVoltage')"
+                          @mouseenter="openFromHover('secVoltage')"
+                          @mouseleave="scheduleHideInfo('secVoltage')"
+                          @mousedown="skipNextFocus = true"
+                          @focus="handleFocus('secVoltage')"
+                          @blur="hideInfoIfOpen('secVoltage')"
+                        >
+                          <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        </button>
+                      </label>
+                      <div
+                        class="info-tooltip"
+                        x-ref="tip-secVoltage"
+                        x-show="openInfo === 'secVoltage'"
+                        x-cloak
+                        @mouseenter="cancelHideInfo()"
+                        @mouseleave="scheduleHideInfo('secVoltage')"
+                      >
+                        Enter the line-to-line voltage, e.g.
+                        &ldquo;480Y/277&rdquo; or plain &ldquo;480&rdquo; --
+                        this field reads only the leading number, so either
+                        works.
+                      </div>
+                      <input
+                        type="text"
+                        inputmode="decimal"
+                        class="form-control mt-auto"
+                        id="secondaryVoltage"
+                        x-model="secondaryVoltage"
+                        list="secondaryVoltagePresets"
+                        placeholder="e.g. 480Y/277"
+                        @focus="$el.select()"
+                      />
+                      <datalist id="secondaryVoltagePresets">
+                        <option value="208Y/120"></option>
+                        <option value="240"></option>
+                        <option value="240/120"></option>
+                        <option value="480Y/277"></option>
+                        <option value="480"></option>
+                        <option value="600"></option>
+                      </datalist>
+                    </div>
+                  </div>
+
+                  <div class="mb-1 position-relative">
+                    <label for="protectionMethod" class="form-label"
+                      >Protection Method &mdash; Table 450.3(B)
+                      <button
+                        type="button"
+                        class="info-icon-btn"
+                        aria-label="More info"
+                        :aria-expanded="(openInfo === 'protMethod').toString()"
+                        @click="toggleInfo('protMethod')"
+                        @mouseenter="openFromHover('protMethod')"
+                        @mouseleave="scheduleHideInfo('protMethod')"
+                        @mousedown="skipNextFocus = true"
+                        @focus="handleFocus('protMethod')"
+                        @blur="hideInfoIfOpen('protMethod')"
+                      >
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                      </button>
+                    </label>
+                    <div
+                      class="info-tooltip"
+                      x-ref="tip-protMethod"
+                      x-show="openInfo === 'protMethod'"
+                      x-cloak
+                      @mouseenter="cancelHideInfo()"
+                      @mouseleave="scheduleHideInfo('protMethod')"
+                    >
+                      Defaults to Primary-and-Secondary as common field
+                      practice -- not an NEC-mandated default. Primary-Only
+                      protection is also code-compliant and, for many
+                      utility-primary/small-secondary jobs, is the only
+                      practical option (no accessible secondary device
+                      location). Confirm this matches what actually gets
+                      specified on the drawings.
+                    </div>
+                    <select
+                      class="form-select"
+                      id="protectionMethod"
+                      x-model="protectionMethod"
+                    >
+                      <option value="primaryAndSecondary">
+                        Primary and Secondary Protection
+                      </option>
+                      <option value="primaryOnly">
+                        Primary-Only Protection
+                      </option>
+                    </select>
+                  </div>
+
+                  <div
+                    class="form-check position-relative mt-2"
+                    x-show="result.state === 'ok' && result.primaryOcpdOverrideRatings && result.primaryOcpdOverrideRatings.length > 1"
+                  >
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="primaryOcpdUseOverride"
+                      x-model="primaryOcpdUseOverride"
+                    />
+                    <label class="form-check-label" for="primaryOcpdUseOverride"
+                      >Use a different standard rating of Recommended primary
+                      OCPD
+                      <button
+                        type="button"
+                        class="info-icon-btn"
+                        aria-label="More info"
+                        :aria-expanded="(openInfo === 'primaryOcpdOverride').toString()"
+                        @click="toggleInfo('primaryOcpdOverride')"
+                        @mouseenter="openFromHover('primaryOcpdOverride')"
+                        @mouseleave="scheduleHideInfo('primaryOcpdOverride')"
+                        @mousedown="skipNextFocus = true"
+                        @focus="handleFocus('primaryOcpdOverride')"
+                        @blur="hideInfoIfOpen('primaryOcpdOverride')"
+                      >
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                      </button>
+                    </label>
+                    <div
+                      class="info-tooltip"
+                      x-ref="tip-primaryOcpdOverride"
+                      x-show="openInfo === 'primaryOcpdOverride'"
+                      x-cloak
+                      @mouseenter="cancelHideInfo()"
+                      @mouseleave="scheduleHideInfo('primaryOcpdOverride')"
+                    >
+                      Only use this if the field genuinely needs a rating
+                      other than Recommended &mdash; e.g. to match what's
+                      already installed, hold a downstream panelboard rating
+                      down (lower), or add coordination headroom up to the
+                      Table 450.3(B) Maximum (higher). Affects only the
+                      primary conductor ampacity, EGC, and schedule notation
+                      below &mdash; the Recommended and Maximum figures stay
+                      as computed, unaffected. Going lower is capped at a hard
+                      floor: the smallest standard rating that still carries
+                      the transformer's own full-load current at 100% (not
+                      derated).
+                    </div>
+                  </div>
+                  <p
+                    class="text-muted small mt-1 mb-0"
+                    x-show="result.state === 'ok' && (!result.primaryOcpdOverrideRatings || result.primaryOcpdOverrideRatings.length <= 1)"
+                  >
+                    No standard rating differs from Recommended within the
+                    floor-to-Maximum range &mdash; Recommended is the only
+                    workable primary OCPD rating here.
+                  </p>
+                  <div
+                    class="mb-1"
+                    x-show="primaryOcpdUseOverride && result.state === 'ok' && result.primaryOcpdOverrideOptions && result.primaryOcpdOverrideOptions.length > 1"
+                  >
+                    <label for="primaryOcpdOverrideRating" class="form-label"
+                      >Selected Primary OCPD Rating</label
+                    >
+                    <select
+                      class="form-select"
+                      id="primaryOcpdOverrideRating"
+                      x-model="primaryOcpdOverrideRating"
+                    >
+                      <option value="" disabled>Select a rating&hellip;</option>
+                      <template x-for="opt in result.primaryOcpdOverrideOptions" :key="opt.value">
+                        <option :value="opt.value" x-text="opt.label"></option>
+                      </template>
+                    </select>
+                  </div>
+
+                  <div
+                    class="form-check position-relative mt-2"
+                    x-show="result.state === 'ok' && protectionMethod === 'primaryAndSecondary' && result.secondaryOcpdOverrideRatings && result.secondaryOcpdOverrideRatings.length > 1"
+                  >
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="secondaryOcpdUseOverride"
+                      x-model="secondaryOcpdUseOverride"
+                    />
+                    <label class="form-check-label" for="secondaryOcpdUseOverride"
+                      >Use a different standard rating of secondary OCPD
+                      <button
+                        type="button"
+                        class="info-icon-btn"
+                        aria-label="More info"
+                        :aria-expanded="(openInfo === 'secondaryOcpdOverride').toString()"
+                        @click="toggleInfo('secondaryOcpdOverride')"
+                        @mouseenter="openFromHover('secondaryOcpdOverride')"
+                        @mouseleave="scheduleHideInfo('secondaryOcpdOverride')"
+                        @mousedown="skipNextFocus = true"
+                        @focus="handleFocus('secondaryOcpdOverride')"
+                        @blur="hideInfoIfOpen('secondaryOcpdOverride')"
+                      >
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                      </button>
+                    </label>
+                    <div
+                      class="info-tooltip"
+                      x-ref="tip-secondaryOcpdOverride"
+                      x-show="openInfo === 'secondaryOcpdOverride'"
+                      x-cloak
+                      @mouseenter="cancelHideInfo()"
+                      @mouseleave="scheduleHideInfo('secondaryOcpdOverride')"
+                    >
+                      Only use this if the field genuinely needs a smaller
+                      secondary device &mdash; e.g. to match what's already
+                      installed downstream, or hold a panelboard rating down.
+                      Unlike the primary override, there's no going higher
+                      here &mdash; Maximum above is already the Table
+                      450.3(B) ceiling for the secondary. Affects only the
+                      secondary conductor ampacity, supply-side bonding
+                      jumper, and schedule notation below &mdash; the Maximum
+                      figure stays as computed, unaffected. Capped at a hard
+                      floor: the smallest standard rating that still carries
+                      the transformer's own secondary full-load current at
+                      100% (not derated).
+                    </div>
+                  </div>
+                  <p
+                    class="text-muted small mt-1 mb-0"
+                    x-show="result.state === 'ok' && protectionMethod === 'primaryAndSecondary' && (!result.secondaryOcpdOverrideRatings || result.secondaryOcpdOverrideRatings.length <= 1)"
+                  >
+                    No standard rating below Maximum still clears the
+                    transformer's raw secondary full-load current &mdash;
+                    Maximum is the only workable secondary OCPD rating here.
+                  </p>
+                  <div
+                    class="mb-1"
+                    x-show="secondaryOcpdUseOverride && result.state === 'ok' && protectionMethod === 'primaryAndSecondary' && result.secondaryOcpdOverrideOptions && result.secondaryOcpdOverrideOptions.length > 1"
+                  >
+                    <label for="secondaryOcpdOverrideRating" class="form-label"
+                      >Selected Secondary OCPD Rating</label
+                    >
+                    <select
+                      class="form-select"
+                      id="secondaryOcpdOverrideRating"
+                      x-model="secondaryOcpdOverrideRating"
+                    >
+                      <option value="" disabled>Select a rating&hellip;</option>
+                      <template x-for="opt in result.secondaryOcpdOverrideOptions" :key="opt.value">
+                        <option :value="opt.value" x-text="opt.label"></option>
+                      </template>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="result-callout mb-4">
+                  <div class="group-label">
+                    Primary Feeder Conductors &mdash; NEC 310.16
+                  </div>
+
+                  <div class="row">
+                    <div class="col-6 mb-3 d-flex flex-column">
+                      <label for="primaryTempRating" class="form-label"
+                        >Termination Rating</label
+                      >
+                      <select
+                        class="form-select mt-auto"
+                        id="primaryTempRating"
+                        x-model="primaryTempRating"
+                        @change="primaryTempRatingTouched = true"
+                      >
+                        <option value="60">60&deg;C (140&deg;F)</option>
+                        <option value="75">75&deg;C (167&deg;F)</option>
+                        <option value="90">90&deg;C (194&deg;F)</option>
+                      </select>
+                    </div>
+                    <div class="col-6 mb-3 d-flex flex-column">
+                      <label for="primaryAmbientC" class="form-label"
+                        >Ambient Temp (&deg;C)</label
+                      >
+                      <input
+                        type="number"
+                        step="any"
+                        class="form-control mt-auto"
+                        id="primaryAmbientC"
+                        x-model="primaryAmbientC"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label d-block">Conductor Material</label>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="primaryMaterial"
+                        id="primaryMaterialCu"
+                        value="copper"
+                        x-model="primaryMaterial"
+                        @change="primaryMaterialTouched = true"
+                      />
+                      <label class="form-check-label" for="primaryMaterialCu"
+                        >Copper</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="primaryMaterial"
+                        id="primaryMaterialAl"
+                        value="aluminum"
+                        x-model="primaryMaterial"
+                        @change="primaryMaterialTouched = true"
+                      />
+                      <label class="form-check-label" for="primaryMaterialAl"
+                        >Aluminum</label
+                      >
+                    </div>
+                  </div>
+
+                  <div class="mb-3 position-relative">
+                    <label for="primaryNumberOfConductors" class="form-label"
+                      >Number of Conductors
+                      <button
+                        type="button"
+                        class="info-icon-btn"
+                        aria-label="More info"
+                        :aria-expanded="(openInfo === 'primaryNumberOfConductors').toString()"
+                        @click="toggleInfo('primaryNumberOfConductors')"
+                        @mouseenter="openFromHover('primaryNumberOfConductors')"
+                        @mouseleave="scheduleHideInfo('primaryNumberOfConductors')"
+                        @mousedown="skipNextFocus = true"
+                        @focus="handleFocus('primaryNumberOfConductors')"
+                        @blur="hideInfoIfOpen('primaryNumberOfConductors')"
+                      >
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                      </button>
+                    </label>
+                    <div
+                      class="info-tooltip"
+                      x-ref="tip-primaryNumberOfConductors"
+                      x-show="openInfo === 'primaryNumberOfConductors'"
+                      x-cloak
+                      @mouseenter="cancelHideInfo()"
+                      @mouseleave="scheduleHideInfo('primaryNumberOfConductors')"
+                    >
+                      Primary line (phase) conductors. Defaults to 2 for
+                      single-phase, 3 for three-phase -- a primary feed is
+                      typically a 3-wire delta run with no neutral. Excludes
+                      the equipment grounding conductor, added separately
+                      below.
+                    </div>
+                    <input
+                      type="number"
+                      min="1"
+                      step="1"
+                      class="form-control"
+                      id="primaryNumberOfConductors"
+                      x-model="primaryNumberOfConductors"
+                      @input="primaryNumberOfConductorsTouched = true"
+                    />
+                  </div>
+
+                  <div class="mb-3 form-check position-relative">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="primaryIncludeGround"
+                      x-model="primaryIncludeGround"
+                    />
+                    <label class="form-check-label" for="primaryIncludeGround"
+                      >Include an equipment grounding conductor in raceway fill
+                    </label>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-6 mb-3 d-flex flex-column">
+                      <label for="primaryRacewayType" class="form-label"
+                        >Raceway Type</label
+                      >
+                      <select
+                        class="form-select mt-auto"
+                        id="primaryRacewayType"
+                        x-model="primaryRacewayType"
+                      >
+                        <template x-for="opt in racewayOptions" :key="opt.key">
+                          <option :value="opt.key" :selected="opt.key === primaryRacewayType" x-text="opt.label"></option>
+                        </template>
+                      </select>
+                    </div>
+                    <div class="col-6 mb-3 d-flex flex-column">
+                      <label for="primaryMaxSizeCap" class="form-label"
+                        >Max Single Conductor</label
+                      >
+                      <select
+                        class="form-select mt-auto"
+                        id="primaryMaxSizeCap"
+                        x-model="primaryMaxSizeCap"
+                      >
+                        <template x-for="size in wireSizes" :key="size">
+                          <option :value="size" :selected="size === primaryMaxSizeCap" x-text="formatSize(size)"></option>
+                        </template>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="result-callout mb-4">
+                  <div class="group-label">
+                    Secondary Feeder Conductors &mdash; NEC 310.16
+                  </div>
+
+                  <div class="row">
+                    <div class="col-6 mb-3 d-flex flex-column">
+                      <label for="secondaryTempRating" class="form-label"
+                        >Termination Rating</label
+                      >
+                      <select
+                        class="form-select mt-auto"
+                        id="secondaryTempRating"
+                        x-model="secondaryTempRating"
+                        @change="secondaryTempRatingTouched = true"
+                      >
+                        <option value="60">60&deg;C (140&deg;F)</option>
+                        <option value="75">75&deg;C (167&deg;F)</option>
+                        <option value="90">90&deg;C (194&deg;F)</option>
+                      </select>
+                    </div>
+                    <div class="col-6 mb-3 d-flex flex-column">
+                      <label for="secondaryAmbientC" class="form-label"
+                        >Ambient Temp (&deg;C)</label
+                      >
+                      <input
+                        type="number"
+                        step="any"
+                        class="form-control mt-auto"
+                        id="secondaryAmbientC"
+                        x-model="secondaryAmbientC"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label d-block">Conductor Material</label>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="secondaryMaterial"
+                        id="secondaryMaterialCu"
+                        value="copper"
+                        x-model="secondaryMaterial"
+                        @change="secondaryMaterialTouched = true"
+                      />
+                      <label class="form-check-label" for="secondaryMaterialCu"
+                        >Copper</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="secondaryMaterial"
+                        id="secondaryMaterialAl"
+                        value="aluminum"
+                        x-model="secondaryMaterial"
+                        @change="secondaryMaterialTouched = true"
+                      />
+                      <label class="form-check-label" for="secondaryMaterialAl"
+                        >Aluminum</label
+                      >
+                    </div>
+                  </div>
+
+                  <div class="mb-3 position-relative">
+                    <label for="secondaryNumberOfConductors" class="form-label"
+                      >Number of Conductors
+                      <button
+                        type="button"
+                        class="info-icon-btn"
+                        aria-label="More info"
+                        :aria-expanded="(openInfo === 'secondaryNumberOfConductors').toString()"
+                        @click="toggleInfo('secondaryNumberOfConductors')"
+                        @mouseenter="openFromHover('secondaryNumberOfConductors')"
+                        @mouseleave="scheduleHideInfo('secondaryNumberOfConductors')"
+                        @mousedown="skipNextFocus = true"
+                        @focus="handleFocus('secondaryNumberOfConductors')"
+                        @blur="hideInfoIfOpen('secondaryNumberOfConductors')"
+                      >
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                      </button>
+                    </label>
+                    <div
+                      class="info-tooltip"
+                      x-ref="tip-secondaryNumberOfConductors"
+                      x-show="openInfo === 'secondaryNumberOfConductors'"
+                      x-cloak
+                      @mouseenter="cancelHideInfo()"
+                      @mouseleave="scheduleHideInfo('secondaryNumberOfConductors')"
+                    >
+                      Physical conductors in the raceway: secondary line
+                      (phase) conductors plus a neutral -- assumed always
+                      present on a transformer secondary feeder. Defaults to
+                      the line count (2 single-phase / 3 three-phase) plus 1,
+                      and stays in sync with phase until edited directly.
+                      Excludes the bonding jumper, added separately below.
+                    </div>
+                    <input
+                      type="number"
+                      min="1"
+                      step="1"
+                      class="form-control"
+                      id="secondaryNumberOfConductors"
+                      x-model="secondaryNumberOfConductors"
+                      @input="secondaryNumberOfConductorsTouched = true"
+                    />
+                  </div>
+
+                  <div class="mb-3 form-check position-relative">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="secondaryWyeMajorityNonlinear"
+                      x-model="secondaryWyeMajorityNonlinear"
+                    />
+                    <label class="form-check-label" for="secondaryWyeMajorityNonlinear"
+                      >4-wire, 3-phase wye, majority nonlinear load
+                      (LED/electronics/VFDs) &mdash; neutral counted per NEC
+                      310.15(E)(3)
+                      <button
+                        type="button"
+                        class="info-icon-btn"
+                        aria-label="More info"
+                        :aria-expanded="(openInfo === 'secondaryWyeMajorityNonlinear').toString()"
+                        @click="toggleInfo('secondaryWyeMajorityNonlinear')"
+                        @mouseenter="openFromHover('secondaryWyeMajorityNonlinear')"
+                        @mouseleave="scheduleHideInfo('secondaryWyeMajorityNonlinear')"
+                        @mousedown="skipNextFocus = true"
+                        @focus="handleFocus('secondaryWyeMajorityNonlinear')"
+                        @blur="hideInfoIfOpen('secondaryWyeMajorityNonlinear')"
+                      >
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                      </button>
+                    </label>
+                    <div
+                      class="info-tooltip"
+                      x-ref="tip-secondaryWyeMajorityNonlinear"
+                      x-show="openInfo === 'secondaryWyeMajorityNonlinear'"
+                      x-cloak
+                      @mouseenter="cancelHideInfo()"
+                      @mouseleave="scheduleHideInfo('secondaryWyeMajorityNonlinear')"
+                    >
+                      NEC doesn't numerically define &ldquo;major portion of
+                      the load&rdquo; &mdash; the common engineering
+                      convention (not codified in the NEC) is roughly &gt;50%
+                      nonlinear, so this is an engineering judgment call, not
+                      a hard threshold. A transformer secondary commonly
+                      feeds panels with nonlinear loads (computer rooms,
+                      VFDs, LED/electronic ballasts), so the neutral can end
+                      up current-carrying.
+                    </div>
+                  </div>
+
+                  <div class="mb-3 form-check position-relative">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="secondaryIncludeGround"
+                      x-model="secondaryIncludeGround"
+                    />
+                    <label class="form-check-label" for="secondaryIncludeGround"
+                      >Include a supply-side bonding jumper in raceway fill
+                    </label>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-6 mb-3 d-flex flex-column">
+                      <label for="secondaryRacewayType" class="form-label"
+                        >Raceway Type</label
+                      >
+                      <select
+                        class="form-select mt-auto"
+                        id="secondaryRacewayType"
+                        x-model="secondaryRacewayType"
+                      >
+                        <template x-for="opt in racewayOptions" :key="opt.key">
+                          <option :value="opt.key" :selected="opt.key === secondaryRacewayType" x-text="opt.label"></option>
+                        </template>
+                      </select>
+                    </div>
+                    <div class="col-6 mb-3 d-flex flex-column">
+                      <label for="secondaryMaxSizeCap" class="form-label"
+                        >Max Single Conductor</label
+                      >
+                      <select
+                        class="form-select mt-auto"
+                        id="secondaryMaxSizeCap"
+                        x-model="secondaryMaxSizeCap"
+                      >
+                        <template x-for="size in wireSizes" :key="size">
+                          <option :value="size" :selected="size === secondaryMaxSizeCap" x-text="formatSize(size)"></option>
+                        </template>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Results -->
+          <div class="col-12 col-lg-7">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body p-4">
+                <h2 class="h5 fw-bold mb-4">Result</h2>
+
+                <template x-if="result.state === 'empty'">
+                  <p class="text-muted mb-0">
+                    Select a transformer size, type, and primary/secondary
+                    voltages to see full-load current, OCPD, and primary/
+                    secondary conductor sizing.
+                  </p>
+                </template>
+
+                <template x-if="result.state === 'error'">
+                  <div
+                    class="alert alert-danger mb-0"
+                    x-text="result.message"
+                  ></div>
+                </template>
+
+                <template x-if="result.state === 'ok'">
+                  <div>
+                    <div class="result-figure mb-1">
+                      <span x-text="result.standardKVA"></span>
+                      <span class="unit">kVA</span>
+                    </div>
+                    <p class="text-muted mb-4">
+                      All figures below are based on this transformer's rated
+                      current, per 450.3's basis on the transformer, not the
+                      connected load.
+                    </p>
+
+                    <h3 class="h6 fw-bold">
+                      Primary &mdash; Table 450.3(B)
+                    </h3>
+                    <div class="row g-3 mb-1">
+                      <div class="col-12">
+                        <div class="result-callout h-100">
+                          <div class="small text-muted">Full-Load Current</div>
+                          <div class="fw-bold fs-4">
+                            <span x-text="result.primaryFLC.toFixed(1)"></span> A
+                          </div>
+                          <div class="text-muted small">
+                            <span x-text="result.standardKVA"></span> kVA &divide;
+                            <span x-text="primaryVoltage"></span> V
+                            <span x-show="phase === 'three'">&times; &radic;3</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row g-3 mb-4">
+                      <div class="col-12 col-sm-6">
+                        <div class="result-callout h-100 position-relative">
+                          <div class="small text-muted">
+                            Recommended
+                            <button
+                              type="button"
+                              class="info-icon-btn"
+                              aria-label="More info"
+                              :aria-expanded="(openInfo === 'primaryRecommended').toString()"
+                              @click="toggleInfo('primaryRecommended')"
+                              @mouseenter="openFromHover('primaryRecommended')"
+                              @mouseleave="scheduleHideInfo('primaryRecommended')"
+                              @mousedown="skipNextFocus = true"
+                              @focus="handleFocus('primaryRecommended')"
+                              @blur="hideInfoIfOpen('primaryRecommended')"
+                            >
+                              <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            </button>
+                          </div>
+                          <div
+                            class="info-tooltip"
+                            x-ref="tip-primaryRecommended"
+                            x-show="openInfo === 'primaryRecommended'"
+                            x-cloak
+                            @mouseenter="cancelHideInfo()"
+                            @mouseleave="scheduleHideInfo('primaryRecommended')"
+                          >
+                            Always the primary-only bracket percentage,
+                            regardless of the selected Protection Method.
+                            Even when primary-and-secondary protection allows
+                            up to 250%, tighter coordination at roughly the
+                            primary-only percentage is what's typically
+                            actually installed. Primary feeder conductors and
+                            EGC below are sized off this figure, unless the
+                            different-rating checkbox above is checked. Under
+                            Primary-Only protection this equals Maximum.
+                          </div>
+                          <div class="fw-bold fs-4">
+                            <span x-text="result.primaryOcpdRecommendedRating"></span> A
+                            <span
+                              x-show="result.primaryOcpdRecommendedRating == null"
+                              class="text-danger fs-6"
+                              >&mdash; exceeds 6000 A</span
+                            >
+                          </div>
+                          <div class="text-muted small">
+                            <span x-text="result.primaryOcpdRecommendedPercent"></span>%
+                            &times; FLC
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-6">
+                        <div class="result-callout h-100">
+                          <div class="small text-muted">Maximum &mdash; Table 450.3(B)</div>
+                          <div class="fw-bold fs-4">
+                            <span x-text="result.primaryOcpdMaxRating"></span> A
+                            <span
+                              x-show="result.primaryOcpdMaxRating == null"
+                              class="text-danger fs-6"
+                              >&mdash; exceeds 6000 A</span
+                            >
+                          </div>
+                          <div class="text-muted small">
+                            <span x-text="result.primaryOcpdMaxPercent"></span>%
+                            &times; FLC
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <p
+                      class="text-muted small mb-4"
+                      x-show="result.primaryOcpdOverrideActive"
+                    >
+                      Rating override active: primary conductors, EGC,
+                      and schedule notation below use
+                      <strong><span x-text="result.primaryConductorBasisRating"></span> A</strong>
+                      instead of the
+                      <span x-text="result.primaryOcpdRecommendedRating"></span> A
+                      Recommended figure above.
+                    </p>
+
+                    <template x-if="protectionMethod === 'primaryAndSecondary'">
+                      <div>
+                        <h3 class="h6 fw-bold">
+                          Secondary &mdash; Table 450.3(B)
+                        </h3>
+                        <div class="row g-3 mb-4">
+                          <div class="col-12 col-sm-6">
+                            <div class="result-callout h-100">
+                              <div class="small text-muted">Full-Load Current</div>
+                              <div class="fw-bold fs-4">
+                                <span x-text="result.secondaryFLC.toFixed(1)"></span> A
+                              </div>
+                              <div class="text-muted small">
+                                <span x-text="result.standardKVA"></span> kVA &divide;
+                                <span x-text="secondaryVoltage"></span> V
+                                <span x-show="phase === 'three'">&times; &radic;3</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12 col-sm-6">
+                            <div class="result-callout h-100">
+                              <div class="small text-muted">Maximum OCPD Rating</div>
+                              <div class="fw-bold fs-4">
+                                <span x-text="result.secondaryOcpdRating"></span> A
+                                <span
+                                  x-show="result.secondaryOcpdRating == null"
+                                  class="text-danger fs-6"
+                                  >&mdash; exceeds 6000 A</span
+                                >
+                              </div>
+                              <div class="text-muted small">
+                                <span x-text="result.secondaryOcpdPercent"></span>%
+                                &times; FLC
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <p
+                          class="text-muted small mb-4"
+                          x-show="result.secondaryOcpdOverrideActive"
+                        >
+                          Rating override active: secondary conductors,
+                          supply-side bonding jumper, and schedule notation
+                          below use
+                          <strong><span x-text="result.secondaryConductorBasisRating"></span> A</strong>
+                          instead of the
+                          <span x-text="result.secondaryOcpdRating"></span> A
+                          Maximum figure above.
+                        </p>
+                      </div>
+                    </template>
+                    <template x-if="protectionMethod === 'primaryOnly'">
+                      <p class="text-muted small mb-4">
+                        No secondary OCPD required under the primary-only
+                        method (Table 450.3(B)) &mdash; the primary device
+                        above protects the secondary conductors instead. See
+                        Secondary Feeder Conductors below.
+                      </p>
+                    </template>
+
+                    <h3 class="h6 fw-bold">
+                      Primary Feeder Conductors &mdash; 240.4 / 215.2
+                    </h3>
+                    <p class="text-muted small mb-2" x-show="result.primaryConductorBasisRating != null">
+                      Minimum ampacity = <span x-text="result.primaryConductorBasisLabel"></span>,
+                      <strong><span x-text="result.primaryConductorBasisRating"></span> A</strong>.
+                    </p>
+                    <template x-if="result.primaryConductorBasisRating == null">
+                      <div class="alert alert-warning mb-0">
+                        The <span x-text="result.primaryConductorBasisLabel"></span> rating exceeds 6000 A
+                        &mdash; conductors can't be sized from Table 240.6(A)
+                        standard ratings by this tool.
+                      </div>
+                    </template>
+                    <template x-if="result.primaryConductorBasisRating != null && !result.primaryConductorOutOfRange">
+                      <div class="mb-4">
+                        <div class="result-figure mb-1" style="font-size: 1.5rem">
+                          <span x-text="result.primaryConductorSizeLabel"></span>
+                          <span class="unit" x-show="result.primaryConductorSets > 1">
+                            &times; <span x-text="result.primaryConductorSets"></span> parallel sets
+                          </span>
+                        </div>
+                        <p class="text-muted small mb-2">
+                          <span
+                            x-text="primaryMaterial === 'aluminum' ? 'Aluminum' : 'Copper'"
+                          ></span
+                          >, <span x-text="primaryTempRating"></span>&deg;C rated.
+                          Corrected ampacity of selected size:
+                          <span x-text="result.primaryConductorCorrectedAmpacity.toFixed(1)"></span>
+                          A.
+                        </p>
+                        <p class="text-muted small mb-2" x-show="result.primaryConductorSets > 1">
+                          Total circuit ampacity (
+                          <span x-text="result.primaryConductorSets"></span>
+                          &times;
+                          <span x-text="result.primaryConductorCorrectedAmpacity.toFixed(1)"></span>
+                          A):
+                          <strong
+                            ><span x-text="result.primaryTotalCircuitAmpacity.toFixed(1)"></span> A</strong
+                          >. Assumes each parallel set is installed in its own
+                          raceway (NEC 310.10(H)(1) requires 1/0 AWG or
+                          larger for parallel conductors).
+                        </p>
+                        <template x-if="!result.primaryFillOutOfRange">
+                          <p class="mb-1">
+                            Minimum raceway trade size:
+                            <strong x-text="result.primaryMinTradeLabel"></strong>
+                            <span x-text="result.primaryRacewayLabel"></span>
+                            (NEC Table <span x-text="result.primaryNecRef"></span>) for
+                            <span x-text="result.primaryFillCount"></span> conductor<span
+                              x-show="result.primaryFillCount !== 1"
+                              >s</span
+                            >
+                            <span x-show="primaryIncludeGround">(including EGC)</span>.
+                            <a
+                              :href="primaryRacewayTablePage"
+                              x-text="'Table ' + result.primaryNecRef"
+                            ></a>
+                          </p>
+                        </template>
+                        <template x-if="result.primaryFillOutOfRange">
+                          <div class="alert alert-warning mb-1">
+                            <span x-text="result.primaryFillCount"></span> conductors
+                            of <span x-text="result.primaryConductorSizeLabel"></span>
+                            exceed the largest trade size tabulated in NEC
+                            Table <span x-text="result.primaryNecRef"></span>.
+                          </div>
+                        </template>
+                        <p class="text-muted small mb-0" x-show="result.primaryEgcSize">
+                          Equipment grounding conductor (Table 250.122, based
+                          on the <span x-text="result.primaryConductorBasisLabel"></span> rating,
+                          <span x-text="result.primaryConductorBasisRating"></span> A):
+                          <strong x-text="result.primaryEgcSizeLabel"></strong>.
+                        </p>
+
+                        <template x-if="result.primaryScheduleNotation">
+                          <div class="result-callout mt-3">
+                            <div class="small text-muted mb-1">
+                              Schedule Notation
+                            </div>
+                            <div class="d-flex align-items-center flex-wrap">
+                              <code
+                                class="fw-bold"
+                                x-text="result.primaryScheduleNotation"
+                              ></code>
+                              <button
+                                type="button"
+                                class="btn btn-accent btn-sm ms-2"
+                                @click="copyPrimaryScheduleNotation()"
+                              >
+                                <span x-show="!primaryScheduleCopied">Copy</span>
+                                <span x-show="primaryScheduleCopied">Copied!</span>
+                              </button>
+                            </div>
+                          </div>
+                        </template>
+                        <template x-if="!result.primaryScheduleNotation">
+                          <p class="text-muted small mt-3 mb-0">
+                            Schedule notation unavailable &mdash; raceway fill
+                            exceeds the largest tabulated trade size, or OCPD
+                            exceeds the largest Table 250.122 rating (6000 A).
+                          </p>
+                        </template>
+                      </div>
+                    </template>
+                    <template x-if="result.primaryConductorOutOfRange">
+                      <div class="alert alert-warning mb-4">
+                        Not achievable even with parallel sets up to this
+                        tool's cap of 10 runs of
+                        <span x-text="formatSize(primaryMaxSizeCap)"></span>
+                        (or the maximum single conductor size is below 1/0
+                        AWG, the minimum allowed for parallel conductors per
+                        NEC 310.10(H)(1)). Raise the maximum single conductor
+                        size.
+                      </div>
+                    </template>
+
+                    <h3 class="h6 fw-bold">
+                      Secondary Feeder Conductors &mdash; 240.4 / 215.2
+                    </h3>
+                    <p class="text-muted small mb-2" x-show="result.secondaryConductorBasisRating != null">
+                      Minimum ampacity = <span x-text="result.secondaryConductorBasisLabel"></span>,
+                      <strong><span x-text="result.secondaryConductorBasisRating"></span> A</strong>.
+                    </p>
+                    <template x-if="result.secondaryConductorBasisRating == null">
+                      <div class="alert alert-warning mb-0">
+                        The governing OCPD rating exceeds 6000 A &mdash;
+                        conductors can't be sized from Table 240.6(A)
+                        standard ratings by this tool.
+                      </div>
+                    </template>
+                    <template x-if="result.secondaryConductorBasisRating != null && !result.secondaryConductorOutOfRange">
+                      <div class="mb-4">
+                        <div class="result-figure mb-1" style="font-size: 1.5rem">
+                          <span x-text="result.secondaryConductorSizeLabel"></span>
+                          <span class="unit" x-show="result.secondaryConductorSets > 1">
+                            &times; <span x-text="result.secondaryConductorSets"></span> parallel sets
+                          </span>
+                        </div>
+                        <p class="text-muted small mb-2">
+                          <span
+                            x-text="secondaryMaterial === 'aluminum' ? 'Aluminum' : 'Copper'"
+                          ></span
+                          >, <span x-text="secondaryTempRating"></span>&deg;C rated.
+                          Corrected ampacity of selected size:
+                          <span x-text="result.secondaryConductorCorrectedAmpacity.toFixed(1)"></span>
+                          A. Adjustment factor based on
+                          <span x-text="result.secondaryCurrentCarryingConductors"></span>
+                          current-carrying conductor<span
+                            x-show="result.secondaryCurrentCarryingConductors !== 1"
+                            >s</span
+                          >
+                          (Table 310.15(C)(1)).
+                        </p>
+                        <p class="text-muted small mb-2" x-show="result.secondaryConductorSets > 1">
+                          Total circuit ampacity (
+                          <span x-text="result.secondaryConductorSets"></span>
+                          &times;
+                          <span x-text="result.secondaryConductorCorrectedAmpacity.toFixed(1)"></span>
+                          A):
+                          <strong
+                            ><span x-text="result.secondaryTotalCircuitAmpacity.toFixed(1)"></span> A</strong
+                          >. Assumes each parallel set is installed in its own
+                          raceway (NEC 310.10(H)(1) requires 1/0 AWG or
+                          larger for parallel conductors).
+                        </p>
+                        <template x-if="!result.secondaryFillOutOfRange">
+                          <p class="mb-1">
+                            Minimum raceway trade size:
+                            <strong x-text="result.secondaryMinTradeLabel"></strong>
+                            <span x-text="result.secondaryRacewayLabel"></span>
+                            (NEC Table <span x-text="result.secondaryNecRef"></span>) for
+                            <span x-text="result.secondaryFillCount"></span> conductor<span
+                              x-show="result.secondaryFillCount !== 1"
+                              >s</span
+                            >
+                            <span x-show="secondaryIncludeGround">(including bonding jumper)</span>.
+                            <a
+                              :href="secondaryRacewayTablePage"
+                              x-text="'Table ' + result.secondaryNecRef"
+                            ></a>
+                          </p>
+                        </template>
+                        <template x-if="result.secondaryFillOutOfRange">
+                          <div class="alert alert-warning mb-1">
+                            <span x-text="result.secondaryFillCount"></span> conductors
+                            of <span x-text="result.secondaryConductorSizeLabel"></span>
+                            exceed the largest trade size tabulated in NEC
+                            Table <span x-text="result.secondaryNecRef"></span>.
+                          </div>
+                        </template>
+                        <p
+                          class="text-muted small mb-0"
+                          x-show="result.secondaryBondingJumperSize && result.secondaryConductorSets <= 1 && !result.secondaryBondingJumperNote1"
+                        >
+                          Supply-side bonding jumper (Table 250.102(C)(1),
+                          based on the
+                          <span x-text="result.secondaryConductorSizeLabel"></span>
+                          ungrounded secondary conductor):
+                          <strong x-text="result.secondaryBondingJumperSizeLabel"></strong>.
+                        </p>
+                        <p
+                          class="text-muted small mb-0"
+                          x-show="result.secondaryBondingJumperSize && result.secondaryConductorSets > 1 && !result.secondaryBondingJumperNote1"
+                        >
+                          Supply-side bonding jumper, one per raceway (Table
+                          250.102(C)(1), based on the equivalent area of
+                          <span x-text="result.secondaryConductorSets"></span>
+                          &times;
+                          <span x-text="result.secondaryConductorSizeLabel"></span>
+                          =
+                          <span x-text="result.secondaryBondingJumperBasisSizeLabel"></span>,
+                          per the table's &ldquo;Equivalent Area for Parallel
+                          Conductors&rdquo; basis):
+                          <strong x-text="result.secondaryBondingJumperSizeLabel"></strong>
+                          each.
+                        </p>
+                        <p
+                          class="text-muted small mb-0"
+                          x-show="result.secondaryBondingJumperSize && result.secondaryBondingJumperNote1"
+                        >
+                          Supply-side bonding jumper<span x-show="result.secondaryConductorSets > 1">, one per raceway</span>:
+                          size per Note 1 (Table 250.102(C)(1)) &mdash; the
+                          <span
+                            x-text="result.secondaryConductorSets > 1
+                              ? (result.secondaryConductorSets + ' × ' + result.secondaryConductorSizeLabel + ' equivalent parallel area')
+                              : (result.secondaryConductorSizeLabel + ' ungrounded conductor')"
+                          ></span>
+                          exceeds the table's largest tabulated size (1100
+                          kcmil Cu / 1750 kcmil Al), so this is 12.5% of that
+                          area, capped at the
+                          <span x-text="result.secondaryConductorSizeLabel"></span>
+                          ungrounded conductor actually installed per raceway
+                          (Note 1's own &ldquo;not required to be larger
+                          than&rdquo; cap):
+                          <strong x-text="result.secondaryBondingJumperSizeLabel"></strong><span x-show="result.secondaryConductorSets > 1"> each</span>.
+                        </p>
+
+                        <template x-if="result.secondaryScheduleNotation">
+                          <div class="result-callout mt-3">
+                            <div class="small text-muted mb-1">
+                              Schedule Notation
+                            </div>
+                            <div class="d-flex align-items-center flex-wrap">
+                              <code
+                                class="fw-bold"
+                                x-text="result.secondaryScheduleNotation"
+                              ></code>
+                              <button
+                                type="button"
+                                class="btn btn-accent btn-sm ms-2"
+                                @click="copySecondaryScheduleNotation()"
+                              >
+                                <span x-show="!secondaryScheduleCopied">Copy</span>
+                                <span x-show="secondaryScheduleCopied">Copied!</span>
+                              </button>
+                            </div>
+                          </div>
+                        </template>
+                        <template x-if="!result.secondaryScheduleNotation">
+                          <p class="text-muted small mt-3 mb-0">
+                            Schedule notation unavailable &mdash; raceway fill
+                            exceeds the largest tabulated trade size.
+                          </p>
+                        </template>
+                      </div>
+                    </template>
+                    <template x-if="result.secondaryConductorOutOfRange">
+                      <div class="alert alert-warning mb-4">
+                        Not achievable even with parallel sets up to this
+                        tool's cap of 10 runs of
+                        <span x-text="formatSize(secondaryMaxSizeCap)"></span>
+                        (or the maximum single conductor size is below 1/0
+                        AWG, the minimum allowed for parallel conductors per
+                        NEC 310.10(H)(1)). Raise the maximum single conductor
+                        size.
+                      </div>
+                    </template>
+
+                    <h3 class="h6 fw-bold">Notes</h3>
+                    <p class="text-muted small mb-1">
+                      Consult NEC 240.21(C) if secondary conductors won't be
+                      independently protected at the transformer &mdash; this
+                      tool assumes they terminate directly in OCPD sized per
+                      Table 450.3(B) above and doesn't model the 10-ft/25-ft
+                      tap rules.
+                    </p>
+                    <p class="text-muted small mb-0">
+                      Transformer vault/room clearances: see NEC
+                      <span x-text="installClearanceRef"></span> for the
+                      selected transformer type (informational reference
+                      only, not calculated by this tool).
+                    </p>
+                  </div>
+                </template>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-muted small mt-4 mb-0">
+          Reference tables:
+          <a href="../tables/table450-3B.html">450.3(B) Max Transformer OCPD</a>
+          &middot;
+          <a href="../tables/table310-16.html">310.16 Ampacity</a> &middot;
+          <a href="../tables/table250-122.html">250.122 EGC Sizing</a> &middot;
+          <a href="../tables/table250-102.html">250.102(C)(1) Bonding Jumper Sizing</a>
+        </p>
+      </div>
+    </main>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../js/script.js"></script>
+  </body>
+</html>
