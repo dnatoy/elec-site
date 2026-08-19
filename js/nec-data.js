@@ -1,8 +1,9 @@
 // Shared NEC reference data for table pages and calculators.
 // Figures mirror tables/table310-16.html, tables/table310-15.html,
 // tables/table310-15C1.html, tables/tableC1-EMT.html, tables/tableC3-FMC.html,
-// tables/tableC11-PVC.html, and tables/table250-122.html -- keep those pages
-// and this file in sync.
+// tables/tableC11-PVC.html, tables/table250-122.html, tables/table430-248.html,
+// tables/table430-250.html, tables/table430-251B.html, and tables/table430-52.html
+// -- keep those pages and this file in sync.
 (function (global) {
   'use strict';
 
@@ -208,6 +209,113 @@
     300, 350, 400, 450, 500, 600, 700, 800, 1000, 1200, 1600, 2000, 2500, 3000, 4000, 5000, 6000
   ];
 
+  // Table 430.248 - Full-Load Currents in Amperes, Single-Phase AC Motors.
+  // Valid for system voltage ranges 110-120 and 220-240V; columns keyed by rated motor voltage.
+  var FLC_430_248 = [
+    { hp: '1/6', 115: 4.4, 200: 2.5, 208: 2.4, 230: 2.2 },
+    { hp: '1/4', 115: 5.8, 200: 3.3, 208: 3.2, 230: 2.9 },
+    { hp: '1/3', 115: 7.2, 200: 4.1, 208: 4, 230: 3.6 },
+    { hp: '1/2', 115: 9.8, 200: 5.6, 208: 5.4, 230: 4.9 },
+    { hp: '3/4', 115: 13.8, 200: 7.9, 208: 7.6, 230: 6.9 },
+    { hp: '1', 115: 16, 200: 9.2, 208: 8.8, 230: 8 },
+    { hp: '1 1/2', 115: 20, 200: 11.5, 208: 11, 230: 10 },
+    { hp: '2', 115: 24, 200: 13.8, 208: 13.2, 230: 12 },
+    { hp: '3', 115: 34, 200: 19.6, 208: 18.7, 230: 17 },
+    { hp: '5', 115: 56, 200: 32.2, 208: 30.8, 230: 28 },
+    { hp: '7 1/2', 115: 80, 200: 46, 208: 44, 230: 40 },
+    { hp: '10', 115: 100, 200: 57.5, 208: 55, 230: 50 }
+  ];
+
+  // Table 430.250 - Full-Load Current, Three-Phase AC Motors (induction-type squirrel
+  // cage and wound rotor). Valid for system voltage ranges 110-120, 220-240, 440-480,
+  // and 550-600V; null = not tabulated ("-" in the NEC table) at that HP/voltage.
+  var FLC_430_250 = [
+    { hp: '1/2', 115: 4.4, 200: 2.5, 208: 2.4, 230: 2.2, 460: 1.1, 575: 0.9, 2300: null },
+    { hp: '3/4', 115: 6.4, 200: 3.7, 208: 3.5, 230: 3.2, 460: 1.6, 575: 1.3, 2300: null },
+    { hp: '1', 115: 8.4, 200: 4.8, 208: 4.6, 230: 4.2, 460: 2.1, 575: 1.7, 2300: null },
+    { hp: '1 1/2', 115: 12, 200: 6.9, 208: 6.6, 230: 6, 460: 3, 575: 2.4, 2300: null },
+    { hp: '2', 115: 13.6, 200: 7.8, 208: 7.5, 230: 6.8, 460: 3.4, 575: 2.7, 2300: null },
+    { hp: '3', 115: null, 200: 11, 208: 10.6, 230: 9.6, 460: 4.8, 575: 3.9, 2300: null },
+    { hp: '5', 115: null, 200: 17.5, 208: 16.7, 230: 15.2, 460: 7.6, 575: 6.1, 2300: null },
+    { hp: '7 1/2', 115: null, 200: 25.3, 208: 24.2, 230: 22, 460: 11, 575: 9, 2300: null },
+    { hp: '10', 115: null, 200: 32.2, 208: 30.8, 230: 28, 460: 14, 575: 11, 2300: null },
+    { hp: '15', 115: null, 200: 48.3, 208: 46.2, 230: 42, 460: 21, 575: 17, 2300: null },
+    { hp: '20', 115: null, 200: 62.1, 208: 59.4, 230: 54, 460: 27, 575: 22, 2300: null },
+    { hp: '25', 115: null, 200: 78.2, 208: 74.8, 230: 68, 460: 34, 575: 27, 2300: null },
+    { hp: '30', 115: null, 200: 92, 208: 88, 230: 80, 460: 40, 575: 32, 2300: null },
+    { hp: '40', 115: null, 200: 120, 208: 114, 230: 104, 460: 52, 575: 41, 2300: null },
+    { hp: '50', 115: null, 200: 150, 208: 143, 230: 130, 460: 65, 575: 52, 2300: null },
+    { hp: '60', 115: null, 200: 177, 208: 169, 230: 154, 460: 77, 575: 62, 2300: 16 },
+    { hp: '75', 115: null, 200: 221, 208: 211, 230: 192, 460: 96, 575: 77, 2300: 20 },
+    { hp: '100', 115: null, 200: 285, 208: 273, 230: 248, 460: 124, 575: 99, 2300: 26 },
+    { hp: '125', 115: null, 200: 359, 208: 343, 230: 312, 460: 156, 575: 125, 2300: 31 },
+    { hp: '150', 115: null, 200: 414, 208: 396, 230: 360, 460: 180, 575: 144, 2300: 37 },
+    { hp: '200', 115: null, 200: 552, 208: 528, 230: 480, 460: 240, 575: 192, 2300: 49 },
+    { hp: '250', 115: null, 200: null, 208: null, 230: null, 460: 302, 575: 242, 2300: 60 },
+    { hp: '300', 115: null, 200: null, 208: null, 230: null, 460: 361, 575: 289, 2300: 72 },
+    { hp: '350', 115: null, 200: null, 208: null, 230: null, 460: 414, 575: 336, 2300: 83 },
+    { hp: '400', 115: null, 200: null, 208: null, 230: null, 460: 477, 575: 382, 2300: 95 },
+    { hp: '450', 115: null, 200: null, 208: null, 230: null, 460: 515, 575: 412, 2300: 103 },
+    { hp: '500', 115: null, 200: null, 208: null, 230: null, 460: 590, 575: 472, 2300: 118 }
+  ];
+
+  // Table 430.251(B) - Max locked-rotor current, polyphase Design B/C/D motors
+  // (NEC tabulates one combined value per HP/voltage for Design B, C, and D).
+  // For selection of disconnecting means/controllers per 430.110, 440.12, 440.41, 455.8(C).
+  // No 2300V column in the source table; null = not tabulated ("-").
+  var LRC_430_251B = [
+    { hp: '1/2', 115: 40, 200: 23, 208: 22.1, 230: 20, 460: 10, 575: 8 },
+    { hp: '3/4', 115: 50, 200: 28.8, 208: 27.6, 230: 25, 460: 12.5, 575: 10 },
+    { hp: '1', 115: 60, 200: 34.5, 208: 33, 230: 30, 460: 15, 575: 12 },
+    { hp: '1 1/2', 115: 80, 200: 46, 208: 44, 230: 40, 460: 20, 575: 16 },
+    { hp: '2', 115: 100, 200: 57.5, 208: 55, 230: 50, 460: 25, 575: 20 },
+    { hp: '3', 115: null, 200: 73.6, 208: 71, 230: 64, 460: 32, 575: 25.6 },
+    { hp: '5', 115: null, 200: 105.8, 208: 102, 230: 92, 460: 46, 575: 36.8 },
+    { hp: '7 1/2', 115: null, 200: 146, 208: 140, 230: 127, 460: 63.5, 575: 50.8 },
+    { hp: '10', 115: null, 200: 186.3, 208: 179, 230: 162, 460: 81, 575: 64.8 },
+    { hp: '15', 115: null, 200: 267, 208: 257, 230: 232, 460: 116, 575: 93 },
+    { hp: '20', 115: null, 200: 334, 208: 321, 230: 290, 460: 145, 575: 116 },
+    { hp: '25', 115: null, 200: 420, 208: 404, 230: 365, 460: 183, 575: 146 },
+    { hp: '30', 115: null, 200: 500, 208: 481, 230: 435, 460: 218, 575: 174 },
+    { hp: '40', 115: null, 200: 667, 208: 641, 230: 580, 460: 290, 575: 232 },
+    { hp: '50', 115: null, 200: 834, 208: 802, 230: 725, 460: 363, 575: 290 },
+    { hp: '60', 115: null, 200: 1001, 208: 962, 230: 870, 460: 435, 575: 348 },
+    { hp: '75', 115: null, 200: 1248, 208: 1200, 230: 1085, 460: 543, 575: 434 },
+    { hp: '100', 115: null, 200: 1668, 208: 1603, 230: 1450, 460: 725, 575: 580 },
+    { hp: '125', 115: null, 200: 2087, 208: 2007, 230: 1815, 460: 908, 575: 726 },
+    { hp: '150', 115: null, 200: 2496, 208: 2400, 230: 2170, 460: 1085, 575: 868 },
+    { hp: '200', 115: null, 200: 3335, 208: 3207, 230: 2900, 460: 1450, 575: 1160 },
+    { hp: '250', 115: null, 200: null, 208: null, 230: null, 460: 1825, 575: 1460 },
+    { hp: '300', 115: null, 200: null, 208: null, 230: null, 460: 2200, 575: 1760 },
+    { hp: '350', 115: null, 200: null, 208: null, 230: null, 460: 2550, 575: 2040 },
+    { hp: '400', 115: null, 200: null, 208: null, 230: null, 460: 2900, 575: 2320 },
+    { hp: '450', 115: null, 200: null, 208: null, 230: null, 460: 3250, 575: 2600 },
+    { hp: '500', 115: null, 200: null, 208: null, 230: null, 460: 3625, 575: 2900 }
+  ];
+
+  // Table 430.52 - Maximum Rating/Setting of Motor Branch-Circuit Short-Circuit and
+  // Ground-Fault Protective Devices, as a percentage of full-load current. Device keys:
+  // nontime (nontime-delay fuse), dual (dual-element/time-delay fuse), instantaneous
+  // (instantaneous-trip breaker / MCP), inverse (inverse-time breaker). "dc" omitted --
+  // no DC full-load-current table is carried in this data file.
+  var OCPD_PERCENT_430_52 = {
+    singlePhase: { label: 'Single-phase motors', nontime: 300, dual: 175, instantaneous: 800, inverse: 250 },
+    polyphaseOther: { label: 'AC polyphase motors other than wound-rotor', nontime: 300, dual: 175, instantaneous: 800, inverse: 250 },
+    squirrelCage: { label: 'Squirrel cage — other than Design B energy-efficient', nontime: 300, dual: 175, instantaneous: 800, inverse: 250 },
+    designB: { label: 'Design B energy-efficient', nontime: 300, dual: 175, instantaneous: 1100, inverse: 250 },
+    synchronous: { label: 'Synchronous', nontime: 300, dual: 175, instantaneous: 800, inverse: 250 },
+    woundRotor: { label: 'Wound-rotor', nontime: 150, dual: 150, instantaneous: 800, inverse: 150 }
+  };
+
+  // Human-readable labels for the OCPD_PERCENT_430_52 device keys, in Table 430.52's
+  // column order.
+  var OCPD_DEVICE_TYPES = [
+    { key: 'nontime', label: 'Nontime-Delay Fuse' },
+    { key: 'dual', label: 'Dual-Element (Time-Delay) Fuse' },
+    { key: 'instantaneous', label: 'Instantaneous-Trip Breaker (MCP)' },
+    { key: 'inverse', label: 'Inverse-Time Breaker' }
+  ];
+
   function sizeIndex(size) {
     return WIRE_SIZES.indexOf(String(size));
   }
@@ -275,6 +383,73 @@
     return match === undefined ? null : match;
   }
 
+  // Largest STANDARD_OCPD_240_6A rating <= current. Used for 430.52(C)(1) Exception No. 2,
+  // where the increased rating is a hard ceiling (not a "round up to next standard size"
+  // allowance like the base Table 430.52 rule). Returns null below the smallest rating (15A).
+  function getStandardOCPDAtOrBelow(current) {
+    var matches = STANDARD_OCPD_240_6A.filter(function (r) { return r <= current; });
+    return matches.length ? matches[matches.length - 1] : null;
+  }
+
+  // Table 430.248 (single-phase) full-load current for hp/voltage. Returns null if
+  // that HP/voltage combination isn't tabulated.
+  function getFLC_1ph(hp, voltage) {
+    var row = FLC_430_248.filter(function (r) { return r.hp === String(hp); })[0];
+    if (!row) return null;
+    var v = row[voltage];
+    return v == null ? null : v;
+  }
+
+  // Table 430.250 (three-phase) full-load current for hp/voltage. Returns null if
+  // that HP/voltage combination isn't tabulated.
+  function getFLC_3ph(hp, voltage) {
+    var row = FLC_430_250.filter(function (r) { return r.hp === String(hp); })[0];
+    if (!row) return null;
+    var v = row[voltage];
+    return v == null ? null : v;
+  }
+
+  // Full-load current lookup for either phase configuration.
+  function getFLC(phase, hp, voltage) {
+    return phase === 'single' ? getFLC_1ph(hp, voltage) : getFLC_3ph(hp, voltage);
+  }
+
+  // Table 430.251(B) locked-rotor current (polyphase Design B/C/D only). Returns null
+  // if not tabulated for that hp/voltage (includes all single-phase and 2300V lookups,
+  // since neither is a column in the source table).
+  function getLockedRotorCurrent(hp, voltage) {
+    var row = LRC_430_251B.filter(function (r) { return r.hp === String(hp); })[0];
+    if (!row) return null;
+    var v = row[voltage];
+    return v == null ? null : v;
+  }
+
+  // Table 430.52 percentage for a motor category + device type. Returns null if the
+  // category key isn't recognized.
+  function getOCPDPercent(category, deviceType) {
+    var row = OCPD_PERCENT_430_52[category];
+    if (!row) return null;
+    return row[deviceType] != null ? row[deviceType] : null;
+  }
+
+  // 430.52(C)(1) Exception No. 2 hard ceiling, as a percentage of FLC. baseRating is the
+  // standard-size rating already selected under the base Table 430.52 rule (needed because
+  // the nontime-delay-fuse breakpoint is stated in the NEC text as a fuse rating, not FLC).
+  // Returns null for device types with no Exception No. 2 allowance (instantaneous-trip
+  // breakers/MCPs must instead use the 430.52(C)(3) trial-setting procedure).
+  function getExceptionCapPercent(deviceType, flc, baseRating) {
+    if (deviceType === 'nontime') {
+      return baseRating != null && baseRating <= 600 ? 400 : 300;
+    }
+    if (deviceType === 'dual') {
+      return 225;
+    }
+    if (deviceType === 'inverse') {
+      return flc <= 100 ? 400 : 300;
+    }
+    return null;
+  }
+
   global.NEC_DATA = {
     WIRE_SIZES: WIRE_SIZES,
     AMPACITY_310_16: AMPACITY_310_16,
@@ -283,6 +458,11 @@
     CONDUCTOR_FILL: CONDUCTOR_FILL,
     EGC_250_122: EGC_250_122,
     STANDARD_OCPD_240_6A: STANDARD_OCPD_240_6A,
+    FLC_430_248: FLC_430_248,
+    FLC_430_250: FLC_430_250,
+    LRC_430_251B: LRC_430_251B,
+    OCPD_PERCENT_430_52: OCPD_PERCENT_430_52,
+    OCPD_DEVICE_TYPES: OCPD_DEVICE_TYPES,
     compareSizes: compareSizes,
     isKcmil: isKcmil,
     formatSize: formatSize,
@@ -291,6 +471,11 @@
     getAdjustmentFactor: getAdjustmentFactor,
     getMinTradeSize: getMinTradeSize,
     getEGCSize: getEGCSize,
-    getStandardOCPD: getStandardOCPD
+    getStandardOCPD: getStandardOCPD,
+    getStandardOCPDAtOrBelow: getStandardOCPDAtOrBelow,
+    getFLC: getFLC,
+    getLockedRotorCurrent: getLockedRotorCurrent,
+    getOCPDPercent: getOCPDPercent,
+    getExceptionCapPercent: getExceptionCapPercent
   };
 })(window);

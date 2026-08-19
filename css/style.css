@@ -97,6 +97,34 @@
   border-radius: 50%;
 }
 
+/* Same open/close tooltip mechanics as .info-icon-btn, but for a caveat that
+   shouldn't blend in with routine field help -- amber at rest so it reads as
+   a flag, not just another (i) icon. */
+.vfd-warning-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #997404;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.vfd-warning-trigger:hover,
+.vfd-warning-trigger:focus {
+  color: var(--mdp-color-accent);
+  outline: none;
+}
+
+.vfd-warning-trigger:focus-visible {
+  outline: 2px solid var(--mdp-color-accent);
+  outline-offset: 2px;
+  border-radius: var(--mdp-radius-sm);
+}
+
 /* Positioned relative to the field wrapper (which carries position: relative)
    so max-width: 100% naturally clamps it to that field's own width, never
    overflowing into a neighboring column. Shows below by default; JS toggles
@@ -446,5 +474,14 @@ body.dark-mode .info-icon-btn {
 
 body.dark-mode .info-icon-btn:hover,
 body.dark-mode .info-icon-btn:focus {
+  color: var(--mdp-color-accent);
+}
+
+body.dark-mode .vfd-warning-trigger {
+  color: #ffd766;
+}
+
+body.dark-mode .vfd-warning-trigger:hover,
+body.dark-mode .vfd-warning-trigger:focus {
   color: var(--mdp-color-accent);
 }
