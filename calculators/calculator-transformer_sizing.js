@@ -741,35 +741,31 @@ document.addEventListener('alpine:init', function () {
         // --- 250.102(C)(1): supply-side bonding jumper -- not off the OCPD rating
         // (this is a separately derived system's supply-side connection, not an
         // ordinary branch/feeder circuit, so it doesn't take a 250.122 EGC). EACH
-        // raceway gets its own full-size bonding jumper (never divided down), but
-        // the SIZE that jumper is picked at uses Table 250.102(C)(1)'s "Equivalent
-        // Area for Parallel Conductors" basis whenever conductors are paralleled --
-        // i.e. the size looked up off the combined area of all parallel sets
-        // together (2 sets of 500 kcmil AL -> 1000 kcmil equivalent -> 4/0 AL),
-        // not off a single raceway's own conductor alone. With a single conductor
-        // (sets === 1) this is just that conductor's own size, same as always. ---
-        // secondaryBondingJumperBasisSize is null when even the largest tabulated
-        // WIRE_SIZES entry (2000 kcmil) doesn't cover the combined parallel area --
-        // Note 1 below still applies in that case (computed straight off
-        // secondaryPicked.size/sets rather than this null basis).
-        var secondaryBondingJumperBasisSize = secondaryPicked
-          ? (secondaryPicked.sets > 1
-            ? D.getEquivalentSingleSize(secondaryPicked.size, secondaryPicked.sets)
-            : secondaryPicked.size)
-          : null;
+        // raceway gets its own full-size bonding jumper (never divided down), and
+        // -- because this tool always runs separate conductors and a separate EGC
+        // per raceway rather than one common jumper bonding all raceways together
+        // at a single point -- the SIZE that jumper is picked at uses Table
+        // 250.102(C)(1)'s "each raceway or cable" per-raceway basis: keyed off the
+        // ungrounded conductor size actually installed in a single raceway, never
+        // the combined equivalent area of all parallel sets together. The
+        // "Equivalent Area for Parallel Conductors" basis is for a single common
+        // jumper bonding multiple raceways at once, which this tool doesn't model.
+        // With a single conductor (sets === 1) this is just that conductor's own
+        // size, same as always.
+        var secondaryBondingJumperBasisSize = secondaryPicked ? secondaryPicked.size : null;
         var secondaryBondingJumperTableSize = secondaryBondingJumperBasisSize
           ? D.getSupplyBondingJumperSize(secondaryBondingJumperBasisSize, this.secondaryMaterial)
           : null;
         // Note 1 applies whenever the basis size falls above Table 250.102(C)(1)'s
         // largest tabulated breakpoint (1100 kcmil Cu / 1750 kcmil Al) -- computed
-        // automatically here (12.5% of the total parallel equivalent area, capped
-        // at the size of the ungrounded conductor actually installed per raceway,
-        // per Note 1's own second sentence) rather than punting to "verify
-        // manually". Always resolves to a real size when secondaryPicked exists.
+        // automatically here (12.5% of the per-raceway conductor's own area,
+        // capped at that same conductor's size, per Note 1's own second sentence)
+        // rather than punting to "verify manually". Always resolves to a real size
+        // when secondaryPicked exists.
         var secondaryBondingJumperNote1 = !!secondaryPicked && secondaryBondingJumperTableSize == null;
         var secondaryBondingJumperSize = secondaryBondingJumperTableSize != null
           ? secondaryBondingJumperTableSize
-          : (secondaryBondingJumperNote1 ? D.getNote1BondingJumperSize(secondaryPicked.size, secondaryPicked.sets) : null);
+          : (secondaryBondingJumperNote1 ? D.getNote1BondingJumperSize(secondaryPicked.size, 1) : null);
 
         var secondaryFillCount = secondaryNumberOfConductors + (this.secondaryIncludeGround ? 1 : 0);
         var secondaryMinTrade = secondaryPicked
@@ -866,8 +862,6 @@ document.addEventListener('alpine:init', function () {
           secondaryConductorOutOfRange: secondaryConductorBasisRating != null && !secondaryPicked,
           secondaryBondingJumperSize: secondaryBondingJumperSize,
           secondaryBondingJumperSizeLabel: secondaryBondingJumperSize ? D.formatSize(secondaryBondingJumperSize) : null,
-          secondaryBondingJumperBasisSize: secondaryBondingJumperBasisSize,
-          secondaryBondingJumperBasisSizeLabel: secondaryBondingJumperBasisSize ? D.formatSize(secondaryBondingJumperBasisSize) : null,
           secondaryBondingJumperNote1: secondaryBondingJumperNote1,
           secondaryFillCount: secondaryFillCount,
           secondaryMinTrade: secondaryMinTrade,

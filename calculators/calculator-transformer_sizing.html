@@ -859,7 +859,7 @@
                       connected load.
                     </p>
 
-                    <h3 class="h6 fw-bold">
+                    <h3 class="fw-bold heading-accent mb-3">
                       Primary &mdash; Table 450.3(B)
                     </h3>
                     <div class="row g-3 mb-1">
@@ -958,66 +958,6 @@
                       <span x-text="result.primaryOcpdRecommendedRating"></span> A
                       Recommended figure above.
                     </p>
-
-                    <template x-if="protectionMethod === 'primaryAndSecondary'">
-                      <div>
-                        <h3 class="h6 fw-bold">
-                          Secondary &mdash; Table 450.3(B)
-                        </h3>
-                        <div class="row g-3 mb-4">
-                          <div class="col-12 col-sm-6">
-                            <div class="result-callout h-100">
-                              <div class="small text-muted">Full-Load Current</div>
-                              <div class="fw-bold fs-4">
-                                <span x-text="result.secondaryFLC.toFixed(1)"></span> A
-                              </div>
-                              <div class="text-muted small">
-                                <span x-text="result.standardKVA"></span> kVA &divide;
-                                <span x-text="secondaryVoltage"></span> V
-                                <span x-show="phase === 'three'">&times; &radic;3</span>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-12 col-sm-6">
-                            <div class="result-callout h-100">
-                              <div class="small text-muted">Maximum OCPD Rating</div>
-                              <div class="fw-bold fs-4">
-                                <span x-text="result.secondaryOcpdRating"></span> A
-                                <span
-                                  x-show="result.secondaryOcpdRating == null"
-                                  class="text-danger fs-6"
-                                  >&mdash; exceeds 6000 A</span
-                                >
-                              </div>
-                              <div class="text-muted small">
-                                <span x-text="result.secondaryOcpdPercent"></span>%
-                                &times; FLC
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <p
-                          class="text-muted small mb-4"
-                          x-show="result.secondaryOcpdOverrideActive"
-                        >
-                          Rating override active: secondary conductors,
-                          supply-side bonding jumper, and schedule notation
-                          below use
-                          <strong><span x-text="result.secondaryConductorBasisRating"></span> A</strong>
-                          instead of the
-                          <span x-text="result.secondaryOcpdRating"></span> A
-                          Maximum figure above.
-                        </p>
-                      </div>
-                    </template>
-                    <template x-if="protectionMethod === 'primaryOnly'">
-                      <p class="text-muted small mb-4">
-                        No secondary OCPD required under the primary-only
-                        method (Table 450.3(B)) &mdash; the primary device
-                        above protects the secondary conductors instead. See
-                        Secondary Feeder Conductors below.
-                      </p>
-                    </template>
 
                     <h3 class="h6 fw-bold">
                       Primary Feeder Conductors &mdash; 240.4 / 215.2
@@ -1136,6 +1076,66 @@
                       </div>
                     </template>
 
+                    <template x-if="protectionMethod === 'primaryAndSecondary'">
+                      <div>
+                        <h3 class="fw-bold heading-accent mb-3 mt-5">
+                          Secondary &mdash; Table 450.3(B)
+                        </h3>
+                        <div class="row g-3 mb-4">
+                          <div class="col-12 col-sm-6">
+                            <div class="result-callout h-100">
+                              <div class="small text-muted">Full-Load Current</div>
+                              <div class="fw-bold fs-4">
+                                <span x-text="result.secondaryFLC.toFixed(1)"></span> A
+                              </div>
+                              <div class="text-muted small">
+                                <span x-text="result.standardKVA"></span> kVA &divide;
+                                <span x-text="secondaryVoltage"></span> V
+                                <span x-show="phase === 'three'">&times; &radic;3</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-12 col-sm-6">
+                            <div class="result-callout h-100">
+                              <div class="small text-muted">Maximum OCPD Rating</div>
+                              <div class="fw-bold fs-4">
+                                <span x-text="result.secondaryOcpdRating"></span> A
+                                <span
+                                  x-show="result.secondaryOcpdRating == null"
+                                  class="text-danger fs-6"
+                                  >&mdash; exceeds 6000 A</span
+                                >
+                              </div>
+                              <div class="text-muted small">
+                                <span x-text="result.secondaryOcpdPercent"></span>%
+                                &times; FLC
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <p
+                          class="text-muted small mb-4"
+                          x-show="result.secondaryOcpdOverrideActive"
+                        >
+                          Rating override active: secondary conductors,
+                          supply-side bonding jumper, and schedule notation
+                          below use
+                          <strong><span x-text="result.secondaryConductorBasisRating"></span> A</strong>
+                          instead of the
+                          <span x-text="result.secondaryOcpdRating"></span> A
+                          Maximum figure above.
+                        </p>
+                      </div>
+                    </template>
+                    <template x-if="protectionMethod === 'primaryOnly'">
+                      <p class="text-muted small mb-4">
+                        No secondary OCPD required under the primary-only
+                        method (Table 450.3(B)) &mdash; the primary device
+                        above protects the secondary conductors instead. See
+                        Secondary Feeder Conductors below.
+                      </p>
+                    </template>
+
                     <h3 class="h6 fw-bold">
                       Secondary Feeder Conductors &mdash; 240.4 / 215.2
                     </h3>
@@ -1224,15 +1224,14 @@
                           class="text-muted small mb-0"
                           x-show="result.secondaryBondingJumperSize && result.secondaryConductorSets > 1 && !result.secondaryBondingJumperNote1"
                         >
-                          Supply-side bonding jumper, one per raceway (Table
-                          250.102(C)(1), based on the equivalent area of
-                          <span x-text="result.secondaryConductorSets"></span>
-                          &times;
+                          Supply-side bonding jumper, one full-size jumper per
+                          raceway (Table 250.102(C)(1), based on the
                           <span x-text="result.secondaryConductorSizeLabel"></span>
-                          =
-                          <span x-text="result.secondaryBondingJumperBasisSizeLabel"></span>,
-                          per the table's &ldquo;Equivalent Area for Parallel
-                          Conductors&rdquo; basis):
+                          ungrounded conductor in each raceway, per the table's
+                          &ldquo;each raceway or cable&rdquo; individual-jumper
+                          basis &mdash; not the combined equivalent area of all
+                          <span x-text="result.secondaryConductorSets"></span>
+                          parallel sets together):
                           <strong x-text="result.secondaryBondingJumperSizeLabel"></strong>
                           each.
                         </p>
@@ -1242,14 +1241,12 @@
                         >
                           Supply-side bonding jumper<span x-show="result.secondaryConductorSets > 1">, one per raceway</span>:
                           size per Note 1 (Table 250.102(C)(1)) &mdash; the
-                          <span
-                            x-text="result.secondaryConductorSets > 1
-                              ? (result.secondaryConductorSets + ' × ' + result.secondaryConductorSizeLabel + ' equivalent parallel area')
-                              : (result.secondaryConductorSizeLabel + ' ungrounded conductor')"
-                          ></span>
+                          <span x-text="result.secondaryConductorSizeLabel"></span>
+                          ungrounded conductor
+                          <span x-show="result.secondaryConductorSets > 1">in each raceway </span>
                           exceeds the table's largest tabulated size (1100
                           kcmil Cu / 1750 kcmil Al), so this is 12.5% of that
-                          area, capped at the
+                          conductor's own area, capped at the
                           <span x-text="result.secondaryConductorSizeLabel"></span>
                           ungrounded conductor actually installed per raceway
                           (Note 1's own &ldquo;not required to be larger
