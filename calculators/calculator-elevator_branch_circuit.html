@@ -292,6 +292,82 @@
                     Exception No. 2 allowance &mdash; field adjustment follows
                     the 430.52(C)(3) trial-setting procedure instead.
                   </p>
+
+                  <div
+                    class="form-check position-relative mt-2"
+                    x-show="result.state === 'ok' && result.mocpOverrideRatings && result.mocpOverrideRatings.length > 1"
+                  >
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="mocpUseOverride"
+                      x-model="mocpUseOverride"
+                    />
+                    <label class="form-check-label" for="mocpUseOverride"
+                      >Use a different standard MOCP rating than Recommended
+                      <button
+                        type="button"
+                        class="info-icon-btn"
+                        aria-label="More info"
+                        :aria-expanded="(openInfo === 'mocpOverride').toString()"
+                        @click="toggleInfo('mocpOverride')"
+                        @mouseenter="openFromHover('mocpOverride')"
+                        @mouseleave="scheduleHideInfo('mocpOverride')"
+                        @mousedown="skipNextFocus = true"
+                        @focus="handleFocus('mocpOverride')"
+                        @blur="hideInfoIfOpen('mocpOverride')"
+                      >
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                      </button>
+                    </label>
+                    <div
+                      class="info-tooltip"
+                      x-ref="tip-mocpOverride"
+                      x-show="openInfo === 'mocpOverride'"
+                      x-cloak
+                      @mouseenter="cancelHideInfo()"
+                      @mouseleave="scheduleHideInfo('mocpOverride')"
+                    >
+                      Only use this if the field genuinely needs a rating
+                      other than Recommended &mdash; e.g. to hold a
+                      downstream rating down (one standard size lower), or
+                      add starting headroom up to the Maximum (430.52)
+                      ceiling above, without necessarily invoking Exception
+                      No. 2 by name. Affects only the equipment grounding
+                      conductor and schedule notation below &mdash; the
+                      Recommended and Maximum figures stay as computed,
+                      unaffected. Going lower is capped at a hard floor: the
+                      smallest standard rating that still carries the
+                      elevator's own raw Running Current (not the 175%-
+                      inflated Recommended figure).
+                    </div>
+                  </div>
+                  <p
+                    class="text-muted small mt-1 mb-0"
+                    x-show="result.state === 'ok' && (!result.mocpOverrideRatings || result.mocpOverrideRatings.length <= 1)"
+                  >
+                    No standard rating differs from Recommended within the
+                    floor-to-Maximum range &mdash; Recommended is the only
+                    workable MOCP rating here.
+                  </p>
+                  <div
+                    class="mb-1"
+                    x-show="mocpUseOverride && result.state === 'ok' && result.mocpOverrideOptions && result.mocpOverrideOptions.length > 1"
+                  >
+                    <label for="mocpOverrideRating" class="form-label"
+                      >Selected MOCP Rating</label
+                    >
+                    <select
+                      class="form-select"
+                      id="mocpOverrideRating"
+                      x-model="mocpOverrideRating"
+                    >
+                      <option value="" disabled>Select a rating&hellip;</option>
+                      <template x-for="opt in result.mocpOverrideOptions" :key="opt.value">
+                        <option :value="opt.value" x-text="opt.label"></option>
+                      </template>
+                    </select>
+                  </div>
                 </div>
 
                 <div class="result-callout mb-4">
@@ -598,6 +674,17 @@
                         </div>
                       </div>
                     </div>
+                    <p
+                      class="text-muted small mb-4"
+                      x-show="result.mocpOverrideActive"
+                    >
+                      Rating override active: the equipment grounding
+                      conductor and schedule notation below use
+                      <strong><span x-text="result.egcBasisRating"></span> A</strong>
+                      instead of the
+                      <span x-text="result.ocpdRecommendedRating"></span> A
+                      Recommended figure above.
+                    </p>
 
                     <div class="result-callout mb-4 position-relative">
                       <div class="small text-muted">

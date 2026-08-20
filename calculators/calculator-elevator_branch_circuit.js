@@ -67,6 +67,17 @@ document.addEventListener('alpine:init', function () {
       deviceType: 'instantaneous',
       exceptionOverride: false,
 
+      // Optional override: use a different standard MOCP rating than Recommended --
+      // one standard size lower (e.g. to hold a downstream rating down, so long as it
+      // still clears Running Current), or any standard size up through the Maximum
+      // (430.52) ceiling above (extra headroom for starting, without having to check
+      // the Exception No. 2 box). Unchecked by default; Recommended alone feeds every
+      // downstream calc until this is checked AND a valid rating from
+      // result.mocpOverrideOptions is selected (see get result() below). Mirrors
+      // calculator-transformer_sizing.js's primaryOcpdUseOverride pattern.
+      mocpUseOverride: false,
+      mocpOverrideRating: '',
+
       // Branch-circuit conductors (620.13) & raceway fill -- mirrors the approach
       // in calculator-motor_ocpd.js, but sized off Running Current (+ auxiliary
       // equipment ampacity) rather than a table FLC, and with no neutral.
@@ -207,10 +218,28 @@ document.addEventListener('alpine:init', function () {
             self.numberOfConductors = self.phase === 'single' ? '2' : '3';
           }
           self.suggestMaterial();
+          self.syncMocpOverride();
         });
-        this.$watch('runningCurrent', function () { self.suggestMaterial(); });
-        this.$watch('deviceType', function () { self.suggestMaterial(); });
-        this.$watch('exceptionOverride', function () { self.suggestMaterial(); });
+        this.$watch('runningCurrent', function () { self.suggestMaterial(); self.syncMocpOverride(); });
+        this.$watch('deviceType', function () { self.suggestMaterial(); self.syncMocpOverride(); });
+        this.$watch('exceptionOverride', function () { self.suggestMaterial(); self.syncMocpOverride(); });
+
+        // Checking the box should immediately surface a usable default rather than
+        // an empty dropdown -- default to Recommended itself (already the middle of
+        // the range), letting the user adjust up or down from there. Unchecking
+        // leaves the stored selection in place (harmless -- it's ignored while
+        // unchecked, and reappears pre-selected if the user re-checks the box).
+        // Mirrors calculator-transformer_sizing.js's primaryOcpdUseOverride $watch.
+        this.$watch('mocpUseOverride', function (value) {
+          if (value) {
+            self.syncMocpOverride();
+            if (!self.mocpOverrideRating && self.result.ocpdRecommendedRating != null) {
+              self.mocpOverrideRating = String(self.result.ocpdRecommendedRating);
+            }
+          }
+          self.suggestMaterial();
+        });
+        this.$watch('mocpOverrideRating', function () { self.suggestMaterial(); });
 
         document.addEventListener('click', function (e) {
           if (self.openInfo == null) return;
@@ -220,6 +249,17 @@ document.addEventListener('alpine:init', function () {
             self.closeInfo();
           }
         });
+      },
+
+      // Resets the selection whenever it's no longer among the current
+      // mocpOverrideRatings (runningCurrent/deviceType/exceptionOverride/phase all
+      // move that list) -- mirrors calculator-transformer_sizing.js's
+      // syncPrimaryOcpdOverride.
+      syncMocpOverride: function () {
+        var ratings = this.result.mocpOverrideRatings || [];
+        if (ratings.indexOf(parseFloat(this.mocpOverrideRating)) === -1) {
+          this.mocpOverrideRating = '';
+        }
       },
 
       get racewayTablePage() {
@@ -309,14 +349,64 @@ document.addEventListener('alpine:init', function () {
         var ocpdRecommendedCurrent = runningCurrent * RECOMMENDED_OCPD_PERCENT / 100;
         var ocpdRecommendedRating = D.getStandardOCPD(ocpdRecommendedCurrent);
 
+        // --- Optional override: a different standard MOCP rating than Recommended --
+        // one standard size lower (down to a hard floor: the smallest standard rating
+        // that still clears the RAW, not 175%-inflated, Running Current, so the device
+        // can still carry the elevator's own running load), or any standard size from
+        // Recommended up through the Maximum (430.52) ceiling above -- inclusive, not
+        // trimmed to a nearest-few, since Maximum is itself the limit (and already
+        // reflects the Exception No. 2 override when that box is checked). Recommended
+        // and Maximum are still always displayed/computed above, unaffected by any of
+        // this -- only which rating feeds the EGC/schedule-notation calcs below
+        // changes. Mirrors calculator-transformer_sizing.js's primaryOcpdOverrideRatings. ---
+        var mocpFloorRating = D.getStandardOCPD(runningCurrent);
+        var mocpOverrideRatings = [];
+        if (ocpdRecommendedRating != null) {
+          var mocpLowerRatings = D.STANDARD_OCPD_240_6A.filter(function (r) {
+            return r < ocpdRecommendedRating && (mocpFloorRating == null || r >= mocpFloorRating);
+          });
+          var mocpLower = mocpLowerRatings.length ? [mocpLowerRatings[mocpLowerRatings.length - 1]] : [];
+          var mocpUpperRatings = finalOcpdRating != null
+            ? D.STANDARD_OCPD_240_6A.filter(function (r) {
+              return r >= ocpdRecommendedRating && r <= finalOcpdRating;
+            })
+            : [ocpdRecommendedRating];
+          mocpOverrideRatings = mocpLower.concat(mocpUpperRatings);
+        }
+        // Labeled for the dropdown -- flags whichever entry is Recommended or Maximum
+        // so the two reference figures above stay identifiable in the list.
+        var mocpOverrideOptions = mocpOverrideRatings.map(function (r) {
+          var suffix = '';
+          if (r === ocpdRecommendedRating) suffix = ' (Recommended)';
+          else if (finalOcpdRating != null && r === finalOcpdRating) suffix = ' (Maximum)';
+          return { value: r, label: r + ' A' + suffix };
+        });
+        var mocpOverrideSelected = null;
+        if (this.mocpUseOverride) {
+          var mocpOverrideParsed = parseFloat(this.mocpOverrideRating);
+          if (!isNaN(mocpOverrideParsed) && mocpOverrideRatings.indexOf(mocpOverrideParsed) !== -1) {
+            mocpOverrideSelected = mocpOverrideParsed;
+          }
+        }
+        // Not "active" when the selection just reproduces Recommended (picking that
+        // entry from the list is a no-op, not really an override).
+        var mocpOverrideActive = mocpOverrideSelected != null && mocpOverrideSelected !== ocpdRecommendedRating;
+
         // Table 250.122 sizes the EGC off the OCPD that actually protects the circuit,
         // not the bare 430.52 ceiling -- so this uses the Recommended (typical-practice)
-        // rating by default, since that's what actually gets installed. It only switches
-        // to the Maximum/Exception No. 2 rating when the user has explicitly checked that
-        // override, i.e. stated that the typical breaker won't start this elevator.
+        // rating by default, since that's what actually gets installed. The MOCP
+        // override above, once checked and a valid rating is selected, takes priority
+        // over both Recommended and the Exception No. 2 override, since it's the most
+        // specific statement of what will actually be installed.
         var egcBasisIsException = this.exceptionOverride && exceptionAvailable && ocpdExceptionRating != null;
-        var egcBasisRating = egcBasisIsException ? finalOcpdRating : ocpdRecommendedRating;
-        var egcBasisLabel = egcBasisIsException ? 'Exception No. 2' : 'Recommended';
+        var egcBasisRating, egcBasisLabel;
+        if (mocpOverrideSelected != null) {
+          egcBasisRating = mocpOverrideSelected;
+          egcBasisLabel = mocpOverrideActive ? 'selected MOCP' : 'Recommended';
+        } else {
+          egcBasisRating = egcBasisIsException ? finalOcpdRating : ocpdRecommendedRating;
+          egcBasisLabel = egcBasisIsException ? 'Exception No. 2' : 'Recommended';
+        }
         var egcSize = egcBasisRating != null ? D.getEGCSize(egcBasisRating, this.material) : null;
 
         var fillCount = numberOfConductors + (this.includeGround ? 1 : 0);
@@ -373,7 +463,13 @@ document.addEventListener('alpine:init', function () {
           finalOcpdRating: finalOcpdRating,
           exceptionApplied: this.exceptionOverride && exceptionAvailable && ocpdExceptionRating != null && ocpdExceptionRating !== ocpdBaseRating,
           recommendedOcpdPercent: RECOMMENDED_OCPD_PERCENT,
-          ocpdRecommendedRating: ocpdRecommendedRating
+          ocpdRecommendedRating: ocpdRecommendedRating,
+
+          mocpFloorRating: mocpFloorRating,
+          mocpOverrideRatings: mocpOverrideRatings,
+          mocpOverrideOptions: mocpOverrideOptions,
+          mocpOverrideActive: mocpOverrideActive,
+          mocpOverrideSelected: mocpOverrideSelected
         };
       }
     };
