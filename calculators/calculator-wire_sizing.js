@@ -14,7 +14,7 @@ document.addEventListener('alpine:init', function () {
     // so it stays local to this calculator rather than in js/nec-data.js.
     var RACEWAY_SCHEDULE_CODES = {
       EMT: 'C',
-      FMC: 'FMC',
+      FMC: 'C',
       PVC_SCH40: 'PVC40'
     };
 
@@ -26,7 +26,18 @@ document.addEventListener('alpine:init', function () {
       return core + (mat === 'aluminum' ? ' AL' : '');
     }
 
-    return {
+    // MDP design standard: 14 AWG is not used on power circuits, so no conductor
+    // in the schedule notation drops below 12 AWG -- neither the phase conductor
+    // (even when a smaller size would carry the OCPD) nor the equipment grounding
+    // conductor (even when Table 250.122 would allow a 14 AWG copper EGC at a 15 A
+    // OCPD). Upsizing from the NEC minimum is always code-compliant. Mirrors the
+    // same floor in calculator-motor_ocpd.js.
+    var MIN_CONDUCTOR_SIZE = '12';
+
+    // Every user-facing input on the form, with its starting value. Held as one
+    // object so the "Reset" button can restore all of them in a single
+    // Object.assign (see reset()) without a hand-maintained second copy.
+    var INPUT_DEFAULTS = {
       material: 'copper',
       tempRating: '75',
       ambientC: '30',
@@ -36,6 +47,32 @@ document.addEventListener('alpine:init', function () {
       // drives that, independently).
       ocpd: '',
       scheduleCopied: false,
+
+      // Raceway fill input. Physical conductors only (line + neutral if present, EXCLUDES
+      // the EGC -- that's added separately via includeGround below). This is the only
+      // input to fillCount; nothing else on this page writes to it or reads it for
+      // anything other than fillCount.
+      numberOfConductors: '4',
+      includeGround: true,
+      racewayType: 'EMT',
+      maxSizeCap: '500',
+
+      // Once the user picks a value directly, stop overriding it from ocpd.
+      materialTouched: false,
+      tempRatingTouched: false,
+
+      // Ampacity-adjustment inputs (Table 310.15(C)(1)). These, together with
+      // numberOfConductors, derive currentCarryingConductors in get result() below --
+      // a computed value, not directly user-editable, that feeds ONLY the adjustment-factor
+      // lookup. It never feeds fillCount, and numberOfConductors never feeds it back.
+      hasNeutral: 'yes',
+      wyeMajorityNonlinear: false
+    };
+
+    return {
+      // Spread of the plain-data defaults above; the getters/methods below stay
+      // live (Object.assign would have flattened them to one-time values).
+      ...INPUT_DEFAULTS,
 
       // Icon-triggered info tooltips (presentation only -- no effect on any calculation).
       // openInfo holds the id of the single currently-open tooltip, or null.
@@ -127,27 +164,12 @@ document.addEventListener('alpine:init', function () {
           }
         });
       },
-      // Raceway fill input. Physical conductors only (line + neutral if present, EXCLUDES
-      // the EGC -- that's added separately via includeGround below). This is the only
-      // input to fillCount; nothing else on this page writes to it or reads it for
-      // anything other than fillCount.
-      numberOfConductors: '4',
-      includeGround: true,
-      racewayType: 'EMT',
-      maxSizeCap: '500',
 
-      // Once the user picks a value directly, stop overriding it from ocpd.
-      materialTouched: false,
-      tempRatingTouched: false,
-
-      // Ampacity-adjustment inputs (Table 310.15(C)(1)). These, together with
-      // numberOfConductors, derive currentCarryingConductors in get result() below --
-      // a computed value, not directly user-editable, that feeds ONLY the adjustment-factor
-      // lookup. It never feeds fillCount, and numberOfConductors never feeds it back.
-      hasNeutral: 'yes',
-      wyeMajorityNonlinear: false,
-
-      wireSizes: D.WIRE_SIZES,
+      // "Max Single Conductor" choices -- 14 AWG is excluded so the cap can't be
+      // set below the MIN_CONDUCTOR_SIZE floor (see the result getter).
+      wireSizes: D.WIRE_SIZES.filter(function (size) {
+        return D.compareSizes(size, MIN_CONDUCTOR_SIZE) >= 0;
+      }),
       racewayOptions: Object.keys(D.CONDUCTOR_FILL).map(function (key) {
         return { key: key, label: D.CONDUCTOR_FILL[key].label };
       }),
@@ -165,6 +187,14 @@ document.addEventListener('alpine:init', function () {
           self.scheduleCopied = true;
           setTimeout(function () { self.scheduleCopied = false; }, 1500);
         });
+      },
+
+      // Restore every form input to its starting value. The $watch on `ocpd` and
+      // `hasNeutral` (see init) may re-fire here, but only re-derives values that
+      // are already back at their INPUT_DEFAULTS state. Transient UI state (open
+      // tooltips) is intentionally left alone.
+      reset: function () {
+        Object.assign(this, INPUT_DEFAULTS);
       },
 
       // Suggest aluminum at >=100A OCPD (common practice for larger feeders/services) and
@@ -249,7 +279,8 @@ document.addEventListener('alpine:init', function () {
         var adjFactor = D.getAdjustmentFactor(currentCarryingConductors);
 
         var usable = D.AMPACITY_310_16.filter(function (row) {
-          return D.compareSizes(row.size, this.maxSizeCap) <= 0;
+          return D.compareSizes(row.size, this.maxSizeCap) <= 0 &&
+            D.compareSizes(row.size, MIN_CONDUCTOR_SIZE) >= 0;
         }, this);
 
         var picked = null;
@@ -312,6 +343,11 @@ document.addEventListener('alpine:init', function () {
           var groundPart = '';
           if (this.includeGround) {
             var egcSize = D.getEGCSize(ocpd, this.material);
+            // Apply the same 12 AWG design floor to the EGC (Table 250.122 gives a
+            // 14 AWG copper EGC at a 15 A OCPD, which MDP doesn't install).
+            if (egcSize != null && D.compareSizes(egcSize, MIN_CONDUCTOR_SIZE) < 0) {
+              egcSize = MIN_CONDUCTOR_SIZE;
+            }
             egcOk = egcSize != null;
             if (egcOk) {
               groundPart = ' & 1-' + formatScheduleSize(egcSize, this.material) + ' GND';

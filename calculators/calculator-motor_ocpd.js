@@ -87,7 +87,10 @@ document.addEventListener('alpine:init', function () {
       scheduleCopied: false
     };
 
-    return Object.assign({}, INPUT_DEFAULTS, {
+    return {
+      // Spread of the plain-data defaults above; the getters/methods below stay
+      // live (Object.assign would have flattened them to one-time values).
+      ...INPUT_DEFAULTS,
 
       // Icon-triggered info tooltips (presentation only -- no effect on any calculation).
       openInfo: null,
@@ -435,6 +438,6 @@ document.addEventListener('alpine:init', function () {
           lockedRotorCurrent: lockedRotorCurrent
         };
       }
-    });
+    };
   });
 });

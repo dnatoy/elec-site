@@ -27,7 +27,7 @@ document.addEventListener('alpine:init', function () {
     // rather than sharing one, since the calculators are otherwise independent).
     var RACEWAY_SCHEDULE_CODES = {
       EMT: 'C',
-      FMC: 'FMC',
+      FMC: 'C',
       PVC_SCH40: 'PVC40'
     };
 
@@ -52,7 +52,10 @@ document.addEventListener('alpine:init', function () {
     // inputs this tool collects.
     var CONDUCTOR_CONTINUOUS_DUTY_PERCENT = 125;
 
-    return {
+    // Every user-facing input on the form, with its starting value. Held as one
+    // object so the "Reset" button can restore all of them in a single
+    // Object.assign (see reset()) without a hand-maintained second copy.
+    var INPUT_DEFAULTS = {
       // Elevator nameplate / submittal basics.
       phase: 'three',
       voltage: '480',
@@ -92,7 +95,13 @@ document.addEventListener('alpine:init', function () {
       includeGround: true,
       racewayType: 'EMT',
       maxSizeCap: '500',
-      scheduleCopied: false,
+      scheduleCopied: false
+    };
+
+    return {
+      // Spread of the plain-data defaults above; the getters/methods below stay
+      // live (Object.assign would have flattened them to one-time values).
+      ...INPUT_DEFAULTS,
 
       // Icon-triggered info tooltips (presentation only -- no effect on any calculation).
       openInfo: null,
@@ -189,6 +198,14 @@ document.addEventListener('alpine:init', function () {
           self.scheduleCopied = true;
           setTimeout(function () { self.scheduleCopied = false; }, 1500);
         });
+      },
+
+      // Restore every form input to its starting value. The $watch handlers on
+      // phase / runningCurrent / deviceType / overrides (see init) re-fire here,
+      // but only re-derive values that are already back at their INPUT_DEFAULTS
+      // state. Transient UI state (open tooltips) is intentionally left alone.
+      reset: function () {
+        Object.assign(this, INPUT_DEFAULTS);
       },
 
       // Suggest aluminum once the OCPD actually protecting the circuit (same

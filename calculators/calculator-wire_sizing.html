@@ -76,7 +76,17 @@
           <div class="col-12 col-lg-5">
             <div class="card border-0 shadow-sm h-100">
               <div class="card-body p-4">
-                <h2 class="h5 fw-bold mb-4 heading-accent">Circuit Inputs</h2>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <h2 class="h5 fw-bold heading-accent mb-0">Circuit Inputs</h2>
+                  <button
+                    type="button"
+                    class="btn-reset"
+                    @click="reset()"
+                    title="Clear all inputs and return to defaults"
+                  >
+                    <i class="fa fa-undo" aria-hidden="true"></i> Reset
+                  </button>
+                </div>
 
                 <div class="result-callout mb-4">
                   <div class="group-label">
