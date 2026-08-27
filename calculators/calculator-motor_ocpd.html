@@ -76,7 +76,17 @@
           <div class="col-12 col-lg-5">
             <div class="card border-0 shadow-sm h-100">
               <div class="card-body p-4">
-                <h2 class="h5 fw-bold mb-4 heading-accent">Motor Inputs</h2>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <h2 class="h5 fw-bold heading-accent mb-0">Motor Inputs</h2>
+                  <button
+                    type="button"
+                    class="btn-reset"
+                    @click="reset()"
+                    title="Clear all inputs and return to defaults"
+                  >
+                    <i class="fa fa-undo" aria-hidden="true"></i> Reset
+                  </button>
+                </div>
 
                 <div class="result-callout mb-4">
                   <div class="group-label">
@@ -251,10 +261,20 @@
                 </div>
 
                 <div class="result-callout mb-4">
-                  <div class="group-label">
-                    Overload Protection &mdash; NEC 430.32
-                  </div>
+                  <button
+                    type="button"
+                    class="group-label-toggle"
+                    :aria-expanded="overloadExpanded ? 'true' : 'false'"
+                    aria-controls="overloadFields"
+                    @click="overloadExpanded = !overloadExpanded"
+                  >
+                    <span class="group-label-caret" aria-hidden="true" x-text="overloadExpanded ? '▾' : '▸'"></span>
+                    <span class="group-label"
+                      >Overload Protection &mdash; NEC 430.32</span
+                    >
+                  </button>
 
+                  <div id="overloadFields" x-show="overloadExpanded" x-cloak class="mt-3">
                   <div class="mb-3 position-relative">
                     <label for="nameplateFLA" class="form-label"
                       >Nameplate Full-Load Amps (optional)
@@ -354,6 +374,7 @@
                         >All other motors (115%)</label
                       >
                     </div>
+                  </div>
                   </div>
                 </div>
 

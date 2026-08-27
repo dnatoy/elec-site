@@ -18,7 +18,7 @@ document.addEventListener('alpine:init', function () {
     // rather than sharing one, since the two calculators are otherwise independent).
     var RACEWAY_SCHEDULE_CODES = {
       EMT: 'C',
-      FMC: 'FMC',
+      FMC: 'C',
       PVC_SCH40: 'PVC40'
     };
 
@@ -37,7 +37,18 @@ document.addEventListener('alpine:init', function () {
     // rather than the 430.52 800% instantaneous-trip max of 80A).
     var RECOMMENDED_OCPD_PERCENT = 175;
 
-    return {
+    // MDP design standard: 14 AWG is not used on power branch circuits, so no
+    // conductor in the schedule notation drops below 12 AWG -- neither the phase
+    // conductor (even when the 430.22(A) 125% ampacity would allow 14 AWG) nor
+    // the equipment grounding conductor (even when Table 250.122 would allow a
+    // 14 AWG copper EGC at a 15 A OCPD). Upsizing from the NEC minimum is always
+    // code-compliant.
+    var MIN_CONDUCTOR_SIZE = '12';
+
+    // Every user-facing input on the form, with its starting value. Held as one
+    // object so the "Reset" button can restore all of them in a single
+    // Object.assign (see reset()) without a hand-maintained second copy.
+    var INPUT_DEFAULTS = {
       // Motor nameplate / circuit basics.
       phase: 'three',
       hp: '',
@@ -51,6 +62,9 @@ document.addEventListener('alpine:init', function () {
       // rise <=40°C, otherwise 115%. Defaults to the conservative 115% branch since
       // the higher allowance requires a nameplate fact not assumed by default.
       overloadClass: 'standard',
+      // Overload sizing is rarely needed on our designs, so its input pane starts
+      // collapsed -- the user expands it via the group-label toggle when required.
+      overloadExpanded: false,
 
       // Branch-circuit short-circuit / ground-fault protection (430.52).
       deviceType: 'instantaneous',
@@ -70,7 +84,10 @@ document.addEventListener('alpine:init', function () {
       includeGround: true,
       racewayType: 'EMT',
       maxSizeCap: '500',
-      scheduleCopied: false,
+      scheduleCopied: false
+    };
+
+    return Object.assign({}, INPUT_DEFAULTS, {
 
       // Icon-triggered info tooltips (presentation only -- no effect on any calculation).
       openInfo: null,
@@ -149,7 +166,11 @@ document.addEventListener('alpine:init', function () {
         });
       },
 
-      wireSizes: D.WIRE_SIZES,
+      // "Max Single Conductor" choices -- 14 AWG is excluded so the cap can't be
+      // set below the MIN_CONDUCTOR_SIZE floor (see the result getter).
+      wireSizes: D.WIRE_SIZES.filter(function (size) {
+        return D.compareSizes(size, MIN_CONDUCTOR_SIZE) >= 0;
+      }),
       racewayOptions: Object.keys(D.CONDUCTOR_FILL).map(function (key) {
         return { key: key, label: D.CONDUCTOR_FILL[key].label };
       }),
@@ -170,6 +191,14 @@ document.addEventListener('alpine:init', function () {
           self.scheduleCopied = true;
           setTimeout(function () { self.scheduleCopied = false; }, 1500);
         });
+      },
+
+      // Restore every form input to its starting value. The $watch on `phase`
+      // (see init) re-fires here and re-clears hp/voltage, which is harmless since
+      // those are already back at their INPUT_DEFAULTS values. Transient UI state
+      // (open tooltips) is intentionally left alone.
+      reset: function () {
+        Object.assign(this, INPUT_DEFAULTS);
       },
 
       // Suggest aluminum once the OCPD actually protecting the circuit (same
@@ -276,7 +305,8 @@ document.addEventListener('alpine:init', function () {
         // --- 430.22(A): branch-circuit conductor minimum ampacity ---
         var minConductorAmpacity = flc * 1.25;
         var usable = D.AMPACITY_310_16.filter(function (row) {
-          return D.compareSizes(row.size, this.maxSizeCap) <= 0;
+          return D.compareSizes(row.size, this.maxSizeCap) <= 0 &&
+            D.compareSizes(row.size, MIN_CONDUCTOR_SIZE) >= 0;
         }, this);
         var picked = null;
         for (var i = 0; i < usable.length; i++) {
@@ -323,6 +353,11 @@ document.addEventListener('alpine:init', function () {
         var egcBasisRating = egcBasisIsException ? finalOcpdRating : ocpdRecommendedRating;
         var egcBasisLabel = egcBasisIsException ? 'Exception No. 2' : 'Recommended';
         var egcSize = egcBasisRating != null ? D.getEGCSize(egcBasisRating, this.material) : null;
+        // Apply the same 12 AWG design floor to the EGC (Table 250.122 gives a
+        // 14 AWG copper EGC at a 15 A OCPD, which MDP doesn't install).
+        if (egcSize != null && D.compareSizes(egcSize, MIN_CONDUCTOR_SIZE) < 0) {
+          egcSize = MIN_CONDUCTOR_SIZE;
+        }
 
         var fillCount = numberOfConductors + (this.includeGround ? 1 : 0);
         var minTrade = picked ? D.getMinTradeSize(this.racewayType, picked.size, fillCount) : null;
@@ -400,6 +435,6 @@ document.addEventListener('alpine:init', function () {
           lockedRotorCurrent: lockedRotorCurrent
         };
       }
-    };
+    });
   });
 });
