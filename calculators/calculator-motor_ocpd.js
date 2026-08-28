@@ -361,6 +361,17 @@ document.addEventListener('alpine:init', function () {
         if (egcSize != null && D.compareSizes(egcSize, MIN_CONDUCTOR_SIZE) < 0) {
           egcSize = MIN_CONDUCTOR_SIZE;
         }
+        // 250.122(A): the EGC is not required to be larger than the circuit
+        // conductors supplying the equipment. On a motor branch circuit the phase
+        // conductors are sized at 125% FLC (430.22) while the EGC is sized off the
+        // larger 430.52 device, so Table 250.122 frequently lands above the phase
+        // size -- cap it there. picked.size is always >= MIN_CONDUCTOR_SIZE, so
+        // this can't undo the floor above.
+        var egcCappedToPhase = false;
+        if (egcSize != null && picked && D.compareSizes(egcSize, picked.size) > 0) {
+          egcSize = picked.size;
+          egcCappedToPhase = true;
+        }
 
         var fillCount = numberOfConductors + (this.includeGround ? 1 : 0);
         var minTrade = picked ? D.getMinTradeSize(this.racewayType, picked.size, fillCount) : null;
@@ -408,6 +419,7 @@ document.addEventListener('alpine:init', function () {
           conductorOutOfRange: !picked,
           egcSize: egcSize,
           egcSizeLabel: egcSize ? D.formatSize(egcSize) : null,
+          egcCappedToPhase: egcCappedToPhase,
           egcBasisRating: egcBasisRating,
           egcBasisLabel: egcBasisLabel,
           fillCount: fillCount,

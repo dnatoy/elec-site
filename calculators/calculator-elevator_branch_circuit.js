@@ -425,6 +425,16 @@ document.addEventListener('alpine:init', function () {
           egcBasisLabel = egcBasisIsException ? 'Exception No. 2' : 'Recommended';
         }
         var egcSize = egcBasisRating != null ? D.getEGCSize(egcBasisRating, this.material) : null;
+        // 250.122(A): the EGC is not required to be larger than the circuit
+        // conductors supplying the equipment. The branch conductors here are sized
+        // at 125% running current + auxiliary load (620.13), while the EGC is sized
+        // off the larger MOCP, so Table 250.122 frequently lands above the phase
+        // size -- cap it there.
+        var egcCappedToPhase = false;
+        if (egcSize != null && picked && D.compareSizes(egcSize, picked.size) > 0) {
+          egcSize = picked.size;
+          egcCappedToPhase = true;
+        }
 
         var fillCount = numberOfConductors + (this.includeGround ? 1 : 0);
         var minTrade = picked ? D.getMinTradeSize(this.racewayType, picked.size, fillCount) : null;
@@ -461,6 +471,7 @@ document.addEventListener('alpine:init', function () {
           conductorOutOfRange: !picked,
           egcSize: egcSize,
           egcSizeLabel: egcSize ? D.formatSize(egcSize) : null,
+          egcCappedToPhase: egcCappedToPhase,
           egcBasisRating: egcBasisRating,
           egcBasisLabel: egcBasisLabel,
           fillCount: fillCount,

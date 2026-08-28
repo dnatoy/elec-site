@@ -332,10 +332,17 @@ document.addEventListener('alpine:init', function () {
 
         // Schedule notation ("A-B & 1-C GND, D", or "E [A-B & 1-C GND, D]" when E > 1;
         // the "& 1-C GND" segment is omitted entirely when the equipment grounding
-        // conductor isn't included in raceway fill). EGC (C) always uses the FULL OCPD
-        // rating per 250.122(F), regardless of how many parallel sets exist -- ocpd/
-        // egcSize are never divided by `sets`.
+        // conductor isn't included in raceway fill). The EGC (C) lookup always uses
+        // the FULL OCPD rating -- it is never divided by `sets` (250.122 sizes the
+        // per-raceway EGC off the feeder/branch OCPD, not a per-set share) -- but it
+        // is then capped at the ungrounded conductor size per 250.122(A): the EGC is
+        // not required to be larger than the circuit conductors supplying the
+        // equipment. With parallel sets the 2026 NEC parallel-conductor provision
+        // states the same cap per raceway (EGC in each raceway need not exceed the
+        // largest ungrounded conductor in that raceway); either way the cap is
+        // picked.size.
         var scheduleNotation = null;
+        var egcCappedToPhase = false;
         if (minTrade != null) {
           // EGC required but not tabulated (OCPD > 6000A) blocks the whole notation;
           // not needing an EGC at all (includeGround false) just omits this part.
@@ -347,6 +354,15 @@ document.addEventListener('alpine:init', function () {
             // 14 AWG copper EGC at a 15 A OCPD, which MDP doesn't install).
             if (egcSize != null && D.compareSizes(egcSize, MIN_CONDUCTOR_SIZE) < 0) {
               egcSize = MIN_CONDUCTOR_SIZE;
+            }
+            // 250.122(A) cap: the EGC need not be larger than the ungrounded
+            // conductors it runs with. In the parallel case (sets > 1) this is the
+            // per-raceway "largest ungrounded conductor in the raceway" rule from
+            // the 2026 NEC parallel-conductor provision. picked.size is always
+            // >= MIN_CONDUCTOR_SIZE, so this can't undo the floor above.
+            if (egcSize != null && D.compareSizes(egcSize, picked.size) > 0) {
+              egcSize = picked.size;
+              egcCappedToPhase = true;
             }
             egcOk = egcSize != null;
             if (egcOk) {
@@ -377,6 +393,7 @@ document.addEventListener('alpine:init', function () {
           ocpdCheckPass: picked.corrected * sets >= ocpd,
           sets: sets,
           scheduleNotation: scheduleNotation,
+          egcCappedToPhase: egcCappedToPhase,
           parallelNotAllowed: parallelNotAllowed,
           fillCount: fillCount,
           minTrade: minTrade,

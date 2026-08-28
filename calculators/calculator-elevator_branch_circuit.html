@@ -801,6 +801,12 @@
                           OCPD rating,
                           <span x-text="result.egcBasisRating"></span> A):
                           <strong x-text="result.egcSizeLabel"></strong>.
+                          <span x-show="result.egcCappedToPhase">
+                            Reduced to the phase conductor size per NEC
+                            250.122(A) &mdash; the EGC need not be larger than
+                            the circuit conductors; Table 250.122 alone would
+                            call for a larger EGC.
+                          </span>
                         </p>
 
                         <template x-if="result.scheduleNotation">

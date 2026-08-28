@@ -690,6 +690,17 @@
                       Assumes each parallel set is installed in its own raceway.
                     </p>
 
+                    <template x-if="result.egcCappedToPhase">
+                      <p class="text-muted small mt-3 mb-0">
+                        EGC reduced to the ungrounded conductor size per NEC
+                        250.122(A) &mdash; the equipment grounding conductor is
+                        not required to be larger than the circuit conductors
+                        <span x-show="result.sets > 1"
+                          >(applied per raceway for parallel sets)</span
+                        >. Table 250.122 alone would call for a larger EGC.
+                      </p>
+                    </template>
+
                     <template x-if="result.scheduleNotation">
                       <div class="result-callout mt-3">
                         <div class="small text-muted mb-1">
