@@ -165,10 +165,12 @@
                         @mouseenter="cancelHideInfo()"
                         @mouseleave="scheduleHideInfo('tempRating')"
                       >
-                        Select the rating based on the lowest-rated termination
-                        in the circuit (NEC 110.14(C)). Standard ambient is
-                        30&deg;C (86&deg;F). Suggested as 60&deg;C for OCPD
-                        &le;60 A unless you choose otherwise.
+                        Temperature rating of the lowest-rated termination in the
+                        circuit (NEC 110.14(C)). This sets the termination limit
+                        only &mdash; ampacity correction and adjustment always
+                        apply to the 90&deg;C column (NEC 310.14(A)(1)), since MDP
+                        installs 90&deg;C-rated wire. Suggested as 60&deg;C for
+                        OCPD &le;60 A unless you choose otherwise.
                       </div>
                       <select
                         class="form-select mt-auto"
@@ -577,8 +579,9 @@
                       <span
                         x-text="material === 'aluminum' ? 'Aluminum' : 'Copper'"
                       ></span
-                      >, <span x-text="tempRating"></span>&deg;C rated, per NEC
-                      Table 310.16
+                      >, 90&deg;C conductor on
+                      <span x-text="result.terminationRating"></span>&deg;C
+                      terminations &mdash; NEC Table 310.16
                     </p>
 
                     <div class="mb-3" x-show="result.sets > 1">
@@ -604,12 +607,16 @@
                       </div>
                     </div>
 
+                    <div class="small text-muted fw-bold mb-1">
+                      Step 1 &mdash; correction &amp; adjustment on the 90&deg;C
+                      ampacity (NEC 310.14(A)(1))
+                    </div>
                     <div class="result-callout mb-3">
                       <div class="row">
                         <div class="col-6 col-md">
-                          <div class="small text-muted">Table Ampacity</div>
+                          <div class="small text-muted">90&deg;C Ampacity</div>
                           <div class="fw-bold">
-                            <span x-text="result.tableAmp"></span> A
+                            <span x-text="result.amp90"></span> A
                           </div>
                         </div>
                         <div class="col-6 col-md">
@@ -630,16 +637,79 @@
                           <div class="fw-bold" x-text="result.adjFactor"></div>
                         </div>
                         <div class="col-6 col-md">
-                          <div class="small text-muted">Corrected Ampacity</div>
+                          <div class="small text-muted">Adjusted Ampacity</div>
                           <div class="fw-bold">
                             <span
-                              x-text="result.correctedAmpacity.toFixed(1)"
+                              x-text="result.adjustedAmpacity.toFixed(1)"
                             ></span>
                             A
                           </div>
                         </div>
                       </div>
                     </div>
+
+                    <div class="small text-muted fw-bold mb-1">
+                      Step 2 &mdash; termination limit (NEC 110.14(C))
+                    </div>
+                    <div class="result-callout mb-2">
+                      <div class="row">
+                        <div class="col-6 col-md">
+                          <div class="small text-muted">
+                            <span x-text="result.terminationRating"></span>&deg;C
+                            Termination Limit
+                          </div>
+                          <div class="fw-bold">
+                            <span x-text="result.terminationAmp"></span> A
+                          </div>
+                        </div>
+                        <div class="col-6 col-md">
+                          <div class="small text-muted">Governing Ampacity</div>
+                          <div class="fw-bold">
+                            <span
+                              x-text="result.governingAmpacity.toFixed(1)"
+                            ></span>
+                            A
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <p class="text-muted small mb-3">
+                      <template x-if="result.terminationLimited">
+                        <span
+                          >Governed by the
+                          <span x-text="result.terminationRating"></span>&deg;C
+                          termination limit (NEC 110.14(C)). The 90&deg;C ampacity
+                          after correction and adjustment is
+                          <span
+                            x-text="result.adjustedAmpacity.toFixed(1)"
+                          ></span>
+                          A (NEC 310.14(A)(1)), which is higher, so the conductor
+                          is held to its terminations.</span
+                        >
+                      </template>
+                      <template
+                        x-if="!result.terminationLimited && result.deratingApplied"
+                      >
+                        <span
+                          >Governed by ampacity correction/adjustment applied to
+                          the 90&deg;C column (NEC 310.14(A)(1)). The
+                          <span x-text="result.terminationRating"></span>&deg;C
+                          termination limit is
+                          <span x-text="result.terminationAmp"></span> A (NEC
+                          110.14(C)), which is higher and does not govern.</span
+                        >
+                      </template>
+                      <template
+                        x-if="!result.terminationLimited && !result.deratingApplied"
+                      >
+                        <span
+                          >No ambient correction, conductor-count adjustment, or
+                          termination limit reduces the ampacity here &mdash; the
+                          90&deg;C table value carries through unchanged.</span
+                        >
+                      </template>
+                    </p>
 
                     <p
                       class="text-muted small mb-3"

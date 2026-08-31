@@ -249,12 +249,24 @@ document.addEventListener('alpine:init', function () {
           return { state: 'error', message: 'Enter an ambient temperature in °C.' };
         }
 
-        var tempFactor = D.getTempCorrectionFactor(ambientC, this.tempRating);
+        // Two-step sizing (NEC 310.14(A)(1) + 110.14(C)):
+        //   Step 1 -- ampacity correction (ambient) and adjustment (conductor count)
+        //            are applied to the 90 °C column, because MDP installs 90 °C-rated
+        //            wire (THWN-2 / XHHW-2) and 310.14(A)(1) permits a conductor rated
+        //            above the termination temperature to be used for correction,
+        //            adjustment, or both. The ambient correction factor is therefore
+        //            taken from the 90 °C column too -- this.tempRating never enters it.
+        //   Step 2 -- the result is then limited to the ampacity of the lowest-rated
+        //            termination (this.tempRating), taken straight from the table with
+        //            no factors applied (110.14(C)).
+        // Final ampacity per set = min(Step 1, Step 2).
+        var DERATING_BASIS = '90';
+        var tempFactor = D.getTempCorrectionFactor(ambientC, DERATING_BASIS);
         if (tempFactor == null) {
           return {
             state: 'error',
-            message: 'Table 310.15(B)(1) has no ' + this.tempRating + '°C correction factor tabulated for ' +
-              ambientC + '°C ambient (the table covers up to 85°C, and the highest ambient bands only apply to higher temperature ratings).'
+            message: 'Table 310.15(B)(1) has no correction factor for ' + ambientC +
+              '°C ambient (the table covers ambients up to 85°C).'
           };
         }
 
@@ -283,14 +295,40 @@ document.addEventListener('alpine:init', function () {
             D.compareSizes(row.size, MIN_CONDUCTOR_SIZE) >= 0;
         }, this);
 
+        var self = this;
+        // Per-set ampacity picture for one table row: the 90 °C basis, the Step 1
+        // adjusted/corrected value, the Step 2 termination limit, and the governing
+        // (lower) of the two. Returns null when either column is untabulated for the
+        // material (e.g. aluminum below 12 AWG).
+        function ampInfoFor(row) {
+          var amp90 = self.material === 'aluminum' ? row.al[DERATING_BASIS] : row.cu[DERATING_BASIS];
+          var termAmp = self.material === 'aluminum' ? row.al[self.tempRating] : row.cu[self.tempRating];
+          if (amp90 == null || termAmp == null) return null;
+          var adjusted = amp90 * tempFactor * adjFactor;
+          return {
+            amp90: amp90,
+            termAmp: termAmp,
+            adjusted: adjusted,
+            governing: Math.min(adjusted, termAmp)
+          };
+        }
+
+        function pick(row, info) {
+          return {
+            size: row.size,
+            amp90: info.amp90,
+            termAmp: info.termAmp,
+            adjusted: info.adjusted,
+            governing: info.governing
+          };
+        }
+
         var picked = null;
         for (var i = 0; i < usable.length; i++) {
-          var row = usable[i];
-          var tableAmp = this.material === 'aluminum' ? row.al[this.tempRating] : row.cu[this.tempRating];
-          if (tableAmp == null) continue;
-          var corrected = tableAmp * tempFactor * adjFactor;
-          if (corrected >= ocpd) {
-            picked = { size: row.size, tableAmp: tableAmp, corrected: corrected };
+          var info = ampInfoFor(usable[i]);
+          if (!info) continue;
+          if (info.governing >= ocpd) {
+            picked = pick(usable[i], info);
             break;
           }
         }
@@ -299,27 +337,26 @@ document.addEventListener('alpine:init', function () {
 
         if (!picked) {
           var capRow = D.AMPACITY_310_16.filter(function (r) { return r.size === this.maxSizeCap; }, this)[0];
-          var capAmp = capRow ? (this.material === 'aluminum' ? capRow.al[this.tempRating] : capRow.cu[this.tempRating]) : null;
-          if (!capAmp) {
+          var capInfo = capRow ? ampInfoFor(capRow) : null;
+          if (!capInfo) {
             return {
               state: 'error',
-              message: D.formatSize(this.maxSizeCap) + ' has no tabulated ' + this.tempRating +
+              message: D.formatSize(this.maxSizeCap) + ' has no tabulated 90°C or ' + this.tempRating +
                 '°C ampacity for ' + this.material + '. Pick a larger maximum conductor size or a different temperature rating.'
             };
           }
-          var capCorrected = capAmp * tempFactor * adjFactor;
           // The cap size, being the largest allowed, gives the fewest possible sets --
           // this is the minimum sets achievable at all. Now find the SMALLEST size
           // (within cap) that also works at that same set count, rather than just
-          // forcing every parallel run up to the cap size regardless of need.
-          sets = Math.ceil(ocpd / capCorrected);
+          // forcing every parallel run up to the cap size regardless of need. Each
+          // set has its own terminations, so both Step 1 and Step 2 scale with `sets`
+          // and the governing per-set ampacity can be multiplied directly.
+          sets = Math.ceil(ocpd / capInfo.governing);
           for (var j = 0; j < usable.length; j++) {
-            var prow = usable[j];
-            var pAmp = this.material === 'aluminum' ? prow.al[this.tempRating] : prow.cu[this.tempRating];
-            if (pAmp == null) continue;
-            var pCorrected = pAmp * tempFactor * adjFactor;
-            if (pCorrected * sets >= ocpd) {
-              picked = { size: prow.size, tableAmp: pAmp, corrected: pCorrected };
+            var pInfo = ampInfoFor(usable[j]);
+            if (!pInfo) continue;
+            if (pInfo.governing * sets >= ocpd) {
+              picked = pick(usable[j], pInfo);
               break;
             }
           }
@@ -384,13 +421,24 @@ document.addEventListener('alpine:init', function () {
           adjFactor: adjFactor,
           size: picked.size,
           sizeLabel: D.formatSize(picked.size),
-          tableAmp: picked.tableAmp,
-          correctedAmpacity: picked.corrected,
+          // Step 1: 90 °C table ampacity and its corrected/adjusted value (per set).
+          amp90: picked.amp90,
+          adjustedAmpacity: picked.adjusted,
+          // Step 2: the lowest-rated termination and its bare table ampacity (per set).
+          terminationRating: this.tempRating,
+          terminationAmp: picked.termAmp,
+          // Governing per-set ampacity = min(Step 1, Step 2). `terminationLimited`
+          // is true when 110.14(C) is what holds the size back (Step 2 < Step 1);
+          // `deratingApplied` says whether any correction/adjustment was in play at
+          // all, so the Result pane can word the explanation appropriately.
+          governingAmpacity: picked.governing,
+          terminationLimited: picked.termAmp < picked.adjusted,
+          deratingApplied: tempFactor !== 1 || adjFactor !== 1,
           // NEC 310.10(H)(1): total circuit ampacity is the sum of each parallel
-          // set's corrected ampacity -- reuses correctedAmpacity and sets directly
+          // set's governing ampacity -- reuses governingAmpacity and sets directly
           // (rather than recomputing) so it can never drift from the values above.
-          totalCircuitAmpacity: picked.corrected * sets,
-          ocpdCheckPass: picked.corrected * sets >= ocpd,
+          totalCircuitAmpacity: picked.governing * sets,
+          ocpdCheckPass: picked.governing * sets >= ocpd,
           sets: sets,
           scheduleNotation: scheduleNotation,
           egcCappedToPhase: egcCappedToPhase,
