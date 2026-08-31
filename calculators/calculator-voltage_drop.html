@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Oleg Duday" />
+    <title>Voltage Drop Calculator</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <!-- Font Awesome 5 JS -->
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+      integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+      integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Shared NEC reference data (Chapter 9 Table 9 a.c. resistance and reactance) -->
+    <script src="../js/nec-data.js"></script>
+
+    <!-- Alpine.js component -- registered before the Alpine CDN script so it's ready when alpine:init fires -->
+    <script defer src="calculator-voltage_drop.js"></script>
+
+    <!-- Alpine.js -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"
+      integrity="sha384-l8f0VcPi/M1iHPv8egOnY/15TDwqgbOR1anMIJWvU6nLRgZVLTLSaNqi/TOoT5Fh"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Logo image on top of the tab -->
+    <link rel="icon" href="../images/website-favicon-32x32.png" />
+  </head>
+
+  <body>
+    <div id="site-header" data-active="calculators"></div>
+    <script src="../js/layout.js"></script>
+
+    <!-- Page header band: steel-blue with thin red accent rule -->
+    <header class="page-header-bar">
+      <div class="container">
+        <h1>Voltage Drop</h1>
+        <p class="page-header-subtitle">
+          Effective-impedance voltage drop using NEC Chapter 9, Table 9 a.c.
+          resistance and reactance &mdash; Ze = R&middot;cos&theta; +
+          X&middot;sin&theta;.
+        </p>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="page-body-tint">
+      <div
+        class="container py-4 py-md-5"
+        x-data="voltageDropCalculator()"
+        x-cloak
+      >
+        <div class="row g-4">
+          <!-- Inputs -->
+          <div class="col-12 col-lg-5">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <h2 class="h5 fw-bold heading-accent mb-0">Circuit Inputs</h2>
+                  <button
+                    type="button"
+                    class="btn-reset"
+                    @click="reset()"
+                    title="Clear all inputs and return to defaults"
+                  >
+                    <i class="fa fa-undo" aria-hidden="true"></i> Reset
+                  </button>
+                </div>
+
+                <div class="result-callout mb-4">
+                  <div class="group-label">System &amp; Load</div>
+
+                  <div class="mb-3 position-relative">
+                    <label class="form-label d-block">Circuit Type</label>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="phase"
+                        id="phaseSingle"
+                        value="single"
+                        x-model="phase"
+                      />
+                      <label class="form-check-label" for="phaseSingle"
+                        >Single-phase (2-wire)</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="phase"
+                        id="phaseThree"
+                        value="three"
+                        x-model="phase"
+                      />
+                      <label class="form-check-label" for="phaseThree"
+                        >Three-phase</label
+                      >
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-6 mb-3 d-flex flex-column position-relative">
+                      <label for="voltage" class="form-label"
+                        >System Voltage (V)
+                        <button
+                          type="button"
+                          class="info-icon-btn"
+                          aria-label="More info"
+                          :aria-expanded="(openInfo === 'voltage').toString()"
+                          @click="toggleInfo('voltage')"
+                          @mouseenter="openFromHover('voltage')"
+                          @mouseleave="scheduleHideInfo('voltage')"
+                          @mousedown="skipNextFocus = true"
+                          @focus="handleFocus('voltage')"
+                          @blur="hideInfoIfOpen('voltage')"
+                        >
+                          <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        </button>
+                      </label>
+                      <div
+                        class="info-tooltip"
+                        x-ref="tip-voltage"
+                        x-show="openInfo === 'voltage'"
+                        x-cloak
+                        @mouseenter="cancelHideInfo()"
+                        @mouseleave="scheduleHideInfo('voltage')"
+                      >
+                        Nominal system voltage the percentage is taken against.
+                        For three-phase this is the line-to-line voltage; for
+                        single-phase it is the voltage across the load (e.g. 120
+                        or 240).
+                      </div>
+                      <input
+                        type="number"
+                        step="any"
+                        min="0"
+                        list="voltageList"
+                        class="form-control mt-auto"
+                        id="voltage"
+                        x-model="voltage"
+                      />
+                      <datalist id="voltageList">
+                        <template x-for="v in voltageOptions" :key="v">
+                          <option :value="v"></option>
+                        </template>
+                      </datalist>
+                    </div>
+                    <div class="col-6 mb-3 d-flex flex-column">
+                      <label for="current" class="form-label">Load Current (A)</label>
+                      <input
+                        type="number"
+                        step="any"
+                        min="0"
+                        class="form-control mt-auto"
+                        id="current"
+                        x-model="current"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-6 mb-3 d-flex flex-column position-relative">
+                      <label for="powerFactor" class="form-label"
+                        >Power Factor
+                        <button
+                          type="button"
+                          class="info-icon-btn"
+                          aria-label="More info"
+                          :aria-expanded="(openInfo === 'powerFactor').toString()"
+                          @click="toggleInfo('powerFactor')"
+                          @mouseenter="openFromHover('powerFactor')"
+                          @mouseleave="scheduleHideInfo('powerFactor')"
+                          @mousedown="skipNextFocus = true"
+                          @focus="handleFocus('powerFactor')"
+                          @blur="hideInfoIfOpen('powerFactor')"
+                        >
+                          <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        </button>
+                      </label>
+                      <div
+                        class="info-tooltip"
+                        x-ref="tip-powerFactor"
+                        x-show="openInfo === 'powerFactor'"
+                        x-cloak
+                        @mouseenter="cancelHideInfo()"
+                        @mouseleave="scheduleHideInfo('powerFactor')"
+                      >
+                        Load displacement power factor, 0&ndash;1. Drives the
+                        angle &theta; in Ze = R&middot;cos&theta; +
+                        X&middot;sin&theta;. Use 1.0 for a purely resistive load
+                        (heating, incandescent). Lagging is the normal case;
+                        choose leading only for a net-capacitive load, which
+                        subtracts the reactive term.
+                      </div>
+                      <input
+                        type="number"
+                        step="any"
+                        min="0"
+                        max="1"
+                        class="form-control mt-auto"
+                        id="powerFactor"
+                        x-model="powerFactor"
+                      />
+                    </div>
+                    <div class="col-6 mb-3 d-flex flex-column">
+                      <label class="form-label d-block">PF Type</label>
+                      <div class="mt-auto">
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="pfType"
+                            id="pfLagging"
+                            value="lagging"
+                            x-model="pfType"
+                          />
+                          <label class="form-check-label" for="pfLagging"
+                            >Lagging</label
+                          >
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="pfType"
+                            id="pfLeading"
+                            value="leading"
+                            x-model="pfType"
+                          />
+                          <label class="form-check-label" for="pfLeading"
+                            >Leading</label
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mb-0 position-relative">
+                    <label for="lengthFt" class="form-label"
+                      >One-Way Circuit Length (ft)
+                      <button
+                        type="button"
+                        class="info-icon-btn"
+                        aria-label="More info"
+                        :aria-expanded="(openInfo === 'lengthFt').toString()"
+                        @click="toggleInfo('lengthFt')"
+                        @mouseenter="openFromHover('lengthFt')"
+                        @mouseleave="scheduleHideInfo('lengthFt')"
+                        @mousedown="skipNextFocus = true"
+                        @focus="handleFocus('lengthFt')"
+                        @blur="hideInfoIfOpen('lengthFt')"
+                      >
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                      </button>
+                    </label>
+                    <div
+                      class="info-tooltip"
+                      x-ref="tip-lengthFt"
+                      x-show="openInfo === 'lengthFt'"
+                      x-cloak
+                      @mouseenter="cancelHideInfo()"
+                      @mouseleave="scheduleHideInfo('lengthFt')"
+                    >
+                      One-way run length from source to load. The return path is
+                      accounted for by the 2 (single-phase) or &radic;3
+                      (three-phase) multiplier &mdash; don't double it yourself.
+                    </div>
+                    <input
+                      type="number"
+                      step="any"
+                      min="0"
+                      class="form-control"
+                      id="lengthFt"
+                      x-model="lengthFt"
+                    />
+                  </div>
+                </div>
+
+                <div class="result-callout mb-4">
+                  <div class="group-label">Conductor &mdash; NEC Ch. 9 Table 9</div>
+
+                  <div class="row">
+                    <div class="col-6 mb-3 d-flex flex-column">
+                      <label for="size" class="form-label">Conductor Size</label>
+                      <select
+                        class="form-select mt-auto"
+                        id="size"
+                        x-model="size"
+                        @change="sizeTouched = true"
+                      >
+                        <option value="">-- Select size --</option>
+                        <template x-for="s in sizeOptions" :key="s">
+                          <option
+                            :value="s"
+                            :selected="s === size"
+                            x-text="formatSize(s)"
+                          ></option>
+                        </template>
+                      </select>
+                    </div>
+                    <div class="col-6 mb-3 d-flex flex-column position-relative">
+                      <label for="maxSingleConductor" class="form-label"
+                        >Max Single Conductor
+                        <button
+                          type="button"
+                          class="info-icon-btn"
+                          aria-label="More info"
+                          :aria-expanded="(openInfo === 'maxSingleConductor').toString()"
+                          @click="toggleInfo('maxSingleConductor')"
+                          @mouseenter="openFromHover('maxSingleConductor')"
+                          @mouseleave="scheduleHideInfo('maxSingleConductor')"
+                          @mousedown="skipNextFocus = true"
+                          @focus="handleFocus('maxSingleConductor')"
+                          @blur="hideInfoIfOpen('maxSingleConductor')"
+                        >
+                          <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        </button>
+                      </label>
+                      <div
+                        class="info-tooltip"
+                        x-ref="tip-maxSingleConductor"
+                        x-show="openInfo === 'maxSingleConductor'"
+                        x-cloak
+                        @mouseenter="cancelHideInfo()"
+                        @mouseleave="scheduleHideInfo('maxSingleConductor')"
+                      >
+                        Largest size used for one conductor per phase. When the
+                        conductor size above is larger than this, the run is split
+                        into equal parallel sets of this size and the per-phase R
+                        and X are divided by the set count. NEC 310.10(H)(1)
+                        permits paralleling only 1/0 AWG and larger.
+                      </div>
+                      <select
+                        class="form-select mt-auto"
+                        id="maxSingleConductor"
+                        x-model="maxSingleConductor"
+                      >
+                        <template x-for="s in maxSizeOptions" :key="s">
+                          <option
+                            :value="s"
+                            :selected="s === maxSingleConductor"
+                            x-text="formatSize(s)"
+                          ></option>
+                        </template>
+                      </select>
+                    </div>
+                  </div>
+
+                  <p
+                    class="text-muted small mb-3"
+                    x-show="suggestedSize"
+                    x-cloak
+                  >
+                    <template x-if="!sizeTouched">
+                      <span
+                        >Conductor size auto-set from the load current &mdash;
+                        <span x-text="formatSize(suggestedSize)"></span> is the
+                        smallest Table 310.16 size at 75&deg;C that carries
+                        <span x-text="current"></span> A. Choose a size to
+                        override.</span
+                      >
+                    </template>
+                    <template x-if="sizeTouched">
+                      <span
+                        >Ampacity starting point for <span x-text="current"></span>
+                        A: <span x-text="formatSize(suggestedSize)"></span> (Table
+                        310.16, 75&deg;C).
+                        <button
+                          type="button"
+                          class="btn btn-link btn-sm p-0 align-baseline"
+                          @click="applySuggestion()"
+                        >
+                          Use it
+                        </button></span
+                      >
+                    </template>
+                  </p>
+
+                  <div class="mb-3 position-relative">
+                    <label class="form-label d-block"
+                      >Conductor Material
+                      <button
+                        type="button"
+                        class="info-icon-btn"
+                        aria-label="More info"
+                        :aria-expanded="(openInfo === 'material').toString()"
+                        @click="toggleInfo('material')"
+                        @mouseenter="openFromHover('material')"
+                        @mouseleave="scheduleHideInfo('material')"
+                        @mousedown="skipNextFocus = true"
+                        @focus="handleFocus('material')"
+                        @blur="hideInfoIfOpen('material')"
+                      >
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                      </button>
+                    </label>
+                    <div
+                      class="info-tooltip"
+                      x-ref="tip-material"
+                      x-show="openInfo === 'material'"
+                      x-cloak
+                      @mouseenter="cancelHideInfo()"
+                      @mouseleave="scheduleHideInfo('material')"
+                    >
+                      Suggested as aluminum once the load current reaches 100 A
+                      (common practice for larger feeders/services) and copper
+                      below that, until you choose one.
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="vdMaterial"
+                        id="vdMaterialCu"
+                        value="copper"
+                        x-model="material"
+                        @change="materialTouched = true"
+                      />
+                      <label class="form-check-label" for="vdMaterialCu"
+                        >Copper</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="vdMaterial"
+                        id="vdMaterialAl"
+                        value="aluminum"
+                        x-model="material"
+                        @change="materialTouched = true"
+                      />
+                      <label class="form-check-label" for="vdMaterialAl"
+                        >Aluminum</label
+                      >
+                    </div>
+                  </div>
+
+                  <div class="mb-0 position-relative">
+                    <label class="form-label d-block"
+                      >Raceway Type &mdash; Table 9 Column
+                      <button
+                        type="button"
+                        class="info-icon-btn"
+                        aria-label="More info"
+                        :aria-expanded="(openInfo === 'conduitClass').toString()"
+                        @click="toggleInfo('conduitClass')"
+                        @mouseenter="openFromHover('conduitClass')"
+                        @mouseleave="scheduleHideInfo('conduitClass')"
+                        @mousedown="skipNextFocus = true"
+                        @focus="handleFocus('conduitClass')"
+                        @blur="hideInfoIfOpen('conduitClass')"
+                      >
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                      </button>
+                    </label>
+                    <div
+                      class="info-tooltip"
+                      x-ref="tip-conduitClass"
+                      x-show="openInfo === 'conduitClass'"
+                      x-cloak
+                      @mouseenter="cancelHideInfo()"
+                      @mouseleave="scheduleHideInfo('conduitClass')"
+                    >
+                      Selects the Table 9 column. PVC and aluminum conduit share
+                      the same reactance; steel conduit has a higher reactance and
+                      a slightly different a.c. resistance from magnetic effects.
+                      Use PVC / nonmetallic for RNC, HDPE, or direct-buried.
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="conduitClass"
+                        id="conduitPvc"
+                        value="pvc"
+                        x-model="conduitClass"
+                      />
+                      <label class="form-check-label" for="conduitPvc"
+                        >PVC / nonmetallic raceway</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="conduitClass"
+                        id="conduitAl"
+                        value="aluminum"
+                        x-model="conduitClass"
+                      />
+                      <label class="form-check-label" for="conduitAl"
+                        >Aluminum conduit</label
+                      >
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="conduitClass"
+                        id="conduitSteel"
+                        value="steel"
+                        x-model="conduitClass"
+                      />
+                      <label class="form-check-label" for="conduitSteel"
+                        >Steel conduit (EMT, IMC, RMC, FMC)</label
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <div class="result-callout mb-0">
+                  <div class="group-label">Acceptance Target</div>
+                  <div class="mb-0 position-relative">
+                    <label for="targetPct" class="form-label"
+                      >Max Voltage Drop (%)
+                      <button
+                        type="button"
+                        class="info-icon-btn"
+                        aria-label="More info"
+                        :aria-expanded="(openInfo === 'targetPct').toString()"
+                        @click="toggleInfo('targetPct')"
+                        @mouseenter="openFromHover('targetPct')"
+                        @mouseleave="scheduleHideInfo('targetPct')"
+                        @mousedown="skipNextFocus = true"
+                        @focus="handleFocus('targetPct')"
+                        @blur="hideInfoIfOpen('targetPct')"
+                      >
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                      </button>
+                    </label>
+                    <div
+                      class="info-tooltip"
+                      x-ref="tip-targetPct"
+                      x-show="openInfo === 'targetPct'"
+                      x-cloak
+                      @mouseenter="cancelHideInfo()"
+                      @mouseleave="scheduleHideInfo('targetPct')"
+                    >
+                      Pass/fail threshold only. The NEC states voltage-drop limits
+                      as recommendations in Informational Notes (210.19(A) and
+                      215.2(A)): about 3% on a branch circuit or feeder, and 5%
+                      total for feeder plus branch circuit. Not an enforceable
+                      rule unless a project spec or other code adopts it.
+                    </div>
+                    <input
+                      type="number"
+                      step="any"
+                      min="0"
+                      class="form-control"
+                      id="targetPct"
+                      x-model="targetPct"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Results -->
+          <div class="col-12 col-lg-7">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body p-4">
+                <h2 class="h5 fw-bold mb-4">Result</h2>
+
+                <template x-if="result.state === 'empty'">
+                  <p class="text-muted mb-0">
+                    Enter the system voltage, load current, power factor, and
+                    one-way length. The conductor size is filled in from the load
+                    current &mdash; adjust it or the max single conductor to see
+                    the voltage drop.
+                  </p>
+                </template>
+
+                <template x-if="result.state === 'error'">
+                  <div
+                    class="alert alert-danger mb-0"
+                    x-text="result.message"
+                  ></div>
+                </template>
+
+                <template x-if="result.state === 'ok'">
+                  <div>
+                    <div class="result-figure mb-1">
+                      <span x-text="result.vdPct.toFixed(2)"></span>%
+                      <span class="unit">voltage drop</span>
+                    </div>
+                    <p
+                      class="mb-3 fw-bold"
+                      :class="result.pass ? 'text-success' : 'text-danger'"
+                    >
+                      <i
+                        class="fa"
+                        :class="result.pass ? 'fa-check-circle' : 'fa-times-circle'"
+                        aria-hidden="true"
+                      ></i>
+                      <span x-text="result.vdPct.toFixed(2)"></span>%
+                      <span x-text="result.pass ? '≤' : '>'"></span>
+                      <span x-text="result.target"></span>% target
+                    </p>
+
+                    <p class="text-muted mb-3">
+                      <span x-text="result.materialLabel"></span>
+                      <span x-text="result.runSizeLabel"></span> per phase<span
+                        x-show="result.paralleled"
+                        >, <span x-text="result.sets"></span> parallel sets</span
+                      >
+                      &mdash; <span x-text="result.phaseLabel"></span>.
+                    </p>
+
+                    <div class="result-callout mb-3">
+                      <div class="row">
+                        <div class="col-6 col-md">
+                          <div class="small text-muted">Voltage Drop</div>
+                          <div class="fw-bold">
+                            <span x-text="result.vdVolts.toFixed(2)"></span> V
+                          </div>
+                        </div>
+                        <div class="col-6 col-md">
+                          <div class="small text-muted">Voltage at Load</div>
+                          <div class="fw-bold">
+                            <span x-text="result.vLoad.toFixed(1)"></span> V
+                          </div>
+                        </div>
+                        <div class="col-6 col-md">
+                          <div class="small text-muted">Effective Z</div>
+                          <div class="fw-bold">
+                            <span x-text="result.ze.toFixed(4)"></span> &#8486;/kft
+                          </div>
+                        </div>
+                        <div class="col-6 col-md">
+                          <div class="small text-muted">Multiplier</div>
+                          <div class="fw-bold" x-text="result.kLabel"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="small text-muted fw-bold mb-1">
+                      Effective impedance (NEC Ch. 9 Table 9)
+                    </div>
+                    <div class="result-callout mb-3">
+                      <p class="mb-2 small">
+                        <span x-text="result.materialLabel"></span>,
+                        <span x-text="result.runSizeLabel"></span>, in
+                        <span x-text="result.conduitLabel"></span><span
+                          x-show="result.paralleled"
+                        >
+                          &mdash; <span x-text="result.sets"></span> parallel sets
+                          (<span x-text="result.intendedSizeLabel"></span> exceeds
+                          the <span x-text="result.capLabel"></span> max single
+                          conductor)</span
+                        >.
+                      </p>
+                      <div class="row">
+                        <div class="col-6 col-md">
+                          <div class="small text-muted">R (per conductor)</div>
+                          <div class="fw-bold">
+                            <span x-text="result.r.toFixed(4)"></span> &#8486;/kft
+                          </div>
+                        </div>
+                        <div class="col-6 col-md">
+                          <div class="small text-muted">X (per conductor)</div>
+                          <div class="fw-bold">
+                            <span x-text="result.x.toFixed(4)"></span> &#8486;/kft
+                          </div>
+                        </div>
+                        <div class="col-6 col-md" x-show="result.sets > 1">
+                          <div class="small text-muted">R &divide; sets</div>
+                          <div class="fw-bold">
+                            <span x-text="result.rPerK.toFixed(4)"></span> &#8486;/kft
+                          </div>
+                        </div>
+                        <div class="col-6 col-md" x-show="result.sets > 1">
+                          <div class="small text-muted">X &divide; sets</div>
+                          <div class="fw-bold">
+                            <span x-text="result.xPerK.toFixed(4)"></span> &#8486;/kft
+                          </div>
+                        </div>
+                        <div class="col-6 col-md">
+                          <div class="small text-muted">&theta;</div>
+                          <div class="fw-bold">
+                            <span x-text="result.thetaDeg.toFixed(1)"></span>&deg;
+                            <span
+                              class="text-muted fw-normal"
+                              x-text="result.pfType"
+                            ></span>
+                          </div>
+                        </div>
+                        <div class="col-6 col-md">
+                          <div class="small text-muted">cos&theta; / sin&theta;</div>
+                          <div class="fw-bold">
+                            <span x-text="result.cosTheta.toFixed(3)"></span> /
+                            <span x-text="result.sinTheta.toFixed(3)"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <p class="text-muted small mb-0 mt-2">
+                        Ze = R&middot;cos&theta;
+                        <span x-text="result.pfType === 'leading' ? '−' : '+'"></span>
+                        X&middot;sin&theta; ; VD = <span x-text="result.kLabel"></span>
+                        &middot; I &middot; Ze &middot; L &divide; 1000.
+                      </p>
+                    </div>
+
+                    <template x-if="result.recommended">
+                      <p class="mb-0">
+                        Smallest option meeting
+                        <span x-text="result.target"></span>%:
+                        <strong>
+                          <span
+                            x-text="formatSize(result.recommended.size)"
+                          ></span>
+                          <span x-show="result.recommended.sets > 1"
+                            >&times;
+                            <span x-text="result.recommended.sets"></span>
+                            parallel sets</span
+                          >
+                        </strong>
+                        (<span x-text="result.recommended.vdPct.toFixed(2)"></span>%)<span
+                          x-show="result.recommended.sets > 1"
+                        >
+                          &mdash; parallel sets of the max single conductor</span
+                        >.
+                      </p>
+                    </template>
+                    <template x-if="!result.recommended">
+                      <p class="mb-0 text-danger">
+                        Nothing up to
+                        <span x-text="result.capLabel"></span> &times;
+                        <span x-text="result.maxSetsSearch"></span> parallel sets
+                        meets <span x-text="result.target"></span>%. Raise the max
+                        single conductor, raise the target, or shorten the run.
+                      </p>
+                    </template>
+                  </div>
+                </template>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-muted small mt-4 mb-0">
+          Reference table:
+          <a href="../tables/table9.html"
+            >Chapter 9, Table 9 &mdash; A.C. Resistance and Reactance for 600V Cables</a
+          >
+        </p>
+      </div>
+    </main>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../js/script.js"></script>
+  </body>
+</html>

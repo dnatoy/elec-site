@@ -3,8 +3,8 @@
 // tables/table310-15C1.html, tables/tableC1-EMT.html, tables/tableC3-FMC.html,
 // tables/tableC11-PVC.html, tables/table250-102.html, tables/table250-122.html,
 // tables/table430-248.html, tables/table430-250.html, tables/table430-251B.html,
-// tables/table430-52.html, and tables/table450-3B.html -- keep those pages and
-// this file in sync.
+// tables/table430-52.html, tables/table450-3B.html, and tables/table9.html --
+// keep those pages and this file in sync.
 (function (global) {
   'use strict';
 
@@ -78,6 +78,50 @@
     { min: 21, max: 30, percent: 45 },
     { min: 31, max: 40, percent: 40 },
     { min: 41, max: Infinity, percent: 35 }
+  ];
+
+  // NEC Chapter 9, Table 9 - Alternating-Current Resistance and Reactance for
+  // 600-Volt Cables, 3-Phase, 60 Hz, 75°C (167°F) - Three Single Conductors in
+  // Conduit. Values are ohms to neutral per 1000 ft (the NEC's "per 1000 feet"
+  // column). This is the effective-Z basis for voltage drop:
+  //   Ze = R*cos(theta) + X*sin(theta)   (Table 9 note about effective impedance)
+  //
+  // Column map:
+  //   xlNonMag - reactance (XL), all wire types, in PVC or aluminum conduit
+  //   xlSteel  - reactance (XL), all wire types, in steel conduit
+  //   cu / al  - a.c. resistance for uncoated copper / aluminum wires, keyed by
+  //              conduit class: pvc (PVC conduit), al (aluminum conduit),
+  //              steel (steel conduit)
+  //
+  // The source table runs to 2000 kcmil; sizes above 1000 kcmil are omitted here
+  // because they are installed as parallel sets in practice (the voltage-drop
+  // calculator handles that with a parallel-set count). Aluminum is not tabulated
+  // at 14 AWG (al: null).
+  var AC_IMPEDANCE_CH9_T9 = [
+    { size: '14',   xlNonMag: 0.058, xlSteel: 0.073, cu: { pvc: 3.1,   al: 3.1,   steel: 3.1   }, al: null },
+    { size: '12',   xlNonMag: 0.054, xlSteel: 0.068, cu: { pvc: 2.0,   al: 2.0,   steel: 2.0   }, al: { pvc: 3.2,   al: 3.2,   steel: 3.2   } },
+    { size: '10',   xlNonMag: 0.050, xlSteel: 0.063, cu: { pvc: 1.2,   al: 1.2,   steel: 1.2   }, al: { pvc: 2.0,   al: 2.0,   steel: 2.0   } },
+    { size: '8',    xlNonMag: 0.052, xlSteel: 0.065, cu: { pvc: 0.78,  al: 0.78,  steel: 0.78  }, al: { pvc: 1.3,   al: 1.3,   steel: 1.3   } },
+    { size: '6',    xlNonMag: 0.051, xlSteel: 0.064, cu: { pvc: 0.49,  al: 0.49,  steel: 0.49  }, al: { pvc: 0.81,  al: 0.81,  steel: 0.81  } },
+    { size: '4',    xlNonMag: 0.048, xlSteel: 0.060, cu: { pvc: 0.31,  al: 0.31,  steel: 0.31  }, al: { pvc: 0.51,  al: 0.51,  steel: 0.51  } },
+    { size: '3',    xlNonMag: 0.047, xlSteel: 0.059, cu: { pvc: 0.25,  al: 0.25,  steel: 0.25  }, al: { pvc: 0.40,  al: 0.41,  steel: 0.40  } },
+    { size: '2',    xlNonMag: 0.045, xlSteel: 0.057, cu: { pvc: 0.19,  al: 0.20,  steel: 0.20  }, al: { pvc: 0.32,  al: 0.32,  steel: 0.32  } },
+    { size: '1',    xlNonMag: 0.046, xlSteel: 0.057, cu: { pvc: 0.15,  al: 0.16,  steel: 0.16  }, al: { pvc: 0.25,  al: 0.26,  steel: 0.25  } },
+    { size: '1/0',  xlNonMag: 0.044, xlSteel: 0.055, cu: { pvc: 0.12,  al: 0.13,  steel: 0.12  }, al: { pvc: 0.20,  al: 0.21,  steel: 0.20  } },
+    { size: '2/0',  xlNonMag: 0.043, xlSteel: 0.054, cu: { pvc: 0.10,  al: 0.10,  steel: 0.10  }, al: { pvc: 0.16,  al: 0.16,  steel: 0.16  } },
+    { size: '3/0',  xlNonMag: 0.042, xlSteel: 0.052, cu: { pvc: 0.077, al: 0.082, steel: 0.079 }, al: { pvc: 0.13,  al: 0.13,  steel: 0.13  } },
+    { size: '4/0',  xlNonMag: 0.041, xlSteel: 0.051, cu: { pvc: 0.062, al: 0.067, steel: 0.063 }, al: { pvc: 0.10,  al: 0.11,  steel: 0.10  } },
+    { size: '250',  xlNonMag: 0.041, xlSteel: 0.052, cu: { pvc: 0.052, al: 0.057, steel: 0.054 }, al: { pvc: 0.085, al: 0.090, steel: 0.086 } },
+    { size: '300',  xlNonMag: 0.041, xlSteel: 0.051, cu: { pvc: 0.044, al: 0.049, steel: 0.045 }, al: { pvc: 0.071, al: 0.076, steel: 0.072 } },
+    { size: '350',  xlNonMag: 0.040, xlSteel: 0.050, cu: { pvc: 0.038, al: 0.043, steel: 0.039 }, al: { pvc: 0.061, al: 0.066, steel: 0.063 } },
+    { size: '400',  xlNonMag: 0.040, xlSteel: 0.049, cu: { pvc: 0.033, al: 0.038, steel: 0.035 }, al: { pvc: 0.054, al: 0.059, steel: 0.055 } },
+    { size: '500',  xlNonMag: 0.039, xlSteel: 0.048, cu: { pvc: 0.027, al: 0.032, steel: 0.029 }, al: { pvc: 0.043, al: 0.048, steel: 0.045 } },
+    { size: '600',  xlNonMag: 0.039, xlSteel: 0.048, cu: { pvc: 0.023, al: 0.028, steel: 0.025 }, al: { pvc: 0.036, al: 0.041, steel: 0.038 } },
+    { size: '700',  xlNonMag: 0.038, xlSteel: 0.048, cu: { pvc: 0.021, al: 0.026, steel: 0.021 }, al: { pvc: 0.032, al: 0.037, steel: 0.034 } },
+    { size: '750',  xlNonMag: 0.038, xlSteel: 0.048, cu: { pvc: 0.019, al: 0.024, steel: 0.021 }, al: { pvc: 0.029, al: 0.034, steel: 0.031 } },
+    { size: '800',  xlNonMag: 0.038, xlSteel: 0.047, cu: { pvc: 0.018, al: 0.023, steel: 0.020 }, al: { pvc: 0.028, al: 0.032, steel: 0.030 } },
+    { size: '900',  xlNonMag: 0.037, xlSteel: 0.046, cu: { pvc: 0.016, al: 0.021, steel: 0.018 }, al: { pvc: 0.025, al: 0.030, steel: 0.027 } },
+    { size: '1000', xlNonMag: 0.037, xlSteel: 0.046, cu: { pvc: 0.015, al: 0.019, steel: 0.017 }, al: { pvc: 0.023, al: 0.027, steel: 0.025 } }
   ];
 
   // Tables C.1 / C.3 / C.11 - Maximum Number of THHN/THWN/THWN-2 Conductors by Trade Size
@@ -462,6 +506,22 @@
     return row ? row.percent / 100 : 1;
   }
 
+  // NEC Chapter 9, Table 9 a.c. resistance and reactance for one conductor of the
+  // given size/material, in the given conduit class. conduitClass is one of
+  // 'pvc' (PVC or other nonmetallic), 'aluminum', or 'steel'. Returns
+  // { r: <ohms/1000ft>, x: <ohms/1000ft> } or null when the size/material isn't
+  // tabulated (e.g. 14 AWG aluminum, or any size above 1000 kcmil).
+  function getTable9Impedance(size, material, conduitClass) {
+    var row = AC_IMPEDANCE_CH9_T9.filter(function (r) { return r.size === String(size); })[0];
+    if (!row) return null;
+    var rCol = material === 'aluminum' ? row.al : row.cu;
+    if (!rCol) return null;
+    var r = rCol[conduitClass];
+    if (r == null) return null;
+    var x = conduitClass === 'steel' ? row.xlSteel : row.xlNonMag;
+    return { r: r, x: x };
+  }
+
   // Smallest trade size (from racewayType's tradeSizes list) that fits
   // conductorCount conductors of the given size. Returns null if none fit
   // within the table's largest listed trade size.
@@ -620,6 +680,7 @@
     AMPACITY_310_16: AMPACITY_310_16,
     TEMP_CORRECTION_310_15B: TEMP_CORRECTION_310_15B,
     ADJUSTMENT_310_15C1: ADJUSTMENT_310_15C1,
+    AC_IMPEDANCE_CH9_T9: AC_IMPEDANCE_CH9_T9,
     CONDUCTOR_FILL: CONDUCTOR_FILL,
     EGC_250_122: EGC_250_122,
     SUPPLY_BONDING_JUMPER_250_102C1: SUPPLY_BONDING_JUMPER_250_102C1,
@@ -641,6 +702,7 @@
     getAmpacity: getAmpacity,
     getTempCorrectionFactor: getTempCorrectionFactor,
     getAdjustmentFactor: getAdjustmentFactor,
+    getTable9Impedance: getTable9Impedance,
     getMinTradeSize: getMinTradeSize,
     getEGCSize: getEGCSize,
     getSupplyBondingJumperSize: getSupplyBondingJumperSize,
