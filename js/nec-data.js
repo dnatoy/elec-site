@@ -223,6 +223,17 @@
     300, 350, 400, 450, 500, 600, 700, 800, 1000, 1200, 1600, 2000, 2500, 3000, 4000, 5000, 6000
   ];
 
+  // NEC 240.4(D) - Small Conductors. Maximum overcurrent protection for these sizes,
+  // applied AFTER ambient/conductor-count correction, regardless of the size's actual
+  // ampacity (unless 240.4(E) or (G) specifically permits otherwise). The list stops
+  // at 10 AWG -- 8 AWG and larger have no fixed small-conductor cap. Sizes below 12 AWG
+  // (16/18 AWG, and their extra conditions) are omitted: no calculator here offers them.
+  var SMALL_CONDUCTOR_OCPD_240_4D = {
+    '14': { copper: 15, aluminum: null },
+    '12': { copper: 20, aluminum: 15 },
+    '10': { copper: 30, aluminum: 25 }
+  };
+
   // Table 430.248 - Full-Load Currents in Amperes, Single-Phase AC Motors.
   // Valid for system voltage ranges 110-120 and 220-240V; columns keyed by rated motor voltage.
   var FLC_430_248 = [
@@ -487,6 +498,18 @@
     return material === 'aluminum' ? row.al : row.cu;
   }
 
+  // NEC 240.4(D) maximum OCPD for a small conductor (12 or 10 AWG here), in amperes.
+  // Returns Infinity when 240.4(D) imposes no cap: 8 AWG and larger, or a size/material
+  // pair the table doesn't list (e.g. 14 AWG aluminum, which has no ampacity anyway).
+  // The value is a hard ceiling on the OCPD after correction/adjustment -- it is NOT a
+  // "round up to the next standard size" allowance.
+  function getSmallConductorOCPDCap(size, material) {
+    var row = SMALL_CONDUCTOR_OCPD_240_4D[String(size)];
+    if (!row) return Infinity;
+    var cap = row[material];
+    return cap == null ? Infinity : cap;
+  }
+
   // Smallest STANDARD_OCPD_240_6A rating >= current. Returns null above the
   // largest standard rating (6000A).
   function getStandardOCPD(current) {
@@ -601,6 +624,7 @@
     EGC_250_122: EGC_250_122,
     SUPPLY_BONDING_JUMPER_250_102C1: SUPPLY_BONDING_JUMPER_250_102C1,
     STANDARD_OCPD_240_6A: STANDARD_OCPD_240_6A,
+    SMALL_CONDUCTOR_OCPD_240_4D: SMALL_CONDUCTOR_OCPD_240_4D,
     FLC_430_248: FLC_430_248,
     FLC_430_250: FLC_430_250,
     LRC_430_251B: LRC_430_251B,
@@ -620,6 +644,7 @@
     getMinTradeSize: getMinTradeSize,
     getEGCSize: getEGCSize,
     getSupplyBondingJumperSize: getSupplyBondingJumperSize,
+    getSmallConductorOCPDCap: getSmallConductorOCPDCap,
     getStandardOCPD: getStandardOCPD,
     getStandardOCPDAtOrBelow: getStandardOCPDAtOrBelow,
     getFLC: getFLC,

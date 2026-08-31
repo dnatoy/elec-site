@@ -309,7 +309,10 @@ document.addEventListener('alpine:init', function () {
             amp90: amp90,
             termAmp: termAmp,
             adjusted: adjusted,
-            governing: Math.min(adjusted, termAmp)
+            governing: Math.min(adjusted, termAmp),
+            // NEC 240.4(D): hard ceiling on the OCPD for 12/10 AWG, independent of
+            // ampacity. Infinity for 8 AWG and larger (no small-conductor cap).
+            smallCondCap: D.getSmallConductorOCPDCap(row.size, self.material)
           };
         }
 
@@ -319,15 +322,27 @@ document.addEventListener('alpine:init', function () {
             amp90: info.amp90,
             termAmp: info.termAmp,
             adjusted: info.adjusted,
-            governing: info.governing
+            governing: info.governing,
+            smallCondCap: info.smallCondCap
           };
         }
+
+        // Set when a size that carries enough ampacity is rejected solely because
+        // the OCPD exceeds its NEC 240.4(D) small-conductor limit -- i.e. 240.4(D)
+        // is what forced the upsize. Records the first such size and its cap.
+        var smallCondLimit = null;
 
         var picked = null;
         for (var i = 0; i < usable.length; i++) {
           var info = ampInfoFor(usable[i]);
           if (!info) continue;
           if (info.governing >= ocpd) {
+            if (ocpd > info.smallCondCap) {
+              if (!smallCondLimit) {
+                smallCondLimit = { size: usable[i].size, cap: info.smallCondCap };
+              }
+              continue;
+            }
             picked = pick(usable[i], info);
             break;
           }
@@ -434,6 +449,13 @@ document.addEventListener('alpine:init', function () {
           governingAmpacity: picked.governing,
           terminationLimited: picked.termAmp < picked.adjusted,
           deratingApplied: tempFactor !== 1 || adjFactor !== 1,
+          // NEC 240.4(D): `smallConductorCap` is the OCPD ceiling on the CHOSEN size
+          // when it's a 12/10 AWG size (null otherwise). `smallConductorForced` is
+          // true when a size with enough ampacity was skipped because the OCPD
+          // exceeded its 240.4(D) limit -- i.e. 240.4(D), not ampacity, set the size.
+          smallConductorCap: isFinite(picked.smallCondCap) ? picked.smallCondCap : null,
+          smallConductorForced: !!smallCondLimit,
+          smallConductorForcedFrom: smallCondLimit,
           // NEC 310.10(H)(1): total circuit ampacity is the sum of each parallel
           // set's governing ampacity -- reuses governingAmpacity and sets directly
           // (rather than recomputing) so it can never drift from the values above.

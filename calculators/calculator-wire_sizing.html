@@ -711,6 +711,29 @@
                       </template>
                     </p>
 
+                    <template x-if="result.smallConductorForced">
+                      <div class="alert alert-warning py-2 small mb-3">
+                        Upsized to
+                        <span x-text="result.sizeLabel"></span> per NEC 240.4(D).
+                        <span x-text="result.smallConductorForcedFrom.size"></span>
+                        AWG carries enough ampacity, but its overcurrent
+                        protection may not exceed
+                        <span
+                          x-text="result.smallConductorForcedFrom.cap"
+                        ></span>
+                        A.
+                      </div>
+                    </template>
+                    <p
+                      class="text-muted small mb-3"
+                      x-show="!result.smallConductorForced && result.smallConductorCap"
+                    >
+                      NEC 240.4(D): overcurrent protection for
+                      <span x-text="result.sizeLabel"></span> is limited to
+                      <span x-text="result.smallConductorCap"></span> A,
+                      regardless of ampacity.
+                    </p>
+
                     <p
                       class="text-muted small mb-3"
                       x-show="wyeMajorityNonlinear"
